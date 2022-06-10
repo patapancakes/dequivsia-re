@@ -2322,8 +2322,8 @@
 		}
 	}
 *label_164
-	var_173 = timeGetTime() - roomTimeStarted
-	if ( var_134 * 1000 / var_170 <= var_173 ) {
+	roomTimePlaying = timeGetTime() - roomTimeStarted
+	if ( var_134 * 1000 / var_170 <= roomTimePlaying ) {
 		gosub *label_190
 		if ( var_171 == 0 ) {
 			dim var_174, 4
@@ -4262,8 +4262,8 @@
 	var_208 = 0
 	var_209 = 0
 *label_188
-	var_173 = timeGetTime() - roomTimeStarted
-	if ( var_208 * 1000 / var_170 <= var_173 ) {
+	roomTimePlaying = timeGetTime() - roomTimeStarted
+	if ( var_208 * 1000 / var_170 <= roomTimePlaying ) {
 		gosub *label_190
 		redraw 0
 		color 0, 0, 0
@@ -4715,7 +4715,7 @@
 	var_98 = 0
 	var_158 = 0
 	var_191 = 0
-	var_173 = 0
+	roomTimePlaying = 0
 	var_192 = 0
 	roomTimeStarted = 0
 	var_186 = 0
