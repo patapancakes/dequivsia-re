@@ -1924,7 +1924,7 @@
 	dim var_162, 20
 	var_163 = 3
 	var_164 = 3
-	dim roomListGraphVisited, levelSizeX, levelSizeY
+	dim roomListVisited, levelSizeX, levelSizeY
 	dim roomListGraphMarker, levelSizeX, levelSizeY
 	var_167 = 3
 	playerLivesLeft = 2
@@ -2243,7 +2243,7 @@
 					var_185 = 8
 					roomCoordX8 = (playerRoomCoordX2 + var_183 \ 5 - 2 + levelSizeX) \ levelSizeX
 					roomCoordY8 = (playerRoomCoordY2 + var_183 / 5 - 2 + levelSizeY) \ levelSizeY
-					if ( roomListGraphVisited(roomCoordX8, roomCoordY8) == 1 ) {
+					if ( roomListVisited(roomCoordX8, roomCoordY8) == 1 ) {
 						var_186 = roomList5(roomCoordX8, roomCoordY8)
 					}
 					else {
@@ -2258,7 +2258,7 @@
 			if ( var_116(6) == 0 & var_182 >= 1 ) {
 				roomCoordX8 = (playerRoomCoordX2 + var_183 \ 5 - 2 + levelSizeX) \ levelSizeX
 				roomCoordY8 = (playerRoomCoordY2 + var_183 / 5 - 2 + levelSizeY) \ levelSizeY
-				if ( roomListGraphVisited(roomCoordX8, roomCoordY8) == 0 & roomListGraphMarker(roomCoordX8, roomCoordY8) <= 1 ) {
+				if ( roomListVisited(roomCoordX8, roomCoordY8) == 0 & roomListGraphMarker(roomCoordX8, roomCoordY8) <= 1 ) {
 					roomListGraphMarker(roomCoordX8, roomCoordY8) = 2
 					var_95(13) = 1
 				}
@@ -2374,18 +2374,18 @@
 				repeat 9
 					roomCoordX7 = (roomCoordX3 + cnt \ 3) \ levelSizeX
 					roomCoordY7 = (roomCoordY3 + cnt / 3) \ levelSizeY
-					if ( roomList5(roomCoordX7, roomCoordY7) == 8 & roomListGraphVisited(roomCoordX7, roomCoordY7) == 1 ) {
+					if ( roomList5(roomCoordX7, roomCoordY7) == 8 & roomListVisited(roomCoordX7, roomCoordY7) == 1 ) {
 						var_92 += 1
 					}
 					else {
-						if ( roomListGraphVisited(roomCoordX7, roomCoordY7) == 0 & roomListGraphMarker(roomCoordX7, roomCoordY7) == 2 ) {
+						if ( roomListVisited(roomCoordX7, roomCoordY7) == 0 & roomListGraphMarker(roomCoordX7, roomCoordY7) == 2 ) {
 							var_92 += 1
 						}
 					}
 				loop
 				roomCoordX8 = (roomCoordX3 + 1) \ levelSizeX
 				roomCoordY8 = (roomCoordY3 + 1) \ levelSizeY
-				if ( var_92 == roomList5(roomCoordX8, roomCoordY8) & roomListGraphVisited(roomCoordX8, roomCoordY8) == 1 ) {
+				if ( var_92 == roomList5(roomCoordX8, roomCoordY8) & roomListVisited(roomCoordX8, roomCoordY8) == 1 ) {
 					repeat 9
 						roomCoordX7 = (roomCoordX3 + cnt \ 3) \ levelSizeX
 						roomCoordY7 = (roomCoordY3 + cnt / 3) \ levelSizeY
@@ -2404,19 +2404,19 @@
 			if ( var_116(6) == 0 ) {
 				var_182 = 0
 			}
-			if ( roomListGraphVisited(playerRoomCoordX2, playerRoomCoordY2) == 0 ) {
-				roomListGraphVisited(playerRoomCoordX2, playerRoomCoordY2) = 1
+			if ( roomListVisited(playerRoomCoordX2, playerRoomCoordY2) == 0 ) {
+				roomListVisited(playerRoomCoordX2, playerRoomCoordY2) = 1
 				if ( roomList6(playerRoomCoordX2, playerRoomCoordY2) == 4 ) {
-					roomListGraphVisited(playerRoomCoordX2 - 1, playerRoomCoordY2) = 1
+					roomListVisited(playerRoomCoordX2 - 1, playerRoomCoordY2) = 1
 				}
 				if ( roomList6(playerRoomCoordX2, playerRoomCoordY2) == 1 ) {
-					roomListGraphVisited(playerRoomCoordX2, playerRoomCoordY2 - 1) = 1
+					roomListVisited(playerRoomCoordX2, playerRoomCoordY2 - 1) = 1
 				}
 				if ( roomList6(playerRoomCoordX2, playerRoomCoordY2) == 2 ) {
-					roomListGraphVisited(playerRoomCoordX2 + 1, playerRoomCoordY2) = 1
+					roomListVisited(playerRoomCoordX2 + 1, playerRoomCoordY2) = 1
 				}
 				if ( roomList6(playerRoomCoordX2, playerRoomCoordY2) == 3 ) {
-					roomListGraphVisited(playerRoomCoordX2, playerRoomCoordY2 + 1) = 1
+					roomListVisited(playerRoomCoordX2, playerRoomCoordY2 + 1) = 1
 				}
 			}
 			var_192 += 1
@@ -3374,7 +3374,7 @@
 			}
 		}
 		pos roomCoordX3 * 8 + roomCoordX, roomCoordY3 * 8 + roomCoordY
-		if ( roomListGraphVisited(playerRoomCoordX, playerRoomCoordY) >= 1 ) {
+		if ( roomListVisited(playerRoomCoordX, playerRoomCoordY) >= 1 ) {
 			gcopy 2, roomList3(playerRoomCoordX, playerRoomCoordY) * 8, roomList5(playerRoomCoordX, playerRoomCoordY) * 8 + 8, 8, 8
 			if ( roomCoordX3 == 6 & roomCoordY3 == 6 ) {
 				gcopy 2, roomList3(playerRoomCoordX, playerRoomCoordY) * 8, 0, 8, 8
