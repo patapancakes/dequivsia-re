@@ -4018,13 +4018,13 @@
 				levelClearAnimPlayerTimeline += "`abcdefghijklmnopqrstuvw"
 				levelClearAnimPlayerTimeline += "0123456789:;@ABCDEFGHIJKPQRSTUVWXYZ[`abcdeffghhhh"
 				levelClearAnimPlayerTimeline += "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
-				var_214 = "0000000000000000000000000000000000000000000000000000000000000000"
-				var_214 += "0000000000000000000000000000000000000000000000000000000000000000"
-				var_214 += "0000000000000000000000000000000000000000000000000000000000000000"
-				var_214 += "111111111111111111111111111111111111111111111111"
-				var_214 += "1111111111111111111111111"
-				var_214 += "222222222222222222222222222222222222222222222222"
-				var_214 += "222222222222222222222222222222222222222222222222"
+				levelClearAnimKeyTimeline = "0000000000000000000000000000000000000000000000000000000000000000"
+				levelClearAnimKeyTimeline += "0000000000000000000000000000000000000000000000000000000000000000"
+				levelClearAnimKeyTimeline += "0000000000000000000000000000000000000000000000000000000000000000"
+				levelClearAnimKeyTimeline += "111111111111111111111111111111111111111111111111"
+				levelClearAnimKeyTimeline += "1111111111111111111111111"
+				levelClearAnimKeyTimeline += "222222222222222222222222222222222222222222222222"
+				levelClearAnimKeyTimeline += "222222222222222222222222222222222222222222222222"
 				levelClearAnimBackgroundTimeline = "5555555595555555955555559555555585558555855585558555855585558555"
 				levelClearAnimBackgroundTimeline += "5555555555555555555555555555555555555555555555555555555555555555"
 				levelClearAnimBackgroundTimeline += "6666666666666455444444444444444455555555655555555555555565555555"
@@ -4078,11 +4078,11 @@
 			var_92 = 0
 			if ( levelClearAnimFrame <= 384 - 1 ) {
 				var_92 = peek(levelClearAnimPlayerTimeline, levelClearAnimFrame / 2) - 48
-				roomCoordX = peek(var_214, levelClearAnimFrame / 2) - 48
+				roomCoordX = peek(levelClearAnimKeyTimeline, levelClearAnimFrame / 2) - 48
 			}
 			else {
 				var_92 = peek(levelClearAnimPlayerTimeline, (levelClearAnimFrame + 128) / 2 * 3 / 4) - 48
-				roomCoordX = peek(var_214, (levelClearAnimFrame + 128) / 2 * 3 / 4) - 48
+				roomCoordX = peek(levelClearAnimKeyTimeline, (levelClearAnimFrame + 128) / 2 * 3 / 4) - 48
 			}
 			gcopy 12, var_92 \ 16 * 32, var_92 / 16 * 48 + roomCoordX * 48 * 5, 32, 48
 			if ( levelClearAnimFrame >= 129 & levelClearAnimFrame <= 695 ) {
