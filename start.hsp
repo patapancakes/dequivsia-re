@@ -111,7 +111,7 @@
 	color 0, 0, 0
 	boxf
 	gosub *gameVarsInit
-	var_109 = 5
+	gameMuToPlay = 5
 	var_110 = 1
 	menuItemSelected = 0
 	roomCoordX8 = 0
@@ -263,7 +263,7 @@
 					var_104(levelType * 2) = 1
 				}
 				gosub *label_193
-				var_109 = 0
+				gameMuToPlay = 0
 				var_110 = 1
 				gosub *label_195
 				goto *label_032
@@ -271,7 +271,7 @@
 			if ( var_116(8) == 1 ) {
 				if ( var_103(0, menuItemSelected) >= 1 ) {
 					levelClearAnimType = menuItemSelected
-					var_109 = 0
+					gameMuToPlay = 0
 					var_110 = 1
 					gosub *label_195
 					goto *label_187
@@ -571,7 +571,7 @@
 	gcopy 5, 40 * var_92, 184, 40, 32
 	pos 0, 0
 	gzoom 256 * (1 + gameWindowSize), 144 * (1 + gameWindowSize), 0, 0, 0, 256, 144
-	var_109 = 0
+	gameMuToPlay = 0
 	var_110 = 1
 	gosub *label_195
 	gosub *gameVarsInit
@@ -2542,7 +2542,7 @@
 					}
 					if ( playerDeathAnimFrame == 0 ) {
 						if ( playerLivesLeft <= 0 ) {
-							var_109 = 0
+							gameMuToPlay = 0
 							var_110 = 1
 						}
 					}
@@ -2558,7 +2558,7 @@
 					}
 					if ( playerDeathAnimFrame == 36 ) {
 						var_95(27) = 1
-						var_109 = 21
+						gameMuToPlay = 21
 						var_110 = 1
 					}
 					if ( playerDeathAnimFrame >= 36 ) {
@@ -2622,7 +2622,7 @@
 						if ( var_171 == 4 ) {
 							playerDeathAnimFrame += 1
 							if ( playerDeathAnimFrame == 1 ) {
-								var_109 = 22
+								gameMuToPlay = 22
 								var_110 = 1
 								if ( var_102 <= 3 ) {
 									if ( levelType + 1 >= var_102 ) {
@@ -2638,7 +2638,7 @@
 								if ( var_103(1, levelType) == 0 ) {
 									if ( var_116(4) == 1 & var_195 >= 74 ) {
 										levelClearAnimType = levelType
-										var_109 = 0
+										gameMuToPlay = 0
 										var_110 = 1
 										gosub *label_195
 										goto *label_187
@@ -2704,7 +2704,7 @@
 				if ( var_194 == 3 ) {
 					var_196 = var_134 + 3420 * 32 / 30 + 15
 				}
-				var_109 = var_194 + 1
+				gameMuToPlay = var_194 + 1
 				var_110 = 1
 				if ( var_104(var_194 + 8) == 0 ) {
 					var_104(var_194 + 8) = 1
@@ -4316,7 +4316,7 @@
 	playerKeysCollected = 0
 	var_189 = 0
 	roomListType = 0
-	var_109 = 0
+	gameMuToPlay = 0
 	var_196 = 0
 	var_125 = 0
 	menuItemSelected = 0
@@ -4420,36 +4420,36 @@
 		goto *label_196
 *label_197
 		roomCoordX = 0
-		if ( var_109 == 0 ) {
-			ds_play gameMuBufferStartId + var_109
+		if ( gameMuToPlay == 0 ) {
+			ds_play gameMuBufferStartId + gameMuToPlay
 			roomCoordX = 1
 		}
-		if ( var_109 == 1 ) {
-			ds_play gameMuBufferStartId + var_109
+		if ( gameMuToPlay == 1 ) {
+			ds_play gameMuBufferStartId + gameMuToPlay
 			roomCoordX = 1
 		}
-		if ( var_109 == 2 ) {
-			ds_play gameMuBufferStartId + var_109
+		if ( gameMuToPlay == 2 ) {
+			ds_play gameMuBufferStartId + gameMuToPlay
 			roomCoordX = 1
 		}
-		if ( var_109 == 3 ) {
-			ds_play gameMuBufferStartId + var_109
+		if ( gameMuToPlay == 3 ) {
+			ds_play gameMuBufferStartId + gameMuToPlay
 			roomCoordX = 1
 		}
-		if ( var_109 == 4 ) {
-			ds_play gameMuBufferStartId + var_109
+		if ( gameMuToPlay == 4 ) {
+			ds_play gameMuBufferStartId + gameMuToPlay
 			roomCoordX = 1
 		}
-		if ( var_109 == 21 ) {
-			ds_play gameMuBufferStartId + var_109
+		if ( gameMuToPlay == 21 ) {
+			ds_play gameMuBufferStartId + gameMuToPlay
 			roomCoordX = 1
 		}
-		if ( var_109 == 22 ) {
-			ds_play gameMuBufferStartId + var_109
+		if ( gameMuToPlay == 22 ) {
+			ds_play gameMuBufferStartId + gameMuToPlay
 			roomCoordX = 1
 		}
 		if ( roomCoordX == 0 ) {
-			ds_loop gameMuBufferStartId + var_109
+			ds_loop gameMuBufferStartId + gameMuToPlay
 		}
 		var_110 = 0
 	}
