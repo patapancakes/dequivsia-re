@@ -239,25 +239,25 @@
 					levelSizeX = 13
 					levelSizeY = 13
 					levelKeysNeeded = 1
-					var_122 = 10
+					levelSafeRoomRate = 10
 				}
 				if ( levelType == 1 ) {
 					levelSizeX = 21
 					levelSizeY = 21
 					levelKeysNeeded = 2
-					var_122 = 4
+					levelSafeRoomRate = 4
 				}
 				if ( levelType == 2 ) {
 					levelSizeX = 31
 					levelSizeY = 31
 					levelKeysNeeded = 3
-					var_122 = 8
+					levelSafeRoomRate = 8
 				}
 				if ( levelType == 3 ) {
 					levelSizeX = 51
 					levelSizeY = 51
 					levelKeysNeeded = 6
-					var_122 = 5
+					levelSafeRoomRate = 5
 				}
 				if ( var_104(levelType * 2) == 0 ) {
 					var_104(levelType * 2) = 1
@@ -677,7 +677,7 @@
 	loop
 	roomCoordX5 = roomCoordX2
 	roomCoordY5 = roomCoordY2
-	repeat var_122
+	repeat levelSafeRoomRate
 		roomCoordX3 = 0
 *label_037
 		exgoto roomCoordX3, 1, levelSizeX, *label_040
@@ -686,12 +686,12 @@
 		exgoto roomCoordY3, 1, levelSizeY, *label_039
 		if ( roomListType(roomCoordX3, roomCoordY3) == 0 ) {
 			var_147 = rnd(4)
-			if ( cnt <= var_122 / 2 ) {
+			if ( cnt <= levelSafeRoomRate / 2 ) {
 				var_92 = 2
 				color 200, 1, 200
 			}
 			else {
-				if ( cnt == var_122 - 2 ) {
+				if ( cnt == levelSafeRoomRate - 2 ) {
 					var_92 = 4
 					color 200, 200, 200
 				}
