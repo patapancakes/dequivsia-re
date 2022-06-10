@@ -608,8 +608,8 @@
 	var_92(0) = var_136(0)
 	var_92(1) = var_136(0) + var_136(1)
 	var_92(2) = var_136(0) + var_136(1) + var_136(2)
-	var_143 = roomCoordX2
-	var_144 = roomCoordY2
+	roomCoordX4 = roomCoordX2
+	roomCoordY4 = roomCoordY2
 	playerRoomCoordX2 = roomCoordX2
 	playerRoomCoordY2 = roomCoordY2
 	repeat
@@ -849,7 +849,7 @@
 		}
 	loop
 	dim roomList4, levelSizeX, levelSizeY
-	roomList4(var_143, var_144) = 1
+	roomList4(roomCoordX4, roomCoordY4) = 1
 	roomList4(var_150, var_151) = 2
 	repeat 800
 		var_92 = 0
@@ -962,7 +962,7 @@
 			break
 		}
 	loop
-	roomListType(var_143, var_144) = 6
+	roomListType(roomCoordX4, roomCoordY4) = 6
 	roomListType(var_150, var_151) = 7
 	roomCoordX3 = 0
 *label_057
@@ -1040,7 +1040,7 @@
 	goto *label_057
 *label_062
 	dim roomList4, levelSizeX, levelSizeY
-	roomList4(var_143, var_144) = 1
+	roomList4(roomCoordX4, roomCoordY4) = 1
 	roomList4(var_150, var_151) = 2
 	repeat 800
 		var_92 = 0
@@ -1179,7 +1179,7 @@
 *label_074
 	gosub *label_158
 	dim roomList4, levelSizeX, levelSizeY
-	roomList4(var_143, var_144) = 1
+	roomList4(roomCoordX4, roomCoordY4) = 1
 	roomList4(var_150, var_151) = 2
 	var_112 = 0
 	repeat 800
@@ -4328,8 +4328,8 @@
 	var_138 = 0
 	var_141 = 0
 	var_142 = 0
-	var_143 = 0
-	var_144 = 0
+	roomCoordX4 = 0
+	roomCoordY4 = 0
 	playerRoomCoordX2 = 0
 	var_202 = 0
 	var_180 = 0
