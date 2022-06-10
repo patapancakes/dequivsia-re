@@ -35,7 +35,7 @@
 	gameSeCount = 75
 	var_94 = 3
 	ds_init 22050, 2
-	dim var_95, gameSeCount
+	dim gameSePlaying, gameSeCount
 	dim var_96, gameSeCount
 	color 10, 10, 10
 	repeat gameSeCount
@@ -116,7 +116,7 @@
 	menuItemSelected = 0
 	roomCoordX8 = 0
 	roomCoordY8 = rnd(3)
-	var_95(33) = 1
+	gameSePlaying(33) = 1
 	var_114 = 0
 	repeat 4
 		if ( var_103(0, cnt) >= 1 ) {
@@ -148,11 +148,11 @@
 	if ( roomCoordX8 == 0 & var_116(1) * var_116(3) == 0 ) {
 		if ( var_116(1) == 1 | var_116(1) >= 8 ) {
 			menuItemSelected = (menuItemSelected + 4) \ 5
-			var_95(34) = 1
+			gameSePlaying(34) = 1
 		}
 		if ( var_116(3) == 1 | var_116(3) >= 8 ) {
 			menuItemSelected = (menuItemSelected + 1) \ 5
-			var_95(34) = 1
+			gameSePlaying(34) = 1
 		}
 		if ( var_114 == 0 ) {
 			if ( var_116(1) == 1 | var_116(1) >= 8 ) {
@@ -168,26 +168,26 @@
 		}
 		if ( menuItemSelected == 0 & var_116(4) == 1 ) {
 			roomCoordX8 = 1
-			var_95(35) = 1
+			gameSePlaying(35) = 1
 		}
 		if ( menuItemSelected == 1 & var_116(4) == 1 ) {
 			roomCoordX8 = 2
 			menuItemSelected = 0
-			var_95(35) = 1
+			gameSePlaying(35) = 1
 		}
 		if ( menuItemSelected == 2 & var_116(0) * var_116(2) == 0 ) {
 			if ( var_116(0) == 1 | var_116(0) >= 8 ) {
 				if ( var_100 >= 5 ) {
 					var_100 -= 5
 					gosub *label_194
-					var_95(34) = 1
+					gameSePlaying(34) = 1
 				}
 			}
 			if ( var_116(2) == 1 | var_116(2) >= 8 ) {
 				if ( var_100 <= 95 ) {
 					var_100 += 5
 					gosub *label_194
-					var_95(34) = 1
+					gameSePlaying(34) = 1
 				}
 			}
 		}
@@ -196,19 +196,19 @@
 				if ( var_101 >= 5 ) {
 					var_101 -= 5
 					gosub *label_194
-					var_95(34) = 1
+					gameSePlaying(34) = 1
 				}
 			}
 			if ( var_116(2) == 1 | var_116(2) >= 8 ) {
 				if ( var_101 <= 95 ) {
 					var_101 += 5
 					gosub *label_194
-					var_95(34) = 1
+					gameSePlaying(34) = 1
 				}
 			}
 		}
 		if ( menuItemSelected == 4 & var_116(4) == 1 ) {
-			var_95(35) = 1
+			gameSePlaying(35) = 1
 			gameWindowSize = (gameWindowSize + 1) \ 3
 			gosub *gameWindowCreate
 		}
@@ -219,21 +219,21 @@
 			if ( var_116(5) == 1 ) {
 				menuItemSelected = 0
 				roomCoordX8 = 0
-				var_95(35) = 1
+				gameSePlaying(35) = 1
 			}
 			if ( var_116(1) == 1 ) {
 				menuItemSelected = (menuItemSelected + var_102 - 1) \ var_102
-				var_95(34) = 1
+				gameSePlaying(34) = 1
 				var_117 = 0
 			}
 			if ( var_116(3) == 1 ) {
 				menuItemSelected = (menuItemSelected + 1) \ var_102
-				var_95(34) = 1
+				gameSePlaying(34) = 1
 				var_117 = 0
 			}
 			var_117 += 1
 			if ( var_116(4) == 1 ) {
-				var_95(35) = 1
+				gameSePlaying(35) = 1
 				levelType = menuItemSelected
 				if ( levelType == 0 ) {
 					levelSizeX = 13
@@ -284,28 +284,28 @@
 					menuItemSelected = (menuItemSelected + 13) \ 14
 					var_124 = 12
 					var_115 = -1
-					var_95(34) = 1
+					gameSePlaying(34) = 1
 				}
 				if ( var_116(2) == 1 | var_116(2) >= 8 ) {
 					menuItemSelected = (menuItemSelected + 1) \ 14
 					var_124 = 12
 					var_115 = -1
-					var_95(34) = 1
+					gameSePlaying(34) = 1
 				}
 				if ( var_116(4) == 1 ) {
 					if ( var_104(menuItemSelected) == 0 ) {
-						var_95(51) = 1
+						gameSePlaying(51) = 1
 					}
 					else {
 						var_115 = 16
 						var_104(menuItemSelected) = 2
-						var_95(11) = 1
+						gameSePlaying(11) = 1
 					}
 				}
 				if ( var_116(5) == 1 ) {
 					menuItemSelected = 1
 					roomCoordX8 = 0
-					var_95(35) = 1
+					gameSePlaying(35) = 1
 				}
 				if ( var_124 >= 1 ) {
 					var_124 -= 1
@@ -2088,7 +2088,7 @@
 				if ( levelStyle == 3 ) {
 					var_92 = 23
 				}
-				var_95(17 + rnd(3) + var_92) = 1
+				gameSePlaying(17 + rnd(3) + var_92) = 1
 			}
 			if ( var_178 \ 4 == 1 ) {
 				roomCoordX8 = (var_163 + playerRoomCoordX2 * 7 + levelSizeX * 7) \ (levelSizeX * 7)
@@ -2128,7 +2128,7 @@
 						var_181 = playerRoomCoordY2
 						playerRoomCoordX2 = (playerRoomCoordX2 - 1 + levelSizeX) \ levelSizeX
 						roomTransitionFrame = 8
-						var_95(8) = 1
+						gameSePlaying(8) = 1
 					}
 					else {
 						if ( roomList6(playerRoomCoordX2, playerRoomCoordY2) == 4 ) {
@@ -2148,7 +2148,7 @@
 						var_181 = playerRoomCoordY2
 						playerRoomCoordY2 = (playerRoomCoordY2 - 1 + levelSizeY) \ levelSizeY
 						roomTransitionFrame = 8
-						var_95(9) = 1
+						gameSePlaying(9) = 1
 					}
 					else {
 						if ( roomList6(playerRoomCoordX2, playerRoomCoordY2) == 1 ) {
@@ -2168,7 +2168,7 @@
 						var_181 = playerRoomCoordY2
 						playerRoomCoordX2 = (playerRoomCoordX2 + 1) \ levelSizeX
 						roomTransitionFrame = 8
-						var_95(10) = 1
+						gameSePlaying(10) = 1
 					}
 					else {
 						if ( roomList6(playerRoomCoordX2, playerRoomCoordY2) == 2 ) {
@@ -2188,7 +2188,7 @@
 						var_181 = playerRoomCoordY2
 						playerRoomCoordY2 = (playerRoomCoordY2 + 1) \ levelSizeY
 						roomTransitionFrame = 8
-						var_95(11) = 1
+						gameSePlaying(11) = 1
 					}
 					else {
 						if ( roomList6(playerRoomCoordX2, playerRoomCoordY2) == 3 ) {
@@ -2213,7 +2213,7 @@
 				var_182 += 1
 				if ( var_182 == 1 ) {
 					var_183 = 12
-					var_95(15) = 1
+					gameSePlaying(15) = 1
 				}
 				var_184 = var_183
 				if ( var_116(0) == 1 | var_116(0) >= 9 ) {
@@ -2249,7 +2249,7 @@
 					else {
 						var_186 = -1
 					}
-					var_95(12) = 1
+					gameSePlaying(12) = 1
 				}
 			}
 			if ( var_187 >= 1 ) {
@@ -2260,15 +2260,15 @@
 				roomCoordY8 = (playerRoomCoordY2 + var_183 / 5 - 2 + levelSizeY) \ levelSizeY
 				if ( roomListVisited(roomCoordX8, roomCoordY8) == 0 & roomListGraphMarker(roomCoordX8, roomCoordY8) <= 1 ) {
 					roomListGraphMarker(roomCoordX8, roomCoordY8) = 2
-					var_95(13) = 1
+					gameSePlaying(13) = 1
 				}
 				else {
 					if ( roomListGraphMarker(roomCoordX8, roomCoordY8) == 2 ) {
 						roomListGraphMarker(roomCoordX8, roomCoordY8) = 0
-						var_95(16) = 1
+						gameSePlaying(16) = 1
 					}
 					else {
-						var_95(14) = 1
+						gameSePlaying(14) = 1
 					}
 				}
 				var_187 = 6
@@ -2283,15 +2283,15 @@
 				if ( levelStyle == 3 ) {
 					var_92 = 43
 				}
-				var_95(17 + rnd(3) + var_92) = 1
+				gameSePlaying(17 + rnd(3) + var_92) = 1
 				if ( roomList5(playerRoomCoordX2, playerRoomCoordY2) <= 6 ) {
-					var_95(roomList5(playerRoomCoordX2, playerRoomCoordY2) + var_92) = 1
+					gameSePlaying(roomList5(playerRoomCoordX2, playerRoomCoordY2) + var_92) = 1
 				}
 				if ( roomList5(playerRoomCoordX2, playerRoomCoordY2) == 7 ) {
-					var_95(6 + var_92) = 1
+					gameSePlaying(6 + var_92) = 1
 				}
 				if ( roomList5(playerRoomCoordX2, playerRoomCoordY2) == 8 ) {
-					var_95(7 + var_92) = 1
+					gameSePlaying(7 + var_92) = 1
 				}
 			}
 			if ( var_189 >= 1 ) {
@@ -2301,14 +2301,14 @@
 				var_189 = 0
 			}
 			if ( playerClearAnimFrame == 1 ) {
-				var_95(21) = 1
+				gameSePlaying(21) = 1
 			}
 			if ( playerClearAnimFrame == 60 ) {
-				var_95(22) = 1
+				gameSePlaying(22) = 1
 			}
 			if ( playerClearAnimFrame == 128 ) {
-				var_95(23) = 1
-				var_95(32) = 1
+				gameSePlaying(23) = 1
+				gameSePlaying(32) = 1
 			}
 			if ( playerClearAnimFrame >= 1 ) {
 				playerClearAnimFrame += 1
@@ -2324,7 +2324,7 @@
 					roomListType(playerRoomCoordX2, playerRoomCoordY2) = 2
 					playerKeysCollected += 1
 					var_189 = 32
-					var_95(20) = 1
+					gameSePlaying(20) = 1
 				}
 				if ( roomListType(playerRoomCoordX2, playerRoomCoordY2) == 7 & playerClearAnimFrame == 0 ) {
 					if ( playerKeysCollected >= levelKeysNeeded ) {
@@ -2425,7 +2425,7 @@
 			}
 			if ( var_116(5) == 1 & playerClearAnimFrame == 0 ) {
 				var_171 = 1
-				var_95(24) = 1
+				gameSePlaying(24) = 1
 				var_179 = 1
 			}
 		}
@@ -2438,38 +2438,38 @@
 					}
 					if ( var_116(5) == 1 ) {
 						var_171 = 0
-						var_95(25) = 1
+						gameSePlaying(25) = 1
 					}
 					if ( var_116(1) == 1 | var_116(1) >= 8 ) {
 						menuItemSelected = (menuItemSelected + 5) \ 6
-						var_95(30) = 1
+						gameSePlaying(30) = 1
 					}
 					if ( var_116(3) == 1 | var_116(3) >= 8 ) {
 						menuItemSelected = (menuItemSelected + 1) \ 6
-						var_95(30) = 1
+						gameSePlaying(30) = 1
 					}
 					if ( menuItemSelected == 0 & var_116(4) == 1 ) {
 						var_171 = 0
-						var_95(25) = 1
+						gameSePlaying(25) = 1
 					}
 					if ( menuItemSelected == 1 & var_116(4) == 1 ) {
 						menuItemSelected = 7
-						var_95(31) = 1
+						gameSePlaying(31) = 1
 					}
 					else {
 						if ( menuItemSelected == 7 & var_116(4) == 1 ) {
 							goto *label_032
-							var_95(31) = 1
+							gameSePlaying(31) = 1
 						}
 					}
 					if ( menuItemSelected == 2 & var_116(4) == 1 ) {
 						menuItemSelected = 8
-						var_95(31) = 1
+						gameSePlaying(31) = 1
 					}
 					else {
 						if ( menuItemSelected == 8 & var_116(4) == 1 ) {
 							goto *label_024
-							var_95(31) = 1
+							gameSePlaying(31) = 1
 						}
 					}
 					if ( menuItemSelected == 3 & var_116(0) * var_116(2) == 0 ) {
@@ -2477,14 +2477,14 @@
 							if ( var_100 >= 5 ) {
 								var_100 -= 5
 								gosub *label_194
-								var_95(30) = 1
+								gameSePlaying(30) = 1
 							}
 						}
 						if ( var_116(2) == 1 | var_116(2) >= 8 ) {
 							if ( var_100 <= 95 ) {
 								var_100 += 5
 								gosub *label_194
-								var_95(30) = 1
+								gameSePlaying(30) = 1
 							}
 						}
 					}
@@ -2493,19 +2493,19 @@
 							if ( var_101 >= 5 ) {
 								var_101 -= 5
 								gosub *label_194
-								var_95(30) = 1
+								gameSePlaying(30) = 1
 							}
 						}
 						if ( var_116(2) == 1 | var_116(2) >= 8 ) {
 							if ( var_101 <= 95 ) {
 								var_101 += 5
 								gosub *label_194
-								var_95(30) = 1
+								gameSePlaying(30) = 1
 							}
 						}
 					}
 					if ( menuItemSelected == 5 & var_116(4) == 1 ) {
-						var_95(31) = 1
+						gameSePlaying(31) = 1
 						gameWindowSize = (gameWindowSize + 1) \ 3
 						gosub *gameWindowCreate
 					}
@@ -2523,7 +2523,7 @@
 								}
 							}
 						}
-						var_95(31) = 1
+						gameSePlaying(31) = 1
 					}
 				}
 				else {
@@ -2548,16 +2548,16 @@
 					}
 					playerDeathAnimFrame += 1
 					if ( playerDeathAnimFrame == 1 ) {
-						var_95(26) = 1
+						gameSePlaying(26) = 1
 					}
 					if ( playerDeathAnimFrame == 33 & playerLivesLeft >= 1 ) {
-						var_95(36) = 1
+						gameSePlaying(36) = 1
 						var_171 = 0
 						playerDeathAnimFrame = 0
 						playerLivesLeft -= 1
 					}
 					if ( playerDeathAnimFrame == 36 ) {
-						var_95(27) = 1
+						gameSePlaying(27) = 1
 						gameMuToPlay = 21
 						var_110 = 1
 					}
@@ -2568,30 +2568,30 @@
 							}
 							if ( var_116(1) == 1 ) {
 								menuItemSelected = (menuItemSelected + 1) \ 2
-								var_95(30) = 1
+								gameSePlaying(30) = 1
 							}
 							if ( var_116(3) == 1 ) {
 								menuItemSelected = (menuItemSelected + 1) \ 2
-								var_95(30) = 1
+								gameSePlaying(30) = 1
 							}
 							if ( menuItemSelected == 0 & var_116(4) == 1 ) {
 								menuItemSelected = 2
-								var_95(31) = 1
+								gameSePlaying(31) = 1
 							}
 							else {
 								if ( menuItemSelected == 2 & var_116(4) == 1 ) {
 									goto *label_032
-									var_95(31) = 1
+									gameSePlaying(31) = 1
 								}
 							}
 							if ( menuItemSelected == 1 & var_116(4) == 1 ) {
 								menuItemSelected = 3
-								var_95(31) = 1
+								gameSePlaying(31) = 1
 							}
 							else {
 								if ( menuItemSelected == 3 & var_116(4) == 1 ) {
 									goto *label_024
-									var_95(31) = 1
+									gameSePlaying(31) = 1
 								}
 							}
 						}
@@ -2611,7 +2611,7 @@
 							var_171 = 0
 						}
 						if ( var_134 == 0 ) {
-							var_95(32) = 1
+							gameSePlaying(32) = 1
 							var_194 = rnd(4)
 							if ( levelType <= 2 ) {
 								var_194 = levelType - 1
@@ -2648,30 +2648,30 @@
 								else {
 									if ( var_116(1) == 1 ) {
 										menuItemSelected = (menuItemSelected + 1) \ 2
-										var_95(30) = 1
+										gameSePlaying(30) = 1
 									}
 									if ( var_116(3) == 1 ) {
 										menuItemSelected = (menuItemSelected + 1) \ 2
-										var_95(30) = 1
+										gameSePlaying(30) = 1
 									}
 									if ( menuItemSelected == 0 & var_116(4) == 1 ) {
 										menuItemSelected = 2
-										var_95(31) = 1
+										gameSePlaying(31) = 1
 									}
 									else {
 										if ( menuItemSelected == 2 & var_116(4) == 1 ) {
 											goto *label_032
-											var_95(31) = 1
+											gameSePlaying(31) = 1
 										}
 									}
 									if ( menuItemSelected == 1 & var_116(4) == 1 ) {
 										menuItemSelected = 3
-										var_95(31) = 1
+										gameSePlaying(31) = 1
 									}
 									else {
 										if ( menuItemSelected == 3 & var_116(4) == 1 ) {
 											goto *label_024
-											var_95(31) = 1
+											gameSePlaying(31) = 1
 										}
 									}
 								}
@@ -4388,9 +4388,9 @@
 *label_193
 	if ( var_100 >= 1 ) {
 		repeat gameSeCount
-			if ( var_95(cnt) == 1 ) {
+			if ( gameSePlaying(cnt) == 1 ) {
 				ds_play gameSeCount * var_96(cnt) + cnt
-				var_95(cnt) = 0
+				gameSePlaying(cnt) = 0
 				var_96(cnt) = (var_96(cnt) + 1) \ var_94
 			}
 		loop
@@ -4399,7 +4399,7 @@
 	else {
 		var_215 = 0
 		var_215 = 1
-		dim var_95, gameSeCount
+		dim gameSePlaying, gameSeCount
 	}
 	return
 *label_194
