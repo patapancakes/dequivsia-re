@@ -105,7 +105,7 @@
 		noteget var_107, cnt
 		var_104(cnt) = int(var_107)
 	loop
-	onexit goto *label_199
+	onexit goto *gameQuit
 	dim levelClearAnimPlaying, 4
 *label_024
 	color 0, 0, 0
@@ -4378,7 +4378,7 @@
 		goto *gameInputsInterpret
 *label_192
 		if ( gameKeyPressed(19) == 1 ) {
-			goto *label_199
+			goto *gameQuit
 		}
 	}
 	else {
@@ -4457,7 +4457,7 @@
 *gameWindowCreate
 	screen 0, (gameWindowSize + 1) * 256, (gameWindowSize + 1) * 144, 4, ginfo(20) / 2 - 3 - (gameWindowSize + 1) * 128, ginfo(21) / 2 - 22 - (gameWindowSize + 1) * 72
 	return
-*label_199
+*gameQuit
 	var_105 = 0
 	if ( var_102 >= 1 ) {
 		var_105 = str(var_102)
