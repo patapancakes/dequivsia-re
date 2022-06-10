@@ -1,0 +1,4858 @@
+#uselib "dsoundex.hpi"
+#func ds_init "_ds_init@16" bmscr, int, int, /*•s–¾‚ÈŒ^ FFEE*/
+#func ds_load "_ds_load@16" bmscr, str, int, int
+#func ds_play "_ds_play@16" int, int, int, int
+#func ds_loop "_ds_loop@16" int, int, int, int
+#func ds_stop "_ds_stop@16" int, int, int, int
+#func ds_vol "_ds_vol@16" int, int, int, int
+#func ds_dup "_ds_dup@16" int, int, int, int
+
+#uselib "winmm.dll"
+#cfunc timeGetTime "timeGetTime"
+
+	var_0 = 1
+	title "Dequivsia"
+	goto *label_017
+#deffunc d3rotate var prm_28, var prm_29, double prm_30, double prm_31, double prm_32
+	prm_28 = prm_30 * cos(prm_32) - prm_31 * sin(prm_32)
+	prm_29 = prm_30 * sin(prm_32) + prm_31 * cos(prm_32)
+	return
+#deffunc d3vrotate var prm_33, var prm_34, var prm_35, double prm_36, double prm_37, double prm_38, double prm_39, double prm_40, double prm_41, double prm_42
+	var_1 = sqrt(prm_39 * prm_39 + prm_40 * prm_40 + prm_41 * prm_41)
+	var_2 = prm_39 / var_1
+	var_3 = prm_40 / var_1
+	var_4 = prm_41 / var_1
+	var_5 = sin(prm_42)
+	var_6 = cos(prm_42)
+	var_7 = 1.0 - var_6
+	prm_33 = (var_2 * var_2 * var_7 + var_6) * prm_36 + (var_2 * var_3 * var_7 - var_4 * var_5) * prm_37 + (var_4 * var_2 * var_7 + var_3 * var_5) * prm_38
+	prm_34 = (var_2 * var_3 * var_7 + var_4 * var_5) * prm_36 + (var_3 * var_3 * var_7 + var_6) * prm_37 + (var_3 * var_4 * var_7 - var_2 * var_5) * prm_38
+	prm_35 = (var_4 * var_2 * var_7 - var_3 * var_5) * prm_36 + (var_3 * var_4 * var_7 + var_2 * var_5) * prm_37 + (var_4 * var_4 * var_7 + var_6) * prm_38
+	return
+#deffunc d3setlocalmx double prm_43, double prm_44, double prm_45, double prm_46, double prm_47, double prm_48, double prm_49, double prm_50, double prm_51, double prm_52, double prm_53, double prm_54
+	var_8 = var_9 * prm_46 + var_10 * prm_49
+	var_11 = var_9 * prm_47 + var_10 * prm_50
+	var_12 = var_9 * prm_48 + var_10 * prm_51
+	var_13 = var_9 * prm_43 + var_10 * prm_44 + var_14
+	var_15 = var_16 * prm_46 + var_17 * prm_49 + var_18 * prm_52
+	var_19 = var_16 * prm_47 + var_17 * prm_50 + var_18 * prm_53
+	var_20 = var_16 * prm_48 + var_17 * prm_51 + var_18 * prm_54
+	var_21 = var_16 * prm_43 + var_17 * prm_44 + var_18 * prm_45 + var_22
+	var_23 = var_24 * prm_46 + var_25 * prm_49 + var_26 * prm_52
+	var_27 = var_24 * prm_47 + var_25 * prm_50 + var_26 * prm_53
+	var_28 = var_24 * prm_48 + var_25 * prm_51 + var_26 * prm_54
+	var_29 = var_24 * prm_43 + var_25 * prm_44 + var_26 * prm_45 + var_30
+	return
+#deffunc d3setcamx double prm_55, double prm_56, double prm_57, double prm_58, double prm_59, double prm_60, double prm_61
+	mref var_31, 64
+	var_32 = ginfo(12) / 2
+	var_33 = ginfo(13) / 2
+	var_2 = prm_55 - prm_58
+	var_3 = prm_56 - prm_59
+	var_4 = prm_57 - prm_60
+	var_34 = sqrt(var_2 * var_2 + var_3 * var_3)
+	var_35 = sqrt(var_34 * var_34 + var_4 * var_4)
+	if ( var_34 != 0.0 ) {
+		var_36 = -var_2 / var_34
+		var_37 = -var_3 / var_34
+	}
+	if ( var_35 != 0.0 ) {
+		var_6 = var_34 / var_35
+		var_5 = var_4 / var_35
+	}
+	var_4 = prm_61 / (0.01 + ginfo(13))
+	var_9 = var_37
+	var_10 = -var_36
+	var_16 = var_36 * var_6 * var_4
+	var_17 = var_37 * var_6 * var_4
+	var_18 = -var_5 * var_4
+	var_24 = var_36 * var_5
+	var_25 = var_37 * var_5
+	var_26 = var_6
+	var_14 = (var_9 * prm_55 + var_10 * prm_56) * (-1)
+	var_22 = (var_16 * prm_55 + var_17 * prm_56 + var_18 * prm_57) * (-1)
+	var_30 = (var_24 * prm_55 + var_25 * prm_56 + var_26 * prm_57) * (-1)
+	d3setlocalmx 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1
+	return
+#deffunc d3vpos double prm_62, double prm_63, double prm_64
+	var_38 = var_39
+	var_40 = var_41
+	var_42 = var_31
+	var_43 = var_15 * prm_62 + var_19 * prm_63 + var_20 * prm_64 + var_21
+	var_31 = 0
+	if ( var_43 > 0 ) {
+		var_39 = var_32 + (var_8 * prm_62 + var_11 * prm_63 + var_12 * prm_64 + var_13) / var_43
+		var_41 = var_33 - (var_23 * prm_62 + var_27 * prm_63 + var_28 * prm_64 + var_29) / var_43
+		var_31 = (var_39 / 8000 | var_41 / 8000) == 0
+	}
+	return
+#deffunc d3line double prm_65, double prm_66, double prm_67, double prm_68, double prm_69, double prm_70
+	d3vpos prm_68, prm_69, prm_70
+	d3vpos prm_65, prm_66, prm_67
+	if ( var_31 & var_42 ) {
+		line var_39, var_41, var_38, var_40
+		return
+	}
+	if ( var_31 | var_42 ) {
+		if ( var_31 ) {
+			pos var_39, var_41
+			var_2 = prm_65
+			var_3 = prm_66
+			var_4 = prm_67
+			var_44 = prm_68
+			var_45 = prm_69
+			var_46 = prm_70
+		}
+		else {
+			pos var_38, var_40
+			var_2 = prm_68
+			var_3 = prm_69
+			var_4 = prm_70
+			var_44 = prm_65
+			var_45 = prm_66
+			var_46 = prm_67
+		}
+		repeat 10
+			var_47 = (var_2 + var_44) / 2
+			var_48 = (var_3 + var_45) / 2
+			var_49 = (var_4 + var_46) / 2
+			var_50 = var_15 * var_47 + var_19 * var_48 + var_20 * var_49 + var_21
+			var_51 = 0
+			if ( var_50 > 0 ) {
+				var_38 = var_32 + (var_8 * var_47 + var_11 * var_48 + var_12 * var_49 + var_13) / var_50
+				var_40 = var_33 - (var_23 * var_47 + var_27 * var_48 + var_28 * var_49 + var_29) / var_50
+				var_51 = (var_38 / 8000 | var_40 / 8000) == 0
+			}
+			if ( var_51 ) {
+				var_2 = var_47
+				var_3 = var_48
+				var_4 = var_49
+				line var_38, var_40
+			}
+			else {
+				var_44 = var_47
+				var_45 = var_48
+				var_46 = var_49
+			}
+		loop
+	}
+	return
+#deffunc d3arrow double prm_71, double prm_72, double prm_73, double prm_74, double prm_75, double prm_76
+	d3line prm_71, prm_72, prm_73, prm_74, prm_75, prm_76
+	if ( var_31 & var_42 ) {
+		var_52 = atan(var_41 - var_40, var_39 - var_38)
+		d3vpos (prm_71 * 6 + prm_74) / 7, (prm_72 * 6 + prm_75) / 7, (prm_73 * 6 + prm_76) / 7
+		var_1 = sqrt((prm_71 - prm_74) * (prm_71 - prm_74) + (prm_72 - prm_75) * (prm_72 - prm_75) + (prm_73 - prm_76) * (prm_73 - prm_76)) / var_43 / 25
+		var_44 = cos(var_52) * var_1
+		var_45 = sin(var_52) * var_1
+		line var_38, var_40, var_39 - var_45, var_41 + var_44
+		line var_38, var_40, var_39 + var_45, var_41 - var_44
+	}
+	return
+#deffunc d3box double prm_77, double prm_78, double prm_79, double prm_80, double prm_81, double prm_82
+	d3line prm_77, prm_78, prm_79, prm_77, prm_78, prm_82
+	d3line prm_77, prm_78, prm_82, prm_77, prm_81, prm_82
+	d3line prm_77, prm_81, prm_82, prm_77, prm_81, prm_79
+	d3line prm_77, prm_81, prm_79, prm_77, prm_78, prm_79
+	d3line prm_80, prm_78, prm_79, prm_80, prm_81, prm_79
+	d3line prm_80, prm_81, prm_79, prm_80, prm_81, prm_82
+	d3line prm_80, prm_81, prm_82, prm_80, prm_78, prm_82
+	d3line prm_80, prm_78, prm_82, prm_80, prm_78, prm_79
+	d3line prm_77, prm_78, prm_79, prm_80, prm_78, prm_79
+	d3line prm_77, prm_78, prm_82, prm_80, prm_78, prm_82
+	d3line prm_77, prm_81, prm_82, prm_80, prm_81, prm_82
+	d3line prm_77, prm_81, prm_79, prm_80, prm_81, prm_79
+	return
+#deffunc d3circle double prm_83, double prm_84, double prm_85, double prm_86, int prm_87
+	d3vpos prm_83, prm_84, prm_85
+	if ( var_31 ) {
+		var_1 = prm_86 / var_43
+		if ( var_1 >= 1 ) {
+			circle var_39 - var_1, var_41 - var_1, var_39 + (var_1 + 0.5), var_41 + (var_1 + 0.5), prm_87
+		}
+		else {
+			pset var_39, var_41
+		}
+	}
+	return
+#deffunc d3mes str prm_88, double prm_89, double prm_90, double prm_91
+	d3vpos prm_89, prm_90, prm_91
+	if ( var_31 ) {
+		pos 0, -32000
+		mes prm_88
+		pos var_39 - ginfo(14) / 2, var_41 - ginfo(15) / 2
+		mes prm_88
+	}
+	return
+#deffunc d3createptc int prm_92, int prm_93, int prm_94, int prm_95, array prm_96, int prm_97
+	var_53 = ginfo(3)
+	var_54 = 171 * prm_92
+	if ( prm_92 >= var_55 ) {
+		var_52 = prm_92 + 4
+		if ( var_56 == 29 ) {
+			var_56 = 27
+			var_57 = 29
+		}
+		else {
+			var_56 = 29
+			var_57 = 27
+		}
+		buffer var_57, 171 * var_52, 171 + 18
+		if ( var_55 ) {
+			gcopy var_56, 0, 0, 171 * var_55, 171 + 18
+		}
+		buffer var_56, 342, 342
+		var_55 = var_52
+	}
+	if ( prm_97 ) {
+		gsel var_57
+		pos var_54, 0
+		gzoom 171, 171, prm_93, prm_94, prm_95, prm_96, prm_97, 1
+	}
+	else {
+		gsel var_56
+		color
+		boxf
+		var_58 = prm_96 * prm_96(1)
+		var_59 = 171 * var_58
+		repeat var_59
+			var_60 = (1.0 + cnt) / var_59
+			var_60 = (var_60 * var_60 + var_60) / 2
+			color limit(var_60 * prm_93, 0, 255), limit(var_60 * prm_94, 0, 255), limit(var_60 * prm_95, 0, 255)
+			var_60 = 6.2831853 * cnt / var_58
+			var_1 = 171 * (var_59 - cnt) * prm_96(cnt \ prm_96(1) + 2) / 100 / var_59
+			line 171 + sin(var_60) * var_1, 171 - cos(var_60) * var_1
+		loop
+		pos 0, 0
+		gmode 2, 342, 342
+		gcopy var_56, 1
+		gsel var_57
+		pos var_54, 0
+		gzoom 171, 171, var_56, 0, 0, 342, 342, 1
+	}
+	repeat 18, 1
+		pos (cnt - 1) * cnt / 2 + var_54, 171
+		gzoom cnt, cnt, var_57, var_54, 0, 171, 171, 1
+		gmode 3, , , 56
+		pos cnt * cnt / 2 + var_54, 171 + cnt / 2
+		gcopy var_57, 171 / 2 + var_54, 171 / 2, 1, 1
+	loop
+	var_61 = 0, 0, 170, 170
+	gsel var_53
+	return
+#deffunc d3particlem int prm_98, double prm_99
+	if ( var_31 ) {
+		var_62 = int(prm_99 * 2 / var_43)
+		if ( var_62 >= 1 ) {
+			if ( var_62 <= 18 ) {
+				pos var_39 - var_62 / 2, var_41 - var_62 / 2
+				gcopy var_57, prm_98 * 171 + (var_62 - 1) * var_62 / 2, 171, var_62, var_62
+			}
+			else {
+				var_1 = var_62 / 2
+				var_63 = var_39 - var_1, var_39 + var_1, var_39 + var_1, var_63
+				var_64 = var_41 - var_1, var_64, var_41 + var_1, var_41 + var_1
+				var_54 = prm_98 * 171
+				var_65 = var_54, var_54 + 170, var_54 + 170, var_54
+				gsquare var_57, var_63, var_64, var_65, var_61
+			}
+		}
+	}
+	return
+#deffunc d3particlemr int prm_100, double prm_101, double prm_102
+	if ( var_31 ) {
+		var_1 = prm_101 / var_43 * 1.41421356
+		if ( var_1 >= 1 ) {
+			var_66 = cos(prm_102 - 0.78539816) * var_1
+			var_67 = sin(prm_102 - 0.78539816) * var_1
+			var_63 = var_39 + var_67, var_39 + var_66, var_39 - var_67, var_39 - var_66
+			var_64 = var_41 - var_66, var_41 + var_67, var_41 + var_66, var_41 - var_67
+			var_54 = prm_100 * 171
+			var_65 = var_54, var_54 + 170, var_54 + 170, var_54
+			gsquare var_57, var_63, var_64, var_65, var_61
+		}
+	}
+	return
+#deffunc d3square array prm_103, array prm_104, array prm_105
+	repeat 4
+		var_68 = prm_103(cnt)
+		var_69 = prm_104(cnt)
+		var_70 = prm_105(cnt)
+		var_43 = var_15 * var_68 + var_19 * var_69 + var_20 * var_70 + var_21
+		var_31 = 0
+		if ( var_43 > 0 ) {
+			var_39 = var_32 + (var_8 * var_68 + var_11 * var_69 + var_12 * var_70 + var_13) / var_43
+			var_41 = var_33 - (var_23 * var_68 + var_27 * var_69 + var_28 * var_70 + var_29) / var_43
+			var_31 = (var_39 / 8000 | var_41 / 8000) == 0
+		}
+		if ( var_31 == 0 ) {
+			break
+		}
+		var_63(cnt) = var_39
+		var_64(cnt) = var_41
+	loop
+	if ( var_31 ) {
+		gsquare -1, var_63, var_64
+	}
+	return
+#deffunc d3ribbonto double prm_106, double prm_107, double prm_108, double prm_109, double prm_110, double prm_111
+	var_63 = var_39, var_38
+	var_64 = var_41, var_40
+	var_52 = var_42 & var_31
+	d3vpos prm_106, prm_107, prm_108
+	d3vpos prm_109, prm_110, prm_111
+	if ( var_52 & var_42 & var_31 ) {
+		var_63(2) = var_38, var_39
+		var_64(2) = var_40, var_41
+		gsquare -1, var_63, var_64
+	}
+	return
+#deffunc d3texture array prm_112, array prm_113, array prm_114, int prm_115, int prm_116, int prm_117, int prm_118, int prm_119, int prm_120
+	if ( prm_120 <= 1 ) {
+		repeat 4
+			var_68 = prm_112(cnt)
+			var_69 = prm_113(cnt)
+			var_70 = prm_114(cnt)
+			var_43 = var_15 * var_68 + var_19 * var_69 + var_20 * var_70 + var_21
+			var_31 = 0
+			if ( var_43 > 0 ) {
+				var_39 = var_32 + (var_8 * var_68 + var_11 * var_69 + var_12 * var_70 + var_13) / var_43
+				var_41 = var_33 - (var_23 * var_68 + var_27 * var_69 + var_28 * var_70 + var_29) / var_43
+				var_31 = (var_39 / 8000 | var_41 / 8000) == 0
+			}
+			if ( var_31 == 0 ) {
+				break
+			}
+			var_63(cnt) = var_39
+			var_64(cnt) = var_41
+		loop
+		if ( var_31 ) {
+			var_65 = prm_116, prm_116 + prm_118 - 1, prm_116 + prm_118 - 1, prm_116
+			var_71 = prm_117, prm_117, prm_117 + prm_119 - 1, prm_117 + prm_119 - 1
+			gsquare prm_115, var_63, var_64, var_65, var_71
+		}
+		return
+	}
+	var_72 = prm_120 + 1
+	var_73 = prm_120 * prm_120
+	repeat var_72 * var_72
+		var_54 = cnt \ var_72
+		var_74 = cnt / var_72
+		var_75 = (prm_120 - var_54) * (prm_120 - var_74)
+		var_76 = var_54 * (prm_120 - var_74)
+		var_77 = var_54 * var_74
+		var_78 = (prm_120 - var_54) * var_74
+		var_68 = (prm_112(0) * var_75 + prm_112(1) * var_76 + prm_112(2) * var_77 + prm_112(3) * var_78) / var_73
+		var_69 = (prm_113(0) * var_75 + prm_113(1) * var_76 + prm_113(2) * var_77 + prm_113(3) * var_78) / var_73
+		var_70 = (prm_114(0) * var_75 + prm_114(1) * var_76 + prm_114(2) * var_77 + prm_114(3) * var_78) / var_73
+		var_43 = var_15 * var_68 + var_19 * var_69 + var_20 * var_70 + var_21
+		var_79(cnt) = 0
+		if ( var_43 > 0 ) {
+			var_80(cnt) = var_32 + (var_8 * var_68 + var_11 * var_69 + var_12 * var_70 + var_13) / var_43
+			var_81(cnt) = var_33 - (var_23 * var_68 + var_27 * var_69 + var_28 * var_70 + var_29) / var_43
+			var_79(cnt) = (var_80(cnt) / 8000 | var_81(cnt) / 8000) == 0
+		}
+	loop
+	var_82 = prm_118 - 1
+	var_83 = prm_119 - 1
+	repeat prm_120
+		var_74 = cnt
+		var_71 = var_74 * var_83 / prm_120 + prm_117, var_71(0), (var_74 + 1) * var_83 / prm_120 + prm_117, var_71(2)
+		repeat prm_120
+			var_54 = cnt
+			var_84 = var_74 * var_72 + var_54
+			var_85 = var_84 + 1
+			var_86 = var_85 + var_72
+			var_87 = var_84 + var_72
+			if ( var_79(var_84) & var_79(var_85) & var_79(var_86) & var_79(var_87) ) {
+				var_63 = var_80(var_84), var_80(var_85), var_80(var_86), var_80(var_87)
+				var_64 = var_81(var_84), var_81(var_85), var_81(var_86), var_81(var_87)
+				var_65 = var_54 * var_82 / prm_120 + prm_116, (var_54 + 1) * var_82 / prm_120 + prm_116, var_65(1), var_65(0)
+				gsquare prm_115, var_63, var_64, var_65, var_71
+			}
+		loop
+	loop
+	return
+#defcfunc d3getfps
+	var_52 = timeGetTime() / 200
+	var_88(var_52 & 31)++
+	if ( var_89 != var_52 ) {
+		var_89 = var_52
+		var_90 = 0
+		repeat 5, 1
+			var_90 += var_88(var_52 - cnt & 31)
+		loop
+		repeat 20, 1
+			var_88(var_52 + cnt & 31) = 0
+		loop
+	}
+	return var_90
+*label_017
+	dim var_88, 32
+	var_91 = 20, 1, 100
+	gosub *label_198
+	randomize
+	repeat 14
+		buffer 2 + cnt, 320, 240, 0
+		picload "DPM:data\\data.dpm:chip_" + str(cnt + 2) + ".bmp"
+	loop
+	gsel 0
+	color 0, 0, 0
+	boxf
+	pos 144, 128
+	gcopy 5, 0, 168, 112, 16
+	var_92 = rnd(4)
+	pos 144, 96
+	gcopy 5, 40 * var_92, 184, 40, 32
+	pos 0, 0
+	gzoom 256 * (1 + var_0), 144 * (1 + var_0), 0, 0, 0, 256, 144
+	var_93 = 75
+	var_94 = 3
+	ds_init 22050, 2
+	dim var_95, var_93
+	dim var_96, var_93
+	color 10, 10, 10
+	repeat var_93
+		pos cnt / 14 * 60
+		if ( cnt \ 14 == 0 ) {
+			pos , 0
+		}
+		ds_load "data\\se\\se_" + cnt + ".wav", cnt
+		mes stat
+		await 0
+	loop
+	var_97 = 0
+*label_018
+	exgoto var_97, 1, var_93, *label_021
+	var_98 = 0
+*label_019
+	exgoto var_98, 1, var_94 - 1, *label_020
+	ds_dup var_93 + var_97 + var_93 * var_98, var_97
+	var_98 += 1
+	goto *label_019
+*label_020
+	var_97 += 1
+	goto *label_018
+*label_021
+	pos 360, 0
+	var_99 = var_93 * var_94 + 1
+	exist "data\\savedata\\100"
+	if ( strsize == (-1) ) {
+		repeat 50
+			ds_load "data\\mu\\" + cnt + ".wav", cnt + var_99
+			mes stat
+			await 0
+		loop
+	}
+	var_100 = 50
+	var_101 = 50
+	gosub *label_194
+	var_102 = 1
+	dim var_103, 10, 4
+	dim var_104, 14
+	exist "data\\savedata\\0"
+	notesel var_105
+	if ( strsize != (-1) ) {
+		noteload "data\\savedata\\0"
+		var_102 = int(var_105)
+	}
+	var_106 = 0
+*label_022
+	exgoto var_106, 1, 4, *label_023
+	exist "data\\savedata\\" + str(var_106 + 1)
+	if ( strsize != (-1) ) {
+		noteload "data\\savedata\\" + str(var_106 + 1)
+		repeat 10
+			noteget var_107, cnt
+			var_103(cnt, var_106) = int(var_107)
+		loop
+	}
+	var_106 += 1
+	goto *label_022
+*label_023
+	exist "data\\savedata\\5"
+	notesel var_105
+	if ( strsize != (-1) ) {
+		noteload "data\\savedata\\5"
+	}
+	repeat 14
+		noteget var_107, cnt
+		var_104(cnt) = int(var_107)
+	loop
+	onexit goto *label_199
+	dim var_108, 4
+*label_024
+	color 0, 0, 0
+	boxf
+	gosub *label_189
+	var_109 = 5
+	var_110 = 1
+	var_111 = 0
+	var_112 = 0
+	var_113 = rnd(3)
+	var_95(33) = 1
+	var_114 = 0
+	repeat 4
+		if ( var_103(0, cnt) >= 1 ) {
+			if ( var_104(cnt * 2 + 1) == 0 ) {
+				var_104(cnt * 2 + 1) = 1
+			}
+		}
+	loop
+	var_92 = 0
+	repeat 4
+		if ( var_104(cnt + 8) >= 1 ) {
+			var_92 += 1
+		}
+	loop
+	if ( var_92 == 4 & var_104(12) == 0 ) {
+		var_104(12) = 1
+	}
+	if ( var_104(5) >= 1 & var_104(12) >= 1 & var_104(13) == 0 ) {
+		var_104(13) = 1
+	}
+	repeat 14
+		if ( var_104(cnt) >= 1 ) {
+			var_114 += 1
+		}
+	loop
+	var_115 = -1
+*label_025
+	gosub *label_190
+	if ( var_112 == 0 & var_116(1) * var_116(3) == 0 ) {
+		if ( var_116(1) == 1 | var_116(1) >= 8 ) {
+			var_111 = (var_111 + 4) \ 5
+			var_95(34) = 1
+		}
+		if ( var_116(3) == 1 | var_116(3) >= 8 ) {
+			var_111 = (var_111 + 1) \ 5
+			var_95(34) = 1
+		}
+		if ( var_114 == 0 ) {
+			if ( var_116(1) == 1 | var_116(1) >= 8 ) {
+				if ( var_111 == 1 ) {
+					var_111 -= 1
+				}
+			}
+			if ( var_116(3) == 1 | var_116(3) >= 8 ) {
+				if ( var_111 == 1 ) {
+					var_111 += 1
+				}
+			}
+		}
+		if ( var_111 == 0 & var_116(4) == 1 ) {
+			var_112 = 1
+			var_95(35) = 1
+		}
+		if ( var_111 == 1 & var_116(4) == 1 ) {
+			var_112 = 2
+			var_111 = 0
+			var_95(35) = 1
+		}
+		if ( var_111 == 2 & var_116(0) * var_116(2) == 0 ) {
+			if ( var_116(0) == 1 | var_116(0) >= 8 ) {
+				if ( var_100 >= 5 ) {
+					var_100 -= 5
+					gosub *label_194
+					var_95(34) = 1
+				}
+			}
+			if ( var_116(2) == 1 | var_116(2) >= 8 ) {
+				if ( var_100 <= 95 ) {
+					var_100 += 5
+					gosub *label_194
+					var_95(34) = 1
+				}
+			}
+		}
+		if ( var_111 == 3 & var_116(0) * var_116(2) == 0 ) {
+			if ( var_116(0) == 1 | var_116(0) >= 8 ) {
+				if ( var_101 >= 5 ) {
+					var_101 -= 5
+					gosub *label_194
+					var_95(34) = 1
+				}
+			}
+			if ( var_116(2) == 1 | var_116(2) >= 8 ) {
+				if ( var_101 <= 95 ) {
+					var_101 += 5
+					gosub *label_194
+					var_95(34) = 1
+				}
+			}
+		}
+		if ( var_111 == 4 & var_116(4) == 1 ) {
+			var_95(35) = 1
+			var_0 = (var_0 + 1) \ 3
+			gosub *label_198
+		}
+		var_117 = 0
+	}
+	else {
+		if ( var_112 == 1 ) {
+			if ( var_116(5) == 1 ) {
+				var_111 = 0
+				var_112 = 0
+				var_95(35) = 1
+			}
+			if ( var_116(1) == 1 ) {
+				var_111 = (var_111 + var_102 - 1) \ var_102
+				var_95(34) = 1
+				var_117 = 0
+			}
+			if ( var_116(3) == 1 ) {
+				var_111 = (var_111 + 1) \ var_102
+				var_95(34) = 1
+				var_117 = 0
+			}
+			var_117 += 1
+			if ( var_116(4) == 1 ) {
+				var_95(35) = 1
+				var_118 = var_111
+				if ( var_118 == 0 ) {
+					var_119 = 13
+					var_120 = 13
+					var_121 = 1
+					var_122 = 10
+				}
+				if ( var_118 == 1 ) {
+					var_119 = 21
+					var_120 = 21
+					var_121 = 2
+					var_122 = 4
+				}
+				if ( var_118 == 2 ) {
+					var_119 = 31
+					var_120 = 31
+					var_121 = 3
+					var_122 = 8
+				}
+				if ( var_118 == 3 ) {
+					var_119 = 51
+					var_120 = 51
+					var_121 = 6
+					var_122 = 5
+				}
+				if ( var_104(var_118 * 2) == 0 ) {
+					var_104(var_118 * 2) = 1
+				}
+				gosub *label_193
+				var_109 = 0
+				var_110 = 1
+				gosub *label_195
+				goto *label_032
+			}
+			if ( var_116(8) == 1 ) {
+				if ( var_103(0, var_111) >= 1 ) {
+					var_123 = var_111
+					var_109 = 0
+					var_110 = 1
+					gosub *label_195
+					goto *label_187
+				}
+			}
+		}
+		else {
+			if ( var_112 == 2 ) {
+				if ( var_116(0) == 1 | var_116(0) >= 8 ) {
+					var_111 = (var_111 + 13) \ 14
+					var_124 = 12
+					var_115 = -1
+					var_95(34) = 1
+				}
+				if ( var_116(2) == 1 | var_116(2) >= 8 ) {
+					var_111 = (var_111 + 1) \ 14
+					var_124 = 12
+					var_115 = -1
+					var_95(34) = 1
+				}
+				if ( var_116(4) == 1 ) {
+					if ( var_104(var_111) == 0 ) {
+						var_95(51) = 1
+					}
+					else {
+						var_115 = 16
+						var_104(var_111) = 2
+						var_95(11) = 1
+					}
+				}
+				if ( var_116(5) == 1 ) {
+					var_111 = 1
+					var_112 = 0
+					var_95(35) = 1
+				}
+				if ( var_124 >= 1 ) {
+					var_124 -= 1
+				}
+				if ( var_115 >= 1 ) {
+					var_115 -= 1
+				}
+			}
+		}
+	}
+	var_125 += 1
+	gosub *label_193
+	gosub *label_195
+	redraw 0
+	color 0, 0, 0
+	boxf
+	gmode 4, , , 256
+	if ( var_112 <= 1 ) {
+		var_98 = 0
+*label_026
+		exgoto var_98, 1, 6, *label_029
+		var_97 = 0
+*label_027
+		exgoto var_97, 1, 7, *label_028
+		var_92 = 1
+		if ( var_98 == 0 ) {
+			var_92 = 0
+		}
+		if ( var_98 == 5 ) {
+			var_92 = 2
+		}
+		pos var_98 * 24 + 10, var_97 * 24 - var_112 * 8
+		gcopy 5, 24 * var_92, 12 * 8, 24, 24
+		var_97 += 1
+		goto *label_027
+*label_028
+		var_98 += 1
+		goto *label_026
+	}
+*label_029
+	gmode 4, , , 256
+	if ( var_112 == 0 ) {
+		var_126 = 0
+		var_127 = 0
+		var_92 = 1
+		if ( var_114 >= 1 ) {
+			var_92 = 2
+		}
+		repeat var_92
+			pos var_126 + 6 * 8, var_127 + 3 * 8 + cnt * 24
+			gcopy 5, 0, 120, 8 * 8, 32
+		loop
+		if ( var_111 == 0 ) {
+			var_92 = 0
+		}
+		else {
+			var_92 = 1
+		}
+		pos var_126 + 7 * 8, var_127 + 4 * 8
+		gcopy 5, 0, 8 * 8 + var_92 * 16, 6 * 8, 16
+		if ( var_114 >= 1 ) {
+			if ( var_111 == 1 ) {
+				var_92 = 0
+			}
+			else {
+				var_92 = 1
+			}
+			pos var_126 + 7 * 8, var_127 + 7 * 8
+			gcopy 5, 48, 8 * 8 + var_92 * 16, 6 * 8, 16
+		}
+		pos var_126 + 5 * 8 + 4, var_127 + 10 * 8
+		gcopy 5, 0, 32, 10 * 8, 8
+		pos var_126 + 5 * 8 + 4, var_127 + 11 * 8 + 4
+		gcopy 5, 0, 32, 10 * 8, 8
+		pos var_126 + 5 * 8 + 5, var_127 + 10 * 8
+		gcopy 5, 80 - var_100 * 72 / 100, 40, var_100 * 72 / 100, 8
+		pos var_126 + 5 * 8 + 5, var_127 + 11 * 8 + 4
+		gcopy 5, 80 - var_101 * 72 / 100, 40, var_101 * 72 / 100, 8
+		pos var_126 + 5 * 8 + 4 + var_100 * 72 / 100, var_127 + 10 * 8
+		gcopy 5, 80, 32, 8, 8
+		pos var_126 + 5 * 8 + 4 + var_101 * 72 / 100, var_127 + 11 * 8 + 4
+		gcopy 5, 80, 32, 8, 8
+		pos var_126 + 4 * 8 + 4, var_127 + 10 * 8
+		gcopy 5, 0, 48, 8, 8
+		pos var_126 + 4 * 8 + 4, var_127 + 11 * 8 + 4
+		gcopy 5, 0 + 8, 48, 8, 8
+		pos var_126 + 4 * 8 + 4, var_127 + 13 * 8
+		gcopy 5, 12 * 8, 40 + 16 * var_0, 11 * 8, 16
+		if ( var_111 == 0 ) {
+			var_128 = 4
+			var_129 = 16
+		}
+		if ( var_111 == 1 ) {
+			var_128 = 3 * 8 + 4
+			var_129 = 16
+		}
+		if ( var_111 == 2 ) {
+			var_128 = 6 * 8
+			var_129 = 0
+		}
+		if ( var_111 == 3 ) {
+			var_128 = 7 * 8 + 4
+			var_129 = 0
+		}
+		if ( var_111 == 4 ) {
+			var_128 = 9 * 8 + 4
+			var_129 = 0
+		}
+		if ( var_125 <= 16 ) {
+			gmode 4, , , var_125 * 16
+			var_92 = (16 - var_125) * (16 - var_125) / 32
+		}
+		else {
+			gmode 4, , , 256
+			var_92 = 0
+		}
+		pos 8 * 21, 8 * 3 + var_92
+		gcopy 5, 192, 0, 80, 32
+		pos 8 * 20, 8 * 7 + var_92
+		gcopy 5, 192, 32 + 72 * var_113, 88, 72
+	}
+	else {
+		if ( var_112 == 1 ) {
+			repeat var_102
+				pos var_126 + 6 * 8, var_127 + 3 * 8 + cnt * 24
+				gcopy 5, 0, 120, 8 * 8, 32
+				if ( var_111 == cnt ) {
+					var_92 = 0
+				}
+				else {
+					var_92 = 1
+				}
+				pos var_126 + 7 * 8, var_127 + 4 * 8 + cnt * 24
+				gcopy 5, 6 * 8 * cnt, 16 * var_92, 6 * 8, 16
+			loop
+			var_128 = var_111 * 24 + 4
+			var_129 = 16
+			repeat 10
+				var_130 = var_103(cnt, var_111)
+				if ( var_130 >= 6000000 ) {
+					var_92 = 5999999
+				}
+				var_131 = 8 * 20
+				var_132 = 8 * 2 + cnt * 12
+				var_106 = 0
+*label_030
+				exgoto var_106, 1, 11, *label_031
+				if ( var_117 - cnt - var_106 <= 12 ) {
+					var_133 = var_117 - cnt - var_106
+				}
+				else {
+					var_133 = 12
+				}
+				if ( var_133 == 2 ) {
+					var_133 = 0
+				}
+				if ( var_133 == 5 ) {
+					var_133 = 1
+				}
+				if ( var_133 == 7 ) {
+					var_133 = 1
+				}
+				if ( var_133 == 11 ) {
+					var_133 = 1
+				}
+				if ( var_133 <= 0 ) {
+					var_133 = 0
+				}
+				if ( var_130 >= 1 ) {
+					gmode 4, , , 16 * var_133
+				}
+				else {
+					gmode 4, , , 2 * var_133
+				}
+				if ( var_106 == 10 ) {
+					pos var_131 + 5 * 11, var_132
+					gcopy 2, var_130 / 1 \ 10 * 5, 96, 5, 8
+				}
+				if ( var_106 == 9 ) {
+					pos var_131 + 5 * 10, var_132
+					gcopy 2, var_130 / 10 \ 10 * 5, 96, 5, 8
+				}
+				if ( var_106 == 8 ) {
+					pos var_131 + 5 * 9, var_132
+					gcopy 2, 11 * 5, 96, 5, 8
+				}
+				if ( var_106 == 7 ) {
+					pos var_131 + 5 * 8, var_132
+					gcopy 2, var_130 / 100 \ 10 * 5, 96, 5, 8
+				}
+				if ( var_106 == 6 ) {
+					pos var_131 + 5 * 7, var_132
+					gcopy 2, var_130 / 1000 \ 6 * 5, 96, 5, 8
+				}
+				if ( var_106 == 5 ) {
+					pos var_131 + 5 * 6, var_132
+					gcopy 2, 10 * 5, 96, 5, 8
+				}
+				if ( var_106 == 4 ) {
+					pos var_131 + 5 * 5, var_132
+					gcopy 2, var_130 / 6000 \ 10 * 5, 96, 5, 8
+				}
+				if ( var_106 == 3 ) {
+					pos var_131 + 5 * 4, var_132
+					gcopy 2, var_130 / 60000 \ 10 * 5, 96, 5, 8
+				}
+				if ( var_106 == 2 ) {
+					pos var_131 + 5 * 3, var_132
+					gcopy 2, var_130 / 600000 \ 10 * 5, 96, 5, 8
+				}
+				if ( var_106 == 0 & var_130 != 0 ) {
+					pos var_131 + 6, var_132
+					gcopy 2, var_130 \ 12 * 8, 152, 8, 8
+				}
+				var_106 += 1
+				goto *label_030
+*label_031
+			loop
+			gmode 4, , , 256
+		}
+		else {
+			if ( var_112 == 2 ) {
+				repeat 14
+					var_92 = 0
+					if ( var_111 == cnt ) {
+						var_92 = var_124 * var_124 * var_124 / 8 / 12
+					}
+					pos 16 + cnt * 16, 8 * 16 - var_92
+					gcopy 15, var_104(cnt) * 16, 448, 16, 16
+				loop
+				if ( var_115 >= 0 ) {
+					if ( var_104(var_111) >= 1 ) {
+						var_92 = var_115 * var_115 * var_115 / 4 / 16
+						pos 48, 8 - var_92
+						gcopy 15, var_111 \ 4 * 160, var_111 / 4 * 112, 160, 112
+					}
+				}
+			}
+		}
+	}
+	if ( var_112 <= 1 ) {
+		pos var_126 + 3 * 8 + 4 + var_129, var_127 + 4 * 8 + var_128 - 1
+		gcopy 5, 88 + var_125 / 2 \ 6 * 8, 32, 8, 8
+		pos var_126 + 15 * 8 + 4 - var_129, var_127 + 4 * 8 + var_128 - 1
+		gcopy 5, 136 + var_125 / 2 \ 6 * 8, 32, 8, 8
+	}
+	pos 0, 0
+	gzoom 256 * (1 + var_0), 144 * (1 + var_0), 0, 0, 0, 256, 144
+	pos 0, 0
+	color 255, 255, 255
+	mes var_102
+	redraw 1
+	var_134 += 1
+	await 30
+	goto *label_025
+*label_032
+	color 0, 0, 0
+	boxf
+	pos 144, 128
+	gcopy 5, 0, 168, 112, 16
+	var_92 = rnd(4)
+	pos 144, 96
+	gcopy 5, 40 * var_92, 184, 40, 32
+	pos 0, 0
+	gzoom 256 * (1 + var_0), 144 * (1 + var_0), 0, 0, 0, 256, 144
+	var_109 = 0
+	var_110 = 1
+	gosub *label_195
+	gosub *label_189
+	redraw 0
+	dim var_135, var_119, var_120
+	dim var_136, 4
+	dim var_137, var_119, var_120, 2
+	color 0, 0, 0
+	boxf
+	var_98 = 0
+*label_033
+	exgoto var_98, 1, var_119, *label_036
+	var_97 = 0
+*label_034
+	exgoto var_97, 1, var_120, *label_035
+	pset var_98 * 2, var_97 * 2
+	pset var_98 * 2 + 1, var_97 * 2
+	pset var_98 * 2, var_97 * 2 + 1
+	pset var_98 * 2 + 1, var_97 * 2 + 1
+	var_97 += 1
+	goto *label_034
+*label_035
+	var_98 += 1
+	goto *label_033
+*label_036
+	var_138 = rnd(4)
+	var_136((var_138 + 0) \ 4) = var_119 / 2
+	var_136((var_138 + 1) \ 4) = var_120 * 3 / 4
+	var_136((var_138 + 2) \ 4) = var_119 / 2
+	var_139 = var_119 / 2
+	var_140 = var_120 / 2
+	var_141 = var_136(0) + var_136(1) + var_136(2) + var_136(3)
+	var_142 = var_141
+	var_92(0) = var_136(0)
+	var_92(1) = var_136(0) + var_136(1)
+	var_92(2) = var_136(0) + var_136(1) + var_136(2)
+	var_143 = var_139
+	var_144 = var_140
+	var_145 = var_139
+	var_146 = var_140
+	repeat
+		var_147 = rnd(var_141)
+		if ( var_147 >= var_92(2) ) {
+			var_147 = 3
+		}
+		else {
+			if ( var_147 >= var_92(1) ) {
+				var_147 = 2
+			}
+			else {
+				if ( var_147 >= var_92(0) ) {
+					var_147 = 1
+				}
+				else {
+					var_147 = 0
+				}
+			}
+		}
+		if ( var_136(var_147) >= 1 ) {
+			var_148 = var_139
+			var_149 = var_140
+			if ( var_147 == 0 ) {
+				var_139 -= 1
+			}
+			if ( var_147 == 1 ) {
+				var_140 -= 1
+			}
+			if ( var_147 == 2 ) {
+				var_139 += 1
+			}
+			if ( var_147 == 3 ) {
+				var_140 += 1
+			}
+			var_139 = (var_139 + var_119) \ var_119
+			var_140 = (var_140 + var_120) \ var_120
+			if ( var_135(var_139, var_140) == 0 | rnd(10) == 1 ) {
+				color 255, 1, 0
+				pset var_139 * 2 + 1, var_140 * 2 + 1
+				var_135(var_139, var_140) = 1
+				if ( var_147 == 0 ) {
+					pset var_148 * 2 + 0, var_149 * 2 + 1
+				}
+				if ( var_147 == 1 ) {
+					pset var_148 * 2 + 1, var_149 * 2 + 0
+				}
+				if ( var_147 == 2 ) {
+					pset (var_148 * 2 + 2) \ (var_119 * 2), var_149 * 2 + 1
+				}
+				if ( var_147 == 3 ) {
+					pset var_148 * 2 + 1, (var_149 * 2 + 2) \ (var_120 * 2)
+				}
+				var_136(var_147) -= 1
+			}
+			else {
+				var_139 = var_148
+				var_140 = var_149
+			}
+		}
+		if ( var_136(0) + var_136(1) + var_136(2) + var_136(3) == 0 ) {
+			break
+		}
+		await 0
+	loop
+	var_150 = var_139
+	var_151 = var_140
+	repeat var_122
+		var_98 = 0
+*label_037
+		exgoto var_98, 1, var_119, *label_040
+		var_97 = 0
+*label_038
+		exgoto var_97, 1, var_120, *label_039
+		if ( var_135(var_98, var_97) == 0 ) {
+			var_147 = rnd(4)
+			if ( cnt <= var_122 / 2 ) {
+				var_92 = 2
+				color 200, 1, 200
+			}
+			else {
+				if ( cnt == var_122 - 2 ) {
+					var_92 = 4
+					color 200, 200, 200
+				}
+				else {
+					var_92 = 4
+					color 200, 200, 200
+				}
+			}
+			if ( var_147 == 0 & var_135((var_98 + var_119 - 1) \ var_119, var_97) >= 1 ) {
+				var_135(var_98, var_97) = var_92
+				pset var_98 * 2 + 0, var_97 * 2 + 1
+			}
+			if ( var_147 == 1 & var_135(var_98, (var_97 + var_120 - 1) \ var_120) >= 1 ) {
+				var_135(var_98, var_97) = var_92
+				pset var_98 * 2 + 1, var_97 * 2 + 0
+			}
+			if ( var_147 == 2 & var_135((var_98 + 1) \ var_119, var_97) >= 1 ) {
+				var_135(var_98, var_97) = var_92
+				pset (var_98 * 2 + 2) \ (var_119 * 2), var_97 * 2 + 1
+			}
+			if ( var_147 == 3 & var_135(var_98, (var_97 + 1) \ var_120) >= 1 ) {
+				var_135(var_98, var_97) = var_92
+				pset var_98 * 2 + 1, (var_97 * 2 + 2) \ (var_120 * 2)
+			}
+		}
+		var_97 += 1
+		goto *label_038
+*label_039
+		var_98 += 1
+		goto *label_037
+*label_040
+		await 0
+	loop
+	var_98 = 0
+*label_041
+	exgoto var_98, 1, var_119, *label_044
+	var_97 = 0
+*label_042
+	exgoto var_97, 1, var_120, *label_043
+	var_92 = 0
+	pget var_98 * 4 + 2, var_97 * 4 + 1
+	if ( ginfo(17) >= 1 ) {
+		var_92 += 1
+	}
+	pget var_98 * 4 + 1, var_97 * 4 + 2
+	if ( ginfo(17) >= 1 ) {
+		var_92 += 1
+	}
+	pget var_98 * 4 + 3, var_97 * 4 + 2
+	if ( ginfo(17) >= 1 ) {
+		var_92 += 1
+	}
+	pget var_98 * 4 + 2, var_97 * 4 + 3
+	if ( ginfo(17) >= 1 ) {
+		var_92 += 1
+	}
+	if ( var_92 == 3 & rnd(3) >= 0 ) {
+		color 100, 0, 255
+		pset var_98 * 4 + 2, var_97 * 4 + 1
+		pset var_98 * 4 + 1, var_97 * 4 + 2
+		pset var_98 * 4 + 3, var_97 * 4 + 2
+		pset var_98 * 4 + 2, var_97 * 4 + 3
+	}
+	var_97 += 1
+	goto *label_042
+*label_043
+	var_98 += 1
+	goto *label_041
+*label_044
+	dim var_152, var_119, var_120
+	var_98 = 0
+*label_045
+	exgoto var_98, 1, var_119, *label_048
+	var_97 = 0
+*label_046
+	exgoto var_97, 1, var_120, *label_047
+	if ( var_135(var_98, var_97) == 0 ) {
+		var_135(var_98, var_97) = 4
+	}
+	if ( var_135(var_98, var_97) == 1 ) {
+		color 255, 200, 0
+		pset var_98 * 2 + 1, var_97 * 2 + 1
+	}
+	if ( var_135(var_98, var_97) == 2 ) {
+		color 200, 50, 0
+		pset var_98 * 2 + 1, var_97 * 2 + 1
+	}
+	if ( var_135(var_98, var_97) == 3 ) {
+		color 0, 0, 200
+		pset var_98 * 2 + 1, var_97 * 2 + 1
+	}
+	if ( var_135(var_98, var_97) == 4 ) {
+		color 50, 0, 100
+		pset var_98 * 2 + 1, var_97 * 2 + 1
+	}
+	if ( var_135(var_98, var_97) == 5 ) {
+		color 255, 255, 255
+		pset var_98 * 2 + 1, var_97 * 2 + 1
+	}
+	if ( var_135(var_98, var_97) == 6 ) {
+		color 100, 255, 0
+		pset var_98 * 2 + 1, var_97 * 2 + 1
+	}
+	if ( var_135(var_98, var_97) == 7 ) {
+		color 0, 255, 0
+		pset var_98 * 2 + 1, var_97 * 2 + 1
+	}
+	pget var_98 * 2, var_97 * 2 + 1
+	if ( ginfo(16) >= 1 ) {
+		var_152(var_98, var_97) += 1
+	}
+	pget var_98 * 2 + 1, var_97 * 2
+	if ( ginfo(16) >= 1 ) {
+		var_152(var_98, var_97) += 2
+	}
+	pget (var_98 + var_119 + 1) \ var_119 * 2, var_97 * 2 + 1
+	if ( ginfo(16) >= 1 ) {
+		var_152(var_98, var_97) += 4
+	}
+	pget var_98 * 2 + 1, (var_97 + var_120 + 1) \ var_120 * 2
+	if ( ginfo(16) >= 1 ) {
+		var_152(var_98, var_97) += 8
+	}
+	color 1, 100, 100
+	if ( var_152(var_98, var_97) / 1 \ 2 == 1 ) {
+		pset var_98 * 2 + 0, var_97 * 2 + 1
+	}
+	if ( var_152(var_98, var_97) / 2 \ 2 == 1 ) {
+		pset var_98 * 2 + 1, var_97 * 2 + 0
+	}
+	if ( var_152(var_98, var_97) / 4 \ 2 == 1 ) {
+		pset (var_98 * 2 + 2) \ (2 * var_119), var_97 * 2 + 1
+	}
+	if ( var_152(var_98, var_97) / 8 \ 2 == 1 ) {
+		pset var_98 * 2 + 1, (var_97 * 2 + 2) \ (2 * var_120)
+	}
+	var_97 += 1
+	goto *label_046
+*label_047
+	var_98 += 1
+	goto *label_045
+*label_048
+	var_92 = var_119
+	repeat
+		var_126 = rnd(var_119)
+		var_127 = rnd(var_120)
+		if ( var_135(var_126, var_127) == 2 ) {
+			if ( var_152(var_126, var_127) / 1 \ 2 + var_152(var_126, var_127) / 2 \ 2 + var_152(var_126, var_127) / 4 \ 2 + var_152(var_126, var_127) / 8 \ 2 == 1 | cnt >= 5000 ) {
+				var_135(var_126, var_127) = 4
+				var_92 -= 1
+			}
+		}
+		if ( var_92 <= 0 ) {
+			break
+		}
+	loop
+	dim var_153, var_119, var_120
+	var_153(var_143, var_144) = 1
+	var_153(var_150, var_151) = 2
+	repeat 800
+		var_92 = 0
+		var_98 = 0
+*label_049
+		exgoto var_98, 1, var_119, *label_052
+		var_97 = 0
+*label_050
+		exgoto var_97, 1, var_120, *label_051
+		var_128 = (var_98 + 1) \ var_119
+		var_129 = (var_97 + 1) \ var_120
+		var_126 = (var_98 + 0) \ var_119
+		var_127 = (var_97 + 1) \ var_120
+		if ( var_153(var_128, var_129) == 0 & var_153(var_126, var_127) >= 1 & var_152(var_126, var_127) / 4 \ 2 == 1 ) {
+			var_153(var_128, var_129) = var_153(var_126, var_127)
+			var_92 = 1
+		}
+		var_126 = (var_98 + 1) \ var_119
+		var_127 = (var_97 + 0) \ var_120
+		if ( var_153(var_128, var_129) == 0 & var_153(var_126, var_127) >= 1 & var_152(var_126, var_127) / 8 \ 2 == 1 ) {
+			var_153(var_128, var_129) = var_153(var_126, var_127)
+			var_92 = 1
+		}
+		var_126 = (var_98 + 2) \ var_119
+		var_127 = (var_97 + 1) \ var_120
+		if ( var_153(var_128, var_129) == 0 & var_153(var_126, var_127) >= 1 & var_152(var_126, var_127) / 1 \ 2 == 1 ) {
+			var_153(var_128, var_129) = var_153(var_126, var_127)
+			var_92 = 1
+		}
+		var_126 = (var_98 + 1) \ var_119
+		var_127 = (var_97 + 2) \ var_120
+		if ( var_153(var_128, var_129) == 0 & var_153(var_126, var_127) >= 1 & var_152(var_126, var_127) / 2 \ 2 == 1 ) {
+			var_153(var_128, var_129) = var_153(var_126, var_127)
+			var_92 = 1
+		}
+		var_97 += 1
+		goto *label_050
+*label_051
+		var_98 += 1
+		goto *label_049
+*label_052
+		if ( var_92 == 0 ) {
+			break
+		}
+	loop
+	var_98 = 0
+*label_053
+	exgoto var_98, 1, var_119, *label_056
+	var_97 = 0
+*label_054
+	exgoto var_97, 1, var_120, *label_055
+	var_128 = (var_98 + 1) \ var_119
+	var_129 = (var_97 + 1) \ var_120
+	var_92 = 0
+	if ( rnd(7000) == 0 & var_135(var_128, var_129) == 4 ) {
+		var_92 = 1
+	}
+	if ( var_92 == 1 ) {
+		var_126 = (var_98 + 0) \ var_119
+		var_127 = (var_97 + 1) \ var_120
+		if ( var_135(var_126, var_127) == 4 & var_153(var_128, var_129) >= 1 & var_152(var_128, var_129) / 1 \ 2 == 0 ) {
+			var_152(var_128, var_129) += 1
+		}
+		if ( var_153(var_126, var_127) == var_153(var_128, var_129) & var_152(var_128, var_129) / 1 \ 2 == 0 ) {
+			var_152(var_128, var_129) += 1
+		}
+		var_126 = (var_98 + 1) \ var_119
+		var_127 = (var_97 + 0) \ var_120
+		if ( var_135(var_126, var_127) == 4 & var_153(var_128, var_129) >= 1 & var_152(var_128, var_129) / 2 \ 2 == 0 ) {
+			var_152(var_128, var_129) += 2
+		}
+		if ( var_153(var_126, var_127) == var_153(var_128, var_129) & var_152(var_128, var_129) / 2 \ 2 == 0 ) {
+			var_152(var_128, var_129) += 2
+		}
+		var_126 = (var_98 + 2) \ var_119
+		var_127 = (var_97 + 1) \ var_120
+		if ( var_135(var_126, var_127) == 4 & var_153(var_128, var_129) >= 1 & var_152(var_128, var_129) / 4 \ 2 == 0 ) {
+			var_152(var_128, var_129) += 4
+		}
+		if ( var_153(var_126, var_127) == var_153(var_128, var_129) & var_152(var_128, var_129) / 4 \ 2 == 0 ) {
+			var_152(var_128, var_129) += 4
+		}
+		var_126 = (var_98 + 1) \ var_119
+		var_127 = (var_97 + 2) \ var_120
+		if ( var_135(var_126, var_127) == 4 & var_153(var_128, var_129) >= 1 & var_152(var_128, var_129) / 8 \ 2 == 0 ) {
+			var_152(var_128, var_129) += 8
+		}
+		if ( var_153(var_126, var_127) == var_153(var_128, var_129) & var_152(var_128, var_129) / 8 \ 2 == 0 ) {
+			var_152(var_128, var_129) += 8
+		}
+	}
+	var_97 += 1
+	goto *label_054
+*label_055
+	var_98 += 1
+	goto *label_053
+*label_056
+	gosub *label_158
+	var_92 = var_121
+	repeat
+		var_126 = rnd(var_119)
+		var_127 = rnd(var_120)
+		if ( var_135(var_126, var_127) == 2 ) {
+			if ( var_152(var_126, var_127) / 1 \ 2 + var_152(var_126, var_127) / 2 \ 2 + var_152(var_126, var_127) / 4 \ 2 + var_152(var_126, var_127) / 8 \ 2 == 1 | cnt >= 5000 ) {
+				var_135(var_126, var_127) = 5
+				var_92 -= 1
+			}
+		}
+		if ( var_92 <= 0 ) {
+			break
+		}
+	loop
+	var_135(var_143, var_144) = 6
+	var_135(var_150, var_151) = 7
+	var_98 = 0
+*label_057
+	exgoto var_98, 1, var_119, *label_062
+	var_97 = 0
+*label_058
+	exgoto var_97, 1, var_120, *label_061
+	if ( var_135((var_98 + 1) \ var_119, (var_97 + 1) \ var_120) >= 5 ) {
+		var_106 = 0
+*label_059
+		exgoto var_106, 1, 9, *label_060
+		var_126 = (var_98 + var_106 \ 3) \ var_119
+		var_127 = (var_97 + var_106 / 3) \ var_120
+		if ( var_135(var_126, var_127) == 4 ) {
+			var_135(var_126, var_127) = 2
+		}
+		if ( var_152(var_126, var_127) == 0 ) {
+			if ( var_106 == 0 ) {
+				if ( rnd(2) == 0 ) {
+					var_152(var_126, var_127) += 4
+				}
+				else {
+					var_152(var_126, var_127) += 8
+				}
+			}
+			if ( var_106 == 2 ) {
+				if ( rnd(2) == 0 ) {
+					var_152(var_126, var_127) += 1
+				}
+				else {
+					var_152(var_126, var_127) += 8
+				}
+			}
+			if ( var_106 == 6 ) {
+				if ( rnd(2) == 0 ) {
+					var_152(var_126, var_127) += 2
+				}
+				else {
+					var_152(var_126, var_127) += 4
+				}
+			}
+			if ( var_106 == 8 ) {
+				if ( rnd(2) == 0 ) {
+					var_152(var_126, var_127) += 1
+				}
+				else {
+					var_152(var_126, var_127) += 2
+				}
+			}
+			if ( var_106 == 1 | var_106 == 7 ) {
+				if ( rnd(2) == 0 ) {
+					var_152(var_126, var_127) += 1
+				}
+				else {
+					var_152(var_126, var_127) += 4
+				}
+			}
+			if ( var_106 == 3 | var_106 == 5 ) {
+				if ( rnd(2) == 0 ) {
+					var_152(var_126, var_127) += 2
+				}
+				else {
+					var_152(var_126, var_127) += 8
+				}
+			}
+		}
+		var_106 += 1
+		goto *label_059
+	}
+*label_060
+	var_97 += 1
+	goto *label_058
+*label_061
+	var_98 += 1
+	goto *label_057
+*label_062
+	dim var_153, var_119, var_120
+	var_153(var_143, var_144) = 1
+	var_153(var_150, var_151) = 2
+	repeat 800
+		var_92 = 0
+		var_98 = 0
+*label_063
+		exgoto var_98, 1, var_119, *label_066
+		var_97 = 0
+*label_064
+		exgoto var_97, 1, var_120, *label_065
+		var_128 = (var_98 + 1) \ var_119
+		var_129 = (var_97 + 1) \ var_120
+		var_126 = (var_98 + 0) \ var_119
+		var_127 = (var_97 + 1) \ var_120
+		if ( var_153(var_128, var_129) == 0 & var_153(var_126, var_127) >= 1 & var_152(var_126, var_127) / 4 \ 2 == 1 & var_135(var_128, var_129) != 4 ) {
+			var_153(var_128, var_129) = var_153(var_126, var_127)
+			var_92 = 1
+		}
+		var_126 = (var_98 + 1) \ var_119
+		var_127 = (var_97 + 0) \ var_120
+		if ( var_153(var_128, var_129) == 0 & var_153(var_126, var_127) >= 1 & var_152(var_126, var_127) / 8 \ 2 == 1 & var_135(var_128, var_129) != 4 ) {
+			var_153(var_128, var_129) = var_153(var_126, var_127)
+			var_92 = 1
+		}
+		var_126 = (var_98 + 2) \ var_119
+		var_127 = (var_97 + 1) \ var_120
+		if ( var_153(var_128, var_129) == 0 & var_153(var_126, var_127) >= 1 & var_152(var_126, var_127) / 1 \ 2 == 1 & var_135(var_128, var_129) != 4 ) {
+			var_153(var_128, var_129) = var_153(var_126, var_127)
+			var_92 = 1
+		}
+		var_126 = (var_98 + 1) \ var_119
+		var_127 = (var_97 + 2) \ var_120
+		if ( var_153(var_128, var_129) == 0 & var_153(var_126, var_127) >= 1 & var_152(var_126, var_127) / 2 \ 2 == 1 & var_135(var_128, var_129) != 4 ) {
+			var_153(var_128, var_129) = var_153(var_126, var_127)
+			var_92 = 1
+		}
+		var_97 += 1
+		goto *label_064
+*label_065
+		var_98 += 1
+		goto *label_063
+*label_066
+		if ( var_92 == 0 ) {
+			break
+		}
+	loop
+	var_98 = 0
+*label_067
+	exgoto var_98, 1, var_119, *label_070
+	var_97 = 0
+*label_068
+	exgoto var_97, 1, var_120, *label_069
+	var_128 = (var_98 + 1) \ var_119
+	var_129 = (var_97 + 1) \ var_120
+	if ( var_153(var_128, var_129) == 0 & var_135(var_128, var_129) == 2 ) {
+		var_92 = 0
+		var_126 = (var_98 + 0) \ var_119
+		var_127 = (var_97 + 1) \ var_120
+		if ( var_153(var_126, var_127) >= 1 & var_152(var_128, var_129) / 1 \ 2 == 0 ) {
+			var_153(var_128, var_129) = var_153(var_126, var_127)
+			var_152(var_128, var_129) += 1
+			var_92 = var_153(var_128, var_129)
+		}
+		var_126 = (var_98 + 1) \ var_119
+		var_127 = (var_97 + 0) \ var_120
+		if ( var_153(var_126, var_127) >= 1 & var_152(var_128, var_129) / 2 \ 2 == 0 ) {
+			if ( var_92 == var_153(var_126, var_127) | var_92 == 0 ) {
+				var_153(var_128, var_129) = var_153(var_126, var_127)
+				var_152(var_128, var_129) += 2
+				var_92 = var_153(var_128, var_129)
+			}
+		}
+		var_126 = (var_98 + 2) \ var_119
+		var_127 = (var_97 + 1) \ var_120
+		if ( var_153(var_126, var_127) >= 1 & var_152(var_128, var_129) / 4 \ 2 == 0 ) {
+			if ( var_92 == var_153(var_126, var_127) | var_92 == 0 ) {
+				var_153(var_128, var_129) = var_153(var_126, var_127)
+				var_152(var_128, var_129) += 4
+				var_92 = var_153(var_128, var_129)
+			}
+		}
+		var_126 = (var_98 + 1) \ var_119
+		var_127 = (var_97 + 2) \ var_120
+		if ( var_153(var_126, var_127) >= 1 & var_152(var_128, var_129) / 8 \ 2 == 0 ) {
+			if ( var_92 == var_153(var_126, var_127) | var_92 == 0 ) {
+				var_153(var_128, var_129) = var_153(var_126, var_127)
+				var_152(var_128, var_129) += 8
+				var_92 = var_153(var_128, var_129)
+			}
+		}
+	}
+	var_97 += 1
+	goto *label_068
+*label_069
+	var_98 += 1
+	goto *label_067
+*label_070
+	var_98 = 0
+*label_071
+	exgoto var_98, 1, var_119, *label_074
+	var_97 = 0
+*label_072
+	exgoto var_97, 1, var_120, *label_073
+	var_128 = (var_98 + 1) \ var_119
+	var_129 = (var_97 + 1) \ var_120
+	if ( var_153(var_128, var_129) == 0 ) {
+		var_92 = 0
+		var_126 = (var_98 + 0) \ var_119
+		var_127 = (var_97 + 1) \ var_120
+		if ( var_135(var_126, var_127) == 4 & var_135(var_128, var_129) != 4 ) {
+			var_92 += 1
+		}
+		var_126 = (var_98 + 1) \ var_119
+		var_127 = (var_97 + 0) \ var_120
+		if ( var_135(var_126, var_127) == 4 & var_135(var_128, var_129) != 4 ) {
+			var_92 += 1
+		}
+		var_126 = (var_98 + 2) \ var_119
+		var_127 = (var_97 + 1) \ var_120
+		if ( var_135(var_126, var_127) == 4 & var_135(var_128, var_129) != 4 ) {
+			var_92 += 1
+		}
+		var_126 = (var_98 + 1) \ var_119
+		var_127 = (var_97 + 2) \ var_120
+		if ( var_135(var_126, var_127) == 4 & var_135(var_128, var_129) != 4 ) {
+			var_92 += 1
+		}
+		if ( var_92 == 4 ) {
+			var_135(var_128, var_129) = 4
+		}
+	}
+	var_97 += 1
+	goto *label_072
+*label_073
+	var_98 += 1
+	goto *label_071
+*label_074
+	gosub *label_158
+	dim var_153, var_119, var_120
+	var_153(var_143, var_144) = 1
+	var_153(var_150, var_151) = 2
+	var_112 = 0
+	repeat 800
+		var_92 = 0
+		var_112 += 1
+		var_98 = 0
+*label_075
+		exgoto var_98, 1, var_119, *label_078
+		var_97 = 0
+*label_076
+		exgoto var_97, 1, var_120, *label_077
+		var_128 = (var_98 + 1) \ var_119
+		var_129 = (var_97 + 1) \ var_120
+		if ( var_135(var_128, var_129) != 4 ) {
+			var_126 = (var_98 + 0) \ var_119
+			var_127 = (var_97 + 1) \ var_120
+			if ( var_153(var_128, var_129) == 0 & var_153(var_126, var_127) >= 1 & var_152(var_126, var_127) / 4 \ 2 == 1 ) {
+				var_153(var_128, var_129) = var_153(var_126, var_127)
+				var_92 = 1
+				var_112 = 0
+			}
+			var_126 = (var_98 + 1) \ var_119
+			var_127 = (var_97 + 0) \ var_120
+			if ( var_153(var_128, var_129) == 0 & var_153(var_126, var_127) >= 1 & var_152(var_126, var_127) / 8 \ 2 == 1 ) {
+				var_153(var_128, var_129) = var_153(var_126, var_127)
+				var_92 = 1
+				var_112 = 0
+			}
+			var_126 = (var_98 + 2) \ var_119
+			var_127 = (var_97 + 1) \ var_120
+			if ( var_153(var_128, var_129) == 0 & var_153(var_126, var_127) >= 1 & var_152(var_126, var_127) / 1 \ 2 == 1 ) {
+				var_153(var_128, var_129) = var_153(var_126, var_127)
+				var_92 = 1
+				var_112 = 0
+			}
+			var_126 = (var_98 + 1) \ var_119
+			var_127 = (var_97 + 2) \ var_120
+			if ( var_153(var_128, var_129) == 0 & var_153(var_126, var_127) >= 1 & var_152(var_126, var_127) / 2 \ 2 == 1 ) {
+				var_153(var_128, var_129) = var_153(var_126, var_127)
+				var_92 = 1
+				var_112 = 0
+			}
+		}
+		var_97 += 1
+		goto *label_076
+*label_077
+		var_98 += 1
+		goto *label_075
+*label_078
+		if ( var_92 == 0 & var_112 >= 20 ) {
+			break
+		}
+	loop
+	var_154 = 0
+	var_98 = 0
+*label_079
+	exgoto var_98, 1, var_119, *label_082
+	var_97 = 0
+*label_080
+	exgoto var_97, 1, var_120, *label_081
+	if ( var_153(var_98, var_97) == 0 ) {
+		if ( var_135(var_98, var_97) == 5 ) {
+			var_121 -= 1
+			var_154 += 1
+		}
+		var_135(var_98, var_97) = 4
+	}
+	var_97 += 1
+	goto *label_080
+*label_081
+	var_98 += 1
+	goto *label_079
+*label_082
+	gosub *label_158
+	dim var_155, var_119, var_120
+	var_98 = 0
+*label_083
+	exgoto var_98, 1, var_119, *label_088
+	var_97 = 0
+*label_084
+	exgoto var_97, 1, var_120, *label_087
+	var_92 = 0
+	var_106 = 0
+*label_085
+	exgoto var_106, 1, 9, *label_086
+	if ( var_135((var_98 + var_106 \ 3) \ var_119, (var_97 + var_106 / 3) \ var_120) == 4 & var_106 != 4 ) {
+		var_92 += 1
+	}
+	var_106 += 1
+	goto *label_085
+*label_086
+	if ( var_135((var_98 + 1) \ var_119, (var_97 + 1) \ var_120) != 4 ) {
+		var_155((var_98 + 1) \ var_119, (var_97 + 1) \ var_120) = var_92
+	}
+	else {
+		var_155((var_98 + 1) \ var_119, (var_97 + 1) \ var_120) = 8
+	}
+	var_97 += 1
+	goto *label_084
+*label_087
+	var_98 += 1
+	goto *label_083
+*label_088
+	var_98 = 0
+*label_089
+	exgoto var_98, 1, var_119, *label_092
+	var_97 = 0
+*label_090
+	exgoto var_97, 1, var_120, *label_091
+	if ( var_135(var_98, var_97) == 2 & var_155(var_98, var_97) == 8 ) {
+		var_135(var_98, var_97) = 7
+	}
+	var_97 += 1
+	goto *label_090
+*label_091
+	var_98 += 1
+	goto *label_089
+*label_092
+	repeat var_154
+		var_128 = 0
+		var_98 = 0
+*label_093
+		exgoto var_98, 1, var_119, *label_096
+		var_97 = 0
+*label_094
+		exgoto var_97, 1, var_120, *label_095
+		var_92 = 0
+		if ( var_152(var_98, var_97) / 1 \ 2 == 1 ) {
+			var_92 += 1
+		}
+		if ( var_152(var_98, var_97) / 2 \ 2 == 1 ) {
+			var_92 += 1
+		}
+		if ( var_152(var_98, var_97) / 4 \ 2 == 1 ) {
+			var_92 += 1
+		}
+		if ( var_152(var_98, var_97) / 8 \ 2 == 1 ) {
+			var_92 += 1
+		}
+		if ( var_92 == 1 & var_135(var_98, var_97) == 2 & var_155(var_98, var_97) == 0 & var_128 == 0 ) {
+			var_135(var_98, var_97) = 5
+			var_128 = 1
+			var_121 += 1
+		}
+		var_97 += 1
+		goto *label_094
+*label_095
+		var_98 += 1
+		goto *label_093
+*label_096
+	loop
+	dim var_156, var_119, var_120
+	var_98 = 0
+*label_097
+	exgoto var_98, 1, var_119 - 1, *label_100
+	var_97 = 0
+*label_098
+	exgoto var_97, 1, var_120, *label_099
+	if ( rnd(4) == 0 ) {
+		if ( var_155(var_98, var_97) == var_155(var_98 + 1, var_97) ) {
+			if ( var_135(var_98, var_97) == 1 | var_135(var_98, var_97) == 2 ) {
+				if ( var_135(var_98 + 1, var_97) == 1 | var_135(var_98 + 1, var_97) == 2 ) {
+					if ( var_152(var_98, var_97) / 4 \ 2 == 1 & var_152(var_98 + 1, var_97) / 1 \ 2 == 1 ) {
+						if ( var_156(var_98, var_97) + var_156(var_98 + 1, var_97) == 0 ) {
+							var_156(var_98, var_97) = 2
+							var_156(var_98 + 1, var_97) = 4
+						}
+					}
+				}
+			}
+		}
+	}
+	var_97 += 1
+	goto *label_098
+*label_099
+	var_98 += 1
+	goto *label_097
+*label_100
+	var_98 = 0
+*label_101
+	exgoto var_98, 1, var_119, *label_110
+	var_97 = 0
+*label_102
+	exgoto var_97, 1, var_120 - 1, *label_109
+	if ( rnd(4) == 0 ) {
+		if ( var_155(var_98, var_97) == var_155(var_98, var_97 + 1) ) {
+			if ( var_135(var_98, var_97) == 1 | var_135(var_98, var_97) == 2 ) {
+				if ( var_135(var_98, var_97 + 1) == 1 | var_135(var_98, var_97 + 1) == 2 ) {
+					if ( var_152(var_98, var_97 + 1) / 8 \ 2 == 1 & var_152(var_98, var_97 + 1) / 2 \ 2 == 1 ) {
+						if ( var_156(var_98, var_97) + var_156(var_98, var_97 + 1) == 0 ) {
+							var_156(var_98, var_97) = 3
+							var_156(var_98, var_97 + 1) = 1
+						}
+					}
+				}
+			}
+		}
+	}
+	var_98 = 0
+*label_103
+	exgoto var_98, 1, var_119, *label_108
+	var_97 = 0
+*label_104
+	exgoto var_97, 1, var_120, *label_107
+	var_106 = 0
+*label_105
+	exgoto var_106, 1, 2, *label_106
+	var_137(var_98, var_97, var_106) = rnd(5) + 1
+	var_106 += 1
+	goto *label_105
+*label_106
+	var_97 += 1
+	goto *label_104
+*label_107
+	var_98 += 1
+	goto *label_103
+*label_108
+	var_97 += 1
+	goto *label_102
+*label_109
+	var_98 += 1
+	goto *label_101
+*label_110
+	var_98 = 0
+*label_111
+	exgoto var_98, 1, var_119, *label_114
+	var_97 = 0
+*label_112
+	exgoto var_97, 1, var_120, *label_113
+	var_126 = (var_98 + 1) \ var_119
+	var_127 = (var_97 + 1) \ var_120
+	if ( var_156(var_98, var_97) == 2 ) {
+		var_137(var_98, var_97, 1) = 1 + rnd(3)
+		var_137(var_98, var_127, 1) = 1 + rnd(3)
+	}
+	if ( var_156(var_98, var_97) == 4 ) {
+		var_137(var_98, var_97, 1) = 3 + rnd(3)
+		var_137(var_98, var_127, 1) = 3 + rnd(3)
+	}
+	if ( var_156(var_98, var_97) == 3 ) {
+		var_137(var_98, var_97, 0) = 1 + rnd(3)
+		var_137(var_126, var_97, 0) = 1 + rnd(3)
+	}
+	if ( var_156(var_98, var_97) == 1 ) {
+		var_137(var_98, var_97, 0) = 3 + rnd(3)
+		var_137(var_126, var_97, 0) = 3 + rnd(3)
+	}
+	var_97 += 1
+	goto *label_112
+*label_113
+	var_98 += 1
+	goto *label_111
+*label_114
+	var_98 = 0
+*label_115
+	exgoto var_98, 1, var_119, *label_118
+	var_97 = 0
+*label_116
+	exgoto var_97, 1, var_120, *label_117
+	var_126 = (var_98 + 1) \ var_119
+	var_127 = (var_97 + 1) \ var_120
+	if ( var_156(var_98, var_97) == 2 & var_156(var_98, var_127) == 4 ) {
+		var_137(var_98, var_127, 1) = 3
+	}
+	if ( var_156(var_98, var_97) == 4 & var_156(var_98, var_127) == 2 ) {
+		var_137(var_98, var_127, 1) = 3
+	}
+	if ( var_156(var_98, var_97) == 1 & var_156(var_126, var_97) == 3 ) {
+		var_137(var_126, var_97, 0) = 3
+	}
+	if ( var_156(var_98, var_97) == 3 & var_156(var_126, var_97) == 1 ) {
+		var_137(var_126, var_97, 0) = 3
+	}
+	var_97 += 1
+	goto *label_116
+*label_117
+	var_98 += 1
+	goto *label_115
+*label_118
+	dim var_157, var_119 * 7, var_120 * 7
+	var_98 = 0
+*label_119
+	exgoto var_98, 1, var_119, *label_154
+	var_97 = 0
+*label_120
+	exgoto var_97, 1, var_120, *label_153
+	var_158 = 0
+*label_121
+	exgoto var_158, 1, 7, *label_124
+	var_159 = 0
+*label_122
+	exgoto var_159, 1, 7, *label_123
+	var_128 = var_158 + var_98 * 7
+	var_129 = var_159 + var_97 * 7
+	var_157(var_128, var_129) = 5 + rnd(4) * 2 + (var_158 + var_159 + 1) \ 2
+	if ( var_159 <= rnd(3) & rnd(2) == 0 ) {
+		var_157(var_128, var_129) = 13 + rnd(2) * 2 + (var_158 + var_159 + 1) \ 2
+	}
+	if ( var_159 <= rnd(7) & var_158 \ 7 == 0 ) {
+		var_157(var_128, var_129) = 13 + rnd(2) * 2 + (var_158 + var_159 + 1) \ 2
+	}
+	if ( var_158 >= 1 & var_159 >= 1 & var_158 <= 5 & var_159 <= 5 ) {
+		var_157(var_128, var_129) = 1 + rnd(4) * 2 + (var_158 + var_159 + 1) \ 2
+	}
+	if ( var_158 == 3 & var_159 == 3 ) {
+		var_157(var_128, var_129) = 9 + rnd(8)
+	}
+	var_159 += 1
+	goto *label_122
+*label_123
+	var_158 += 1
+	goto *label_121
+*label_124
+	var_160 = rnd(5)
+	if ( rnd(20) == 0 ) {
+		var_160 = 5
+	}
+	if ( var_135(var_98, var_97) == 4 ) {
+		var_160 = 10
+	}
+	if ( var_135(var_98, var_97) >= 5 ) {
+		var_160 = 1
+	}
+	if ( var_160 == 0 ) {
+		var_158 = 0
+*label_125
+		exgoto var_158, 1, 7, *label_128
+		var_159 = 0
+*label_126
+		exgoto var_159, 1, 7, *label_127
+		if ( var_158 >= 2 & var_159 >= 2 & var_158 <= 4 & var_159 <= 4 ) {
+			var_157(var_158 + var_98 * 7, var_159 + var_97 * 7) = 0
+		}
+		var_159 += 1
+		goto *label_126
+*label_127
+		var_158 += 1
+		goto *label_125
+*label_128
+		gosub *label_155
+	}
+	if ( var_160 == 1 ) {
+		var_158 = 0
+*label_129
+		exgoto var_158, 1, 7, *label_132
+		var_159 = 0
+*label_130
+		exgoto var_159, 1, 7, *label_131
+		if ( var_158 >= 1 & var_159 >= 1 & var_158 <= 5 & var_159 <= 5 ) {
+			var_157(var_158 + var_98 * 7, var_159 + var_97 * 7) = 0
+		}
+		var_159 += 1
+		goto *label_130
+*label_131
+		var_158 += 1
+		goto *label_129
+*label_132
+		gosub *label_155
+	}
+	if ( var_160 == 2 | var_160 == 0 ) {
+		var_136(0) = var_152(var_98, var_97) / 1 \ 2
+		var_136(1) = var_152(var_98, var_97) / 2 \ 2
+		var_136(2) = var_152(var_98, var_97) / 4 \ 2
+		var_136(3) = var_152(var_98, var_97) / 8 \ 2
+		if ( var_136(0) + var_136(1) + var_136(2) + var_136(3) == 1 ) {
+			if ( var_136(0) == 1 | var_136(2) == 1 ) {
+				var_147 = 4
+				gosub *label_157
+			}
+			if ( var_136(1) == 1 | var_136(3) == 1 ) {
+				var_147 = 5
+				gosub *label_157
+			}
+		}
+		if ( var_136(0) + var_136(1) + var_136(2) + var_136(3) == 2 ) {
+			if ( var_136(0) == 1 & var_136(1) == 1 ) {
+				var_147 = 0
+				gosub *label_157
+			}
+			if ( var_136(2) == 1 & var_136(1) == 1 ) {
+				var_147 = 1
+				gosub *label_157
+			}
+			if ( var_136(0) == 1 & var_136(3) == 1 ) {
+				var_147 = 2
+				gosub *label_157
+			}
+			if ( var_136(2) == 1 & var_136(3) == 1 ) {
+				var_147 = 3
+				gosub *label_157
+			}
+			if ( var_136(0) == 1 & var_136(2) == 1 ) {
+				var_147 = 4
+				gosub *label_157
+			}
+			if ( var_136(1) == 1 & var_136(3) == 1 ) {
+				var_147 = 5
+				gosub *label_157
+			}
+		}
+		if ( var_136(0) + var_136(1) + var_136(2) + var_136(3) == 3 ) {
+			var_126 = rnd(6)
+			if ( var_136(0) == 1 & var_136(1) == 1 & var_126 != 0 ) {
+				var_147 = 0
+				gosub *label_157
+			}
+			if ( var_136(2) == 1 & var_136(1) == 1 & var_126 != 1 ) {
+				var_147 = 1
+				gosub *label_157
+			}
+			if ( var_136(0) == 1 & var_136(3) == 1 & var_126 != 2 ) {
+				var_147 = 2
+				gosub *label_157
+			}
+			if ( var_136(2) == 1 & var_136(3) == 1 & var_126 != 3 ) {
+				var_147 = 3
+				gosub *label_157
+			}
+			if ( var_136(0) == 1 & var_136(2) == 1 & var_126 != 4 ) {
+				var_147 = 4
+				gosub *label_157
+			}
+			if ( var_136(1) == 1 & var_136(3) == 1 & var_126 != 5 ) {
+				var_147 = 5
+				gosub *label_157
+			}
+		}
+		if ( var_136(0) + var_136(1) + var_136(2) + var_136(3) == 4 ) {
+			if ( rnd(2) == 0 ) {
+				var_147 = 0
+				gosub *label_157
+				var_147 = 1
+				gosub *label_157
+				var_147 = 2
+				gosub *label_157
+				var_147 = 3
+				gosub *label_157
+			}
+			else {
+				var_147 = 4
+				gosub *label_157
+				var_147 = 5
+				gosub *label_157
+			}
+		}
+	}
+	if ( var_160 == 3 ) {
+		var_158 = 0
+*label_133
+		exgoto var_158, 1, 7, *label_136
+		var_159 = 0
+*label_134
+		exgoto var_159, 1, 7, *label_135
+		if ( var_158 >= 2 & var_159 >= 2 & var_158 <= 4 & var_159 <= 4 ) {
+			var_157(var_158 + var_98 * 7, var_159 + var_97 * 7) = 0
+		}
+		if ( var_158 >= 0 & var_159 >= 2 & var_158 <= 1 & var_159 <= 4 & var_152(var_98, var_97) / 1 \ 2 == 1 ) {
+			var_157(var_158 + var_98 * 7, var_159 + var_97 * 7) = 0
+		}
+		if ( var_158 >= 2 & var_159 >= 0 & var_158 <= 4 & var_159 <= 1 & var_152(var_98, var_97) / 2 \ 2 == 1 ) {
+			var_157(var_158 + var_98 * 7, var_159 + var_97 * 7) = 0
+		}
+		if ( var_158 >= 5 & var_159 >= 2 & var_158 <= 6 & var_159 <= 4 & var_152(var_98, var_97) / 4 \ 2 == 1 ) {
+			var_157(var_158 + var_98 * 7, var_159 + var_97 * 7) = 0
+		}
+		if ( var_158 >= 2 & var_159 >= 5 & var_158 <= 4 & var_159 <= 6 & var_152(var_98, var_97) / 8 \ 2 == 1 ) {
+			var_157(var_158 + var_98 * 7, var_159 + var_97 * 7) = 0
+		}
+		var_159 += 1
+		goto *label_134
+*label_135
+		var_158 += 1
+		goto *label_133
+*label_136
+		gosub *label_155
+	}
+	if ( var_160 == 4 ) {
+		var_158 = 0
+*label_137
+		exgoto var_158, 1, 7, *label_140
+		var_159 = 0
+*label_138
+		exgoto var_159, 1, 7, *label_139
+		if ( var_158 >= 1 & var_159 >= 1 & var_158 <= 1 & var_159 <= 5 ) {
+			var_157(var_158 + var_98 * 7, var_159 + var_97 * 7) = 0
+		}
+		if ( var_158 >= 1 & var_159 >= 1 & var_158 <= 5 & var_159 <= 1 ) {
+			var_157(var_158 + var_98 * 7, var_159 + var_97 * 7) = 0
+		}
+		if ( var_158 >= 5 & var_159 >= 1 & var_158 <= 5 & var_159 <= 5 ) {
+			var_157(var_158 + var_98 * 7, var_159 + var_97 * 7) = 0
+		}
+		if ( var_158 >= 1 & var_159 >= 5 & var_158 <= 5 & var_159 <= 5 ) {
+			var_157(var_158 + var_98 * 7, var_159 + var_97 * 7) = 0
+		}
+		var_159 += 1
+		goto *label_138
+*label_139
+		var_158 += 1
+		goto *label_137
+*label_140
+		gosub *label_155
+	}
+	if ( var_160 == 5 ) {
+		var_158 = 0
+*label_141
+		exgoto var_158, 1, 7, *label_144
+		var_159 = 0
+*label_142
+		exgoto var_159, 1, 7, *label_143
+		if ( var_158 >= 0 & var_159 >= 0 & var_158 <= 0 & var_159 <= 6 ) {
+			var_157(var_158 + var_98 * 7, var_159 + var_97 * 7) = 0
+		}
+		if ( var_158 >= 0 & var_159 >= 0 & var_158 <= 6 & var_159 <= 0 ) {
+			var_157(var_158 + var_98 * 7, var_159 + var_97 * 7) = 0
+		}
+		if ( var_158 >= 6 & var_159 >= 0 & var_158 <= 6 & var_159 <= 6 ) {
+			var_157(var_158 + var_98 * 7, var_159 + var_97 * 7) = 0
+		}
+		if ( var_158 >= 0 & var_159 >= 6 & var_158 <= 6 & var_159 <= 6 ) {
+			var_157(var_158 + var_98 * 7, var_159 + var_97 * 7) = 0
+		}
+		var_159 += 1
+		goto *label_142
+*label_143
+		var_158 += 1
+		goto *label_141
+*label_144
+		gosub *label_155
+	}
+	if ( var_160 == 10 ) {
+		var_158 = 0
+*label_145
+		exgoto var_158, 1, 7, *label_148
+		var_159 = 0
+*label_146
+		exgoto var_159, 1, 7, *label_147
+		if ( var_159 == 1 ) {
+			var_157(var_158 + var_98 * 7, var_159 + var_97 * 7) = 5 + rnd(4)
+		}
+		if ( var_159 == 2 ) {
+			var_157(var_158 + var_98 * 7, var_159 + var_97 * 7) = 9 + rnd(4)
+		}
+		if ( var_159 >= 3 ) {
+			var_157(var_158 + var_98 * 7, var_159 + var_97 * 7) = 13 + rnd(4)
+		}
+		if ( var_158 >= 0 & var_159 >= 0 & var_158 <= 0 & var_159 <= 6 ) {
+			var_157(var_158 + var_98 * 7, var_159 + var_97 * 7) = 0
+		}
+		if ( var_158 >= 0 & var_159 >= 0 & var_158 <= 6 & var_159 <= 0 ) {
+			var_157(var_158 + var_98 * 7, var_159 + var_97 * 7) = 0
+		}
+		if ( var_158 >= 6 & var_159 >= 0 & var_158 <= 6 & var_159 <= 6 ) {
+			var_157(var_158 + var_98 * 7, var_159 + var_97 * 7) = 0
+		}
+		if ( var_158 >= 0 & var_159 >= 6 & var_158 <= 6 & var_159 <= 6 ) {
+			var_157(var_158 + var_98 * 7, var_159 + var_97 * 7) = 0
+		}
+		var_159 += 1
+		goto *label_146
+*label_147
+		var_158 += 1
+		goto *label_145
+*label_148
+		gosub *label_155
+	}
+	if ( var_160 != 5 ) {
+		var_158 = 0
+*label_149
+		exgoto var_158, 1, 7, *label_152
+		var_159 = 0
+*label_150
+		exgoto var_159, 1, 7, *label_151
+		var_128 = var_158 + var_98 * 7
+		var_129 = var_159 + var_97 * 7
+		if ( var_160 == 10 & var_159 == 6 ) {
+		}
+		else {
+			if ( var_158 <= 1 | var_159 <= 1 | var_158 >= 5 | var_159 >= 5 ) {
+				if ( var_157(var_128, var_129) == 0 & rnd(3) != 0 ) {
+					var_157(var_128, var_129) = 1 + rnd(2) * 2 + (var_158 + var_159 + 1) \ 2
+				}
+			}
+		}
+		var_159 += 1
+		goto *label_150
+*label_151
+		var_158 += 1
+		goto *label_149
+	}
+*label_152
+	gosub *label_155
+	var_97 += 1
+	goto *label_120
+*label_153
+	var_98 += 1
+	goto *label_119
+*label_154
+	goto *label_163
+*label_155
+	if ( var_152(var_98, var_97) / 1 \ 2 == 1 ) {
+		var_157(var_98 * 7 + 0, var_97 * 7 + var_137(var_98, var_97, 0)) = 0
+	}
+	if ( var_152(var_98, var_97) / 2 \ 2 == 1 ) {
+		var_157(var_98 * 7 + var_137(var_98, var_97, 1), var_97 * 7 + 0) = 0
+	}
+	if ( var_152(var_98, var_97) / 4 \ 2 == 1 ) {
+		var_157(var_98 * 7 + 6, var_97 * 7 + var_137((var_98 + 1) \ var_119, var_97, 0)) = 0
+	}
+	if ( var_152(var_98, var_97) / 8 \ 2 == 1 ) {
+		var_157(var_98 * 7 + var_137(var_98, (var_97 + 1) \ var_120, 1), var_97 * 7 + 6) = 0
+	}
+	return
+*label_156
+	repeat
+		var_92 = rnd(4)
+		if ( var_161(var_92) >= 1 ) {
+			if ( var_92 == 0 ) {
+				var_139 -= 1
+			}
+			if ( var_92 == 1 ) {
+				var_140 -= 1
+			}
+			if ( var_92 == 2 ) {
+				var_139 += 1
+			}
+			if ( var_92 == 3 ) {
+				var_140 += 1
+			}
+			var_161(var_92) -= 1
+			var_157(var_139 + var_98 * 7, var_140 + var_97 * 7) = 0
+		}
+		if ( var_161(0) + var_161(1) + var_161(2) + var_161(3) == 0 ) {
+			break
+		}
+	loop
+	return
+*label_157
+	if ( var_147 == 0 ) {
+		dim var_161, 4
+		var_161(2) = var_137(var_98, var_97, 1)
+		var_161(1) = var_137(var_98, var_97, 0)
+		var_139 = 0
+		var_140 = var_137(var_98, var_97, 0)
+		gosub *label_156
+	}
+	if ( var_147 == 1 ) {
+		dim var_161, 4
+		var_161(0) = 6 - var_137(var_98, var_97, 1)
+		var_161(1) = var_137((var_98 + 1) \ var_119, var_97, 0)
+		var_139 = 6
+		var_140 = var_137((var_98 + 1) \ var_119, var_97, 0)
+		gosub *label_156
+	}
+	if ( var_147 == 2 ) {
+		dim var_161, 4
+		var_161(2) = var_137(var_98, (var_97 + 1) \ var_120, 1)
+		var_161(3) = 6 - var_137(var_98, var_97, 0)
+		var_139 = 0
+		var_140 = var_137(var_98, var_97, 0)
+		gosub *label_156
+	}
+	if ( var_147 == 3 ) {
+		dim var_161, 4
+		var_161(0) = 6 - var_137(var_98, (var_97 + 1) \ var_120, 1)
+		var_161(3) = 6 - var_137((var_98 + 1) \ var_119, var_97, 0)
+		var_139 = 6
+		var_140 = var_137((var_98 + 1) \ var_119, var_97, 0)
+		gosub *label_156
+	}
+	if ( var_147 == 4 ) {
+		dim var_161, 4
+		var_92 = var_137(var_98, var_97, 0) - var_137((var_98 + 1) \ var_119, var_97, 0)
+		if ( var_92 >= 1 ) {
+			var_161(1) = var_92
+		}
+		if ( var_92 <= (-1) ) {
+			var_161(3) = -var_92
+		}
+		var_161(2) = 6
+		var_161(1) += 1
+		var_161(3) += 1
+		var_139 = 0
+		var_140 = var_137(var_98, var_97, 0)
+		gosub *label_156
+	}
+	if ( var_147 == 5 ) {
+		dim var_161, 4
+		var_92 = var_137(var_98, var_97, 1) - var_137(var_98, (var_97 + 1) \ var_120, 1)
+		if ( var_92 >= 1 ) {
+			var_161(0) = var_92
+		}
+		if ( var_92 <= (-1) ) {
+			var_161(2) = -var_92
+		}
+		var_161(3) = 6
+		var_161(0) += 1
+		var_161(2) += 1
+		var_139 = var_137(var_98, var_97, 1)
+		var_140 = 0
+		gosub *label_156
+	}
+	return
+*label_158
+	var_98 = 0
+*label_159
+	exgoto var_98, 1, var_119, *label_162
+	var_97 = 0
+*label_160
+	exgoto var_97, 1, var_120, *label_161
+	var_128 = (var_98 + 1) \ var_119
+	var_129 = (var_97 + 1) \ var_120
+	var_126 = (var_98 + 0) \ var_119
+	var_127 = (var_97 + 1) \ var_120
+	if ( var_152(var_128, var_129) / 1 \ 2 == 0 & var_152(var_126, var_127) / 4 \ 2 == 1 ) {
+		var_152(var_128, var_129) += 1
+	}
+	var_126 = (var_98 + 1) \ var_119
+	var_127 = (var_97 + 0) \ var_120
+	if ( var_152(var_128, var_129) / 2 \ 2 == 0 & var_152(var_126, var_127) / 8 \ 2 == 1 ) {
+		var_152(var_128, var_129) += 2
+	}
+	var_126 = (var_98 + 2) \ var_119
+	var_127 = (var_97 + 1) \ var_120
+	if ( var_152(var_128, var_129) / 4 \ 2 == 0 & var_152(var_126, var_127) / 1 \ 2 == 1 ) {
+		var_152(var_128, var_129) += 4
+	}
+	var_126 = (var_98 + 1) \ var_119
+	var_127 = (var_97 + 2) \ var_120
+	if ( var_152(var_128, var_129) / 8 \ 2 == 0 & var_152(var_126, var_127) / 2 \ 2 == 1 ) {
+		var_152(var_128, var_129) += 8
+	}
+	var_97 += 1
+	goto *label_160
+*label_161
+	var_98 += 1
+	goto *label_159
+*label_162
+	return
+*label_163
+	dim var_116, 20
+	dim var_162, 20
+	var_163 = 3
+	var_164 = 3
+	dim var_165, var_119, var_120
+	dim var_166, var_119, var_120
+	var_167 = 3
+	var_168 = 2
+	var_169 = timeGetTime()
+	var_170 = 32
+	var_134 = 0
+	var_171 = 3
+	if ( var_118 == 0 ) {
+		var_172 = 0
+	}
+	if ( var_118 == 1 ) {
+		var_172 = 3
+	}
+	if ( var_118 == 2 ) {
+		var_172 = 4
+	}
+	if ( var_118 == 3 ) {
+		var_172 = rnd(3)
+		if ( var_172 >= 1 ) {
+			var_172 += 2
+		}
+	}
+*label_164
+	var_173 = timeGetTime() - var_169
+	if ( var_134 * 1000 / var_170 <= var_173 ) {
+		gosub *label_190
+		if ( var_171 == 0 ) {
+			dim var_174, 4
+			repeat 4
+				if ( cnt == 0 ) {
+					var_128 = (var_163 + var_145 * 7 - 1 + var_119 * 7) \ (var_119 * 7)
+					var_129 = (var_164 + var_146 * 7 + 0 + var_120 * 7) \ (var_120 * 7)
+					if ( var_157(var_128, var_129) >= 5 ) {
+						var_174(cnt) = 1
+					}
+					if ( var_163 == 0 & var_156(var_145, var_146) != 4 ) {
+						var_174(cnt) = 1
+					}
+					if ( var_137(var_145, var_146, 0) == var_164 & var_163 == 0 & var_152(var_145, var_146) / 1 \ 2 == 1 ) {
+						var_174(cnt) = 0
+					}
+				}
+				if ( cnt == 1 ) {
+					var_128 = (var_163 + var_145 * 7 + 0 + var_119 * 7) \ (var_119 * 7)
+					var_129 = (var_164 + var_146 * 7 - 1 + var_120 * 7) \ (var_120 * 7)
+					if ( var_157(var_128, var_129) >= 5 ) {
+						var_174(cnt) = 1
+					}
+					if ( var_164 == 0 & var_156(var_145, var_146) != 1 ) {
+						var_174(cnt) = 1
+					}
+					if ( var_137(var_145, var_146, 1) == var_163 & var_164 == 0 & var_152(var_145, var_146) / 2 \ 2 == 1 ) {
+						var_174(cnt) = 0
+					}
+				}
+				if ( cnt == 2 ) {
+					var_128 = (var_163 + var_145 * 7 + 1 + var_119 * 7) \ (var_119 * 7)
+					var_129 = (var_164 + var_146 * 7 + 0 + var_120 * 7) \ (var_120 * 7)
+					if ( var_157(var_128, var_129) >= 5 ) {
+						var_174(cnt) = 1
+					}
+					if ( var_163 == 6 & var_156(var_145, var_146) != 2 ) {
+						var_174(cnt) = 1
+					}
+					if ( var_137((var_145 + 1) \ var_119, var_146, 0) == var_164 & var_163 == 6 & var_152(var_145, var_146) / 4 \ 2 == 1 ) {
+						var_174(cnt) = 0
+					}
+				}
+				if ( cnt == 3 ) {
+					var_128 = (var_163 + var_145 * 7 + 0 + var_119 * 7) \ (var_119 * 7)
+					var_129 = (var_164 + var_146 * 7 + 1 + var_120 * 7) \ (var_120 * 7)
+					if ( var_157(var_128, var_129) >= 5 ) {
+						var_174(cnt) = 1
+					}
+					if ( var_164 == 6 & var_156(var_145, var_146) != 3 ) {
+						var_174(cnt) = 1
+					}
+					if ( var_137(var_145, (var_146 + 1) \ var_120, 1) == var_163 & var_164 == 6 & var_152(var_145, var_146) / 8 \ 2 == 1 ) {
+						var_174(cnt) = 0
+					}
+				}
+			loop
+			if ( var_116(6) == 0 | var_175 >= 1 ) {
+				if ( var_116(0) * var_116(2) == 0 & var_116(1) * var_116(3) == 0 ) {
+					var_147 = 0
+					var_176 = 0
+					if ( var_175 == 0 ) {
+						repeat 4
+							var_92 = (cnt + 1) \ 4
+							var_126 = (cnt + 3) \ 4
+							if ( var_116(var_92) + var_116(var_126) == 0 & var_116(cnt) >= 1 ) {
+								var_147 = cnt
+								var_176 = 1
+							}
+							if ( var_116(cnt) * var_116(var_92) >= 1 ) {
+								if ( var_174(var_92) >= 1 & var_174(cnt) == 0 ) {
+									var_147 = cnt
+									var_176 = 1
+									var_116(var_92) = 0
+								}
+								else {
+									if ( var_174(cnt) >= 1 & var_174(var_92) == 0 ) {
+										var_147 = var_92
+										var_176 = 1
+										var_116(cnt) = 0
+									}
+									else {
+										if ( var_116(var_92) >= var_116(cnt) ) {
+											var_147 = cnt
+											var_176 = 1
+										}
+										if ( var_116(cnt) >= var_116(var_92) ) {
+											var_147 = var_92
+											var_176 = 1
+										}
+									}
+								}
+							}
+						loop
+					}
+					else {
+						var_116((var_147 + 1) \ 2) = 0
+						var_116((var_147 + 1) \ 2 + 2) = 0
+					}
+					if ( var_177 >= 1 ) {
+						var_176 = 0
+					}
+				}
+				else {
+					var_176 = 0
+				}
+			}
+			if ( var_176 == 1 | var_178 \ 4 != 0 ) {
+				var_178 += 1
+			}
+			else {
+				var_178 = 0
+			}
+			var_126 = var_163
+			var_127 = var_164
+			if ( var_178 \ 4 == 1 & var_147 == 0 & var_175 == 0 ) {
+				var_163 -= 1
+			}
+			if ( var_178 \ 4 == 1 & var_147 == 1 & var_175 == 0 ) {
+				var_164 -= 1
+			}
+			if ( var_178 \ 4 == 1 & var_147 == 2 & var_175 == 0 ) {
+				var_163 += 1
+			}
+			if ( var_178 \ 4 == 1 & var_147 == 3 & var_175 == 0 ) {
+				var_164 += 1
+			}
+			if ( var_178 \ 4 == 1 & var_175 == 0 ) {
+				var_167 = var_147
+			}
+			if ( var_178 \ 8 == 2 ) {
+				var_92 = 0
+				if ( var_172 == 0 ) {
+					var_92 = 20
+				}
+				if ( var_172 == 3 ) {
+					var_92 = 23
+				}
+				var_95(17 + rnd(3) + var_92) = 1
+			}
+			if ( var_178 \ 4 == 1 ) {
+				var_112 = (var_163 + var_145 * 7 + var_119 * 7) \ (var_119 * 7)
+				var_113 = (var_164 + var_146 * 7 + var_120 * 7) \ (var_120 * 7)
+				if ( var_157(var_112, var_113) >= 5 ) {
+					if ( var_155(var_145, var_146) != 8 ) {
+						var_163 = var_126
+						var_164 = var_127
+						var_178 = 0
+					}
+					else {
+						if ( var_163 >= 1 & var_164 >= 1 & var_163 <= 5 & var_164 <= 5 ) {
+							var_171 = 2
+							var_111 = 0
+							var_125 = 0
+							var_179 = 0
+							var_163 = var_126
+							var_164 = var_127
+							var_178 = 0
+						}
+					}
+				}
+			}
+			else {
+			}
+			if ( var_155(var_145, var_146) == 8 & var_175 == 1 ) {
+				var_171 = 2
+				var_111 = 0
+				var_125 = 0
+				var_179 = 0
+			}
+			if ( var_171 == 0 ) {
+				if ( var_163 <= (-1) ) {
+					if ( var_152(var_145, var_146) / 1 \ 2 == 1 & var_137(var_145, var_146, 0) == var_164 & var_156(var_145, var_146) != 4 ) {
+						var_163 += 7
+						var_180 = var_145
+						var_181 = var_146
+						var_145 = (var_145 - 1 + var_119) \ var_119
+						var_175 = 8
+						var_95(8) = 1
+					}
+					else {
+						if ( var_156(var_145, var_146) == 4 ) {
+							var_163 += 7
+							var_145 = (var_145 - 1 + var_119) \ var_119
+						}
+						else {
+							var_163 += 1
+							var_178 = 0
+						}
+					}
+				}
+				if ( var_164 <= (-1) ) {
+					if ( var_152(var_145, var_146) / 2 \ 2 == 1 & var_137(var_145, var_146, 1) == var_163 & var_156(var_145, var_146) != 1 ) {
+						var_164 += 7
+						var_180 = var_145
+						var_181 = var_146
+						var_146 = (var_146 - 1 + var_120) \ var_120
+						var_175 = 8
+						var_95(9) = 1
+					}
+					else {
+						if ( var_156(var_145, var_146) == 1 ) {
+							var_164 += 7
+							var_146 = (var_146 - 1 + var_120) \ var_120
+						}
+						else {
+							var_164 += 1
+							var_178 = 0
+						}
+					}
+				}
+				if ( var_163 >= 7 ) {
+					if ( var_152(var_145, var_146) / 4 \ 2 == 1 & var_137((var_145 + 1) \ var_119, var_146, 0) == var_164 & var_156(var_145, var_146) != 2 ) {
+						var_163 -= 7
+						var_180 = var_145
+						var_181 = var_146
+						var_145 = (var_145 + 1) \ var_119
+						var_175 = 8
+						var_95(10) = 1
+					}
+					else {
+						if ( var_156(var_145, var_146) == 2 ) {
+							var_163 -= 7
+							var_145 = (var_145 + 1) \ var_119
+						}
+						else {
+							var_163 -= 1
+							var_178 = 0
+						}
+					}
+				}
+				if ( var_164 >= 7 ) {
+					if ( var_152(var_145, var_146) / 8 \ 2 == 1 & var_137(var_145, (var_146 + 1) \ var_120, 1) == var_163 & var_156(var_145, var_146) != 3 ) {
+						var_164 -= 7
+						var_180 = var_145
+						var_181 = var_146
+						var_146 = (var_146 + 1) \ var_120
+						var_175 = 8
+						var_95(11) = 1
+					}
+					else {
+						if ( var_156(var_145, var_146) == 3 ) {
+							var_164 -= 7
+							var_146 = (var_146 + 1) \ var_120
+						}
+						else {
+							var_164 -= 1
+							var_178 = 0
+						}
+					}
+				}
+			}
+			if ( var_175 >= 1 ) {
+				var_175 -= 1
+			}
+			else {
+				var_175 = 0
+			}
+			if ( var_116(6) >= 1 & var_177 == 0 ) {
+				var_176 = 0
+				var_182 += 1
+				if ( var_182 == 1 ) {
+					var_183 = 12
+					var_95(15) = 1
+				}
+				var_184 = var_183
+				if ( var_116(0) == 1 | var_116(0) >= 9 ) {
+					if ( var_183 \ 5 >= 1 ) {
+						var_183 -= 1
+					}
+				}
+				if ( var_116(1) == 1 | var_116(1) >= 9 ) {
+					if ( var_183 >= 5 ) {
+						var_183 -= 5
+					}
+				}
+				if ( var_116(2) == 1 | var_116(2) >= 9 ) {
+					if ( var_183 \ 5 <= 3 ) {
+						var_183 += 1
+					}
+				}
+				if ( var_116(3) == 1 | var_116(3) >= 9 ) {
+					if ( var_183 <= 19 ) {
+						var_183 += 5
+					}
+				}
+				if ( var_185 >= 1 ) {
+					var_185 -= 1
+				}
+				if ( var_183 != var_184 | var_182 == 1 ) {
+					var_185 = 8
+					var_112 = (var_145 + var_183 \ 5 - 2 + var_119) \ var_119
+					var_113 = (var_146 + var_183 / 5 - 2 + var_120) \ var_120
+					if ( var_165(var_112, var_113) == 1 ) {
+						var_186 = var_155(var_112, var_113)
+					}
+					else {
+						var_186 = -1
+					}
+					var_95(12) = 1
+				}
+			}
+			if ( var_187 >= 1 ) {
+				var_187 -= 1
+			}
+			if ( var_116(6) == 0 & var_182 >= 1 ) {
+				var_112 = (var_145 + var_183 \ 5 - 2 + var_119) \ var_119
+				var_113 = (var_146 + var_183 / 5 - 2 + var_120) \ var_120
+				if ( var_165(var_112, var_113) == 0 & var_166(var_112, var_113) <= 1 ) {
+					var_166(var_112, var_113) = 2
+					var_95(13) = 1
+				}
+				else {
+					if ( var_166(var_112, var_113) == 2 ) {
+						var_166(var_112, var_113) = 0
+						var_95(16) = 1
+					}
+					else {
+						var_95(14) = 1
+					}
+				}
+				var_187 = 6
+				var_188 = var_182
+				var_182 = -1
+			}
+			if ( var_175 == 7 ) {
+				var_92 = 0
+				if ( var_172 == 0 ) {
+					var_92 = 43
+				}
+				if ( var_172 == 3 ) {
+					var_92 = 43
+				}
+				var_95(17 + rnd(3) + var_92) = 1
+				if ( var_155(var_145, var_146) <= 6 ) {
+					var_95(var_155(var_145, var_146) + var_92) = 1
+				}
+				if ( var_155(var_145, var_146) == 7 ) {
+					var_95(6 + var_92) = 1
+				}
+				if ( var_155(var_145, var_146) == 8 ) {
+					var_95(7 + var_92) = 1
+				}
+			}
+			if ( var_189 >= 1 ) {
+				var_189 -= 1
+			}
+			if ( var_175 >= 1 ) {
+				var_189 = 0
+			}
+			if ( var_177 == 1 ) {
+				var_95(21) = 1
+			}
+			if ( var_177 == 60 ) {
+				var_95(22) = 1
+			}
+			if ( var_177 == 128 ) {
+				var_95(23) = 1
+				var_95(32) = 1
+			}
+			if ( var_177 >= 1 ) {
+				var_177 += 1
+			}
+			if ( var_177 >= 136 + 15 ) {
+				var_171 = 4
+				var_111 = 0
+				var_125 = 0
+				var_179 = 0
+			}
+			if ( var_163 * var_164 == 9 ) {
+				if ( var_135(var_145, var_146) == 5 ) {
+					var_135(var_145, var_146) = 2
+					var_190 += 1
+					var_189 = 32
+					var_95(20) = 1
+				}
+				if ( var_135(var_145, var_146) == 7 & var_177 == 0 ) {
+					if ( var_190 >= var_121 ) {
+						var_177 = 1
+						var_191 = var_192
+						var_92 = 0
+						repeat 10
+							if ( var_92 == 0 ) {
+								if ( var_103(cnt, var_118) >= var_191 * 100 / var_170 | var_103(cnt, var_118) == 0 ) {
+									var_126 = var_103(cnt, var_118)
+									var_103(cnt, var_118) = var_191 * 100 / var_170
+									var_92 = 1
+								}
+							}
+							else {
+								var_127 = var_103(cnt, var_118)
+								var_103(cnt, var_118) = var_126
+								var_126 = var_127
+							}
+						loop
+					}
+				}
+			}
+			if ( var_175 == 5 | var_182 == (-1) | var_134 == 12 ) {
+				var_98 = var_145 - 6 + var_119
+*label_165
+				exgoto var_98, 1, var_145 + 7 + var_119, *label_168
+				var_97 = var_146 - 6 + var_120
+*label_166
+				exgoto var_97, 1, var_146 + 7 + var_120, *label_167
+				if ( var_166(var_98 \ var_119, var_97 \ var_120) == 1 ) {
+					var_166(var_98 \ var_119, var_97 \ var_120) = 0
+				}
+				var_97 += 1
+				goto *label_166
+*label_167
+				var_98 += 1
+				goto *label_165
+*label_168
+				var_98 = var_145 - 6 + var_119
+*label_169
+				exgoto var_98, 1, var_145 + 7 + var_119, *label_172
+				var_97 = var_146 - 6 + var_120
+*label_170
+				exgoto var_97, 1, var_146 + 7 + var_120, *label_171
+				var_92 = 0
+				repeat 9
+					var_158 = (var_98 + cnt \ 3) \ var_119
+					var_159 = (var_97 + cnt / 3) \ var_120
+					if ( var_155(var_158, var_159) == 8 & var_165(var_158, var_159) == 1 ) {
+						var_92 += 1
+					}
+					else {
+						if ( var_165(var_158, var_159) == 0 & var_166(var_158, var_159) == 2 ) {
+							var_92 += 1
+						}
+					}
+				loop
+				var_112 = (var_98 + 1) \ var_119
+				var_113 = (var_97 + 1) \ var_120
+				if ( var_92 == var_155(var_112, var_113) & var_165(var_112, var_113) == 1 ) {
+					repeat 9
+						var_158 = (var_98 + cnt \ 3) \ var_119
+						var_159 = (var_97 + cnt / 3) \ var_120
+						if ( var_166(var_158, var_159) == 0 ) {
+							var_166(var_158, var_159) = 1
+						}
+					loop
+				}
+				var_97 += 1
+				goto *label_170
+*label_171
+				var_98 += 1
+				goto *label_169
+			}
+*label_172
+			if ( var_116(6) == 0 ) {
+				var_182 = 0
+			}
+			if ( var_165(var_145, var_146) == 0 ) {
+				var_165(var_145, var_146) = 1
+				if ( var_156(var_145, var_146) == 4 ) {
+					var_165(var_145 - 1, var_146) = 1
+				}
+				if ( var_156(var_145, var_146) == 1 ) {
+					var_165(var_145, var_146 - 1) = 1
+				}
+				if ( var_156(var_145, var_146) == 2 ) {
+					var_165(var_145 + 1, var_146) = 1
+				}
+				if ( var_156(var_145, var_146) == 3 ) {
+					var_165(var_145, var_146 + 1) = 1
+				}
+			}
+			var_192 += 1
+			if ( var_125 >= 1 ) {
+				var_125 = 0
+			}
+			if ( var_116(5) == 1 & var_177 == 0 ) {
+				var_171 = 1
+				var_95(24) = 1
+				var_179 = 1
+			}
+		}
+		else {
+			if ( var_171 == 1 ) {
+				var_125 += 1
+				if ( var_179 == 0 ) {
+					if ( var_125 == 1 ) {
+						var_111 = 0
+					}
+					if ( var_116(5) == 1 ) {
+						var_171 = 0
+						var_95(25) = 1
+					}
+					if ( var_116(1) == 1 | var_116(1) >= 8 ) {
+						var_111 = (var_111 + 5) \ 6
+						var_95(30) = 1
+					}
+					if ( var_116(3) == 1 | var_116(3) >= 8 ) {
+						var_111 = (var_111 + 1) \ 6
+						var_95(30) = 1
+					}
+					if ( var_111 == 0 & var_116(4) == 1 ) {
+						var_171 = 0
+						var_95(25) = 1
+					}
+					if ( var_111 == 1 & var_116(4) == 1 ) {
+						var_111 = 7
+						var_95(31) = 1
+					}
+					else {
+						if ( var_111 == 7 & var_116(4) == 1 ) {
+							goto *label_032
+							var_95(31) = 1
+						}
+					}
+					if ( var_111 == 2 & var_116(4) == 1 ) {
+						var_111 = 8
+						var_95(31) = 1
+					}
+					else {
+						if ( var_111 == 8 & var_116(4) == 1 ) {
+							goto *label_024
+							var_95(31) = 1
+						}
+					}
+					if ( var_111 == 3 & var_116(0) * var_116(2) == 0 ) {
+						if ( var_116(0) == 1 | var_116(0) >= 8 ) {
+							if ( var_100 >= 5 ) {
+								var_100 -= 5
+								gosub *label_194
+								var_95(30) = 1
+							}
+						}
+						if ( var_116(2) == 1 | var_116(2) >= 8 ) {
+							if ( var_100 <= 95 ) {
+								var_100 += 5
+								gosub *label_194
+								var_95(30) = 1
+							}
+						}
+					}
+					if ( var_111 == 4 & var_116(0) * var_116(2) == 0 ) {
+						if ( var_116(0) == 1 | var_116(0) >= 8 ) {
+							if ( var_101 >= 5 ) {
+								var_101 -= 5
+								gosub *label_194
+								var_95(30) = 1
+							}
+						}
+						if ( var_116(2) == 1 | var_116(2) >= 8 ) {
+							if ( var_101 <= 95 ) {
+								var_101 += 5
+								gosub *label_194
+								var_95(30) = 1
+							}
+						}
+					}
+					if ( var_111 == 5 & var_116(4) == 1 ) {
+						var_95(31) = 1
+						var_0 = (var_0 + 1) \ 3
+						gosub *label_198
+					}
+					if ( var_116(8) == 1 & var_118 == 3 ) {
+						if ( var_172 == 0 ) {
+							var_172 = 3
+						}
+						else {
+							if ( var_172 == 3 ) {
+								var_172 = 4
+							}
+							else {
+								if ( var_172 == 4 ) {
+									var_172 = 0
+								}
+							}
+						}
+						var_95(31) = 1
+					}
+				}
+				else {
+					if ( var_125 == 1 ) {
+						var_111 = 0
+					}
+					if ( var_116(0) + var_116(1) + var_116(2) + var_116(3) + var_116(4) == 0 ) {
+						var_179 = 0
+					}
+				}
+			}
+			else {
+				if ( var_171 == 2 ) {
+					if ( var_168 >= 1 ) {
+						var_192 += 1
+					}
+					if ( var_193 == 0 ) {
+						if ( var_168 <= 0 ) {
+							var_109 = 0
+							var_110 = 1
+						}
+					}
+					var_193 += 1
+					if ( var_193 == 1 ) {
+						var_95(26) = 1
+					}
+					if ( var_193 == 33 & var_168 >= 1 ) {
+						var_95(36) = 1
+						var_171 = 0
+						var_193 = 0
+						var_168 -= 1
+					}
+					if ( var_193 == 36 ) {
+						var_95(27) = 1
+						var_109 = 21
+						var_110 = 1
+					}
+					if ( var_193 >= 36 ) {
+						if ( var_179 == 0 ) {
+							if ( var_125 == 1 ) {
+								var_111 = 0
+							}
+							if ( var_116(1) == 1 ) {
+								var_111 = (var_111 + 1) \ 2
+								var_95(30) = 1
+							}
+							if ( var_116(3) == 1 ) {
+								var_111 = (var_111 + 1) \ 2
+								var_95(30) = 1
+							}
+							if ( var_111 == 0 & var_116(4) == 1 ) {
+								var_111 = 2
+								var_95(31) = 1
+							}
+							else {
+								if ( var_111 == 2 & var_116(4) == 1 ) {
+									goto *label_032
+									var_95(31) = 1
+								}
+							}
+							if ( var_111 == 1 & var_116(4) == 1 ) {
+								var_111 = 3
+								var_95(31) = 1
+							}
+							else {
+								if ( var_111 == 3 & var_116(4) == 1 ) {
+									goto *label_024
+									var_95(31) = 1
+								}
+							}
+						}
+						else {
+							if ( var_125 == 1 ) {
+								var_111 = 0
+							}
+							if ( var_116(0) + var_116(1) + var_116(2) + var_116(3) + var_116(4) == 0 ) {
+								var_179 = 0
+							}
+						}
+					}
+				}
+				else {
+					if ( var_171 == 3 ) {
+						if ( var_134 >= 8 ) {
+							var_171 = 0
+						}
+						if ( var_134 == 0 ) {
+							var_95(32) = 1
+							var_194 = rnd(4)
+							if ( var_118 <= 2 ) {
+								var_194 = var_118 - 1
+							}
+						}
+					}
+					else {
+						if ( var_171 == 4 ) {
+							var_193 += 1
+							if ( var_193 == 1 ) {
+								var_109 = 22
+								var_110 = 1
+								if ( var_102 <= 3 ) {
+									if ( var_118 + 1 >= var_102 ) {
+										var_102 += 1
+									}
+								}
+							}
+							if ( var_179 == 0 ) {
+								if ( var_125 == 1 ) {
+									var_111 = 0
+									var_195 = 0
+								}
+								if ( var_103(1, var_118) == 0 ) {
+									if ( var_116(4) == 1 & var_195 >= 74 ) {
+										var_123 = var_118
+										var_109 = 0
+										var_110 = 1
+										gosub *label_195
+										goto *label_187
+									}
+									var_195 += 1
+								}
+								else {
+									if ( var_116(1) == 1 ) {
+										var_111 = (var_111 + 1) \ 2
+										var_95(30) = 1
+									}
+									if ( var_116(3) == 1 ) {
+										var_111 = (var_111 + 1) \ 2
+										var_95(30) = 1
+									}
+									if ( var_111 == 0 & var_116(4) == 1 ) {
+										var_111 = 2
+										var_95(31) = 1
+									}
+									else {
+										if ( var_111 == 2 & var_116(4) == 1 ) {
+											goto *label_032
+											var_95(31) = 1
+										}
+									}
+									if ( var_111 == 1 & var_116(4) == 1 ) {
+										var_111 = 3
+										var_95(31) = 1
+									}
+									else {
+										if ( var_111 == 3 & var_116(4) == 1 ) {
+											goto *label_024
+											var_95(31) = 1
+										}
+									}
+								}
+							}
+							else {
+								if ( var_125 == 1 ) {
+									var_111 = 0
+								}
+								if ( var_116(0) + var_116(1) + var_116(2) + var_116(3) + var_116(4) == 0 ) {
+									var_179 = 0
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		if ( var_171 <= 1 ) {
+			if ( var_134 >= var_196 ) {
+				var_194 = (var_194 + 1) \ 4
+				if ( var_194 == 0 ) {
+					var_196 = var_134 + 3527 * 32 / 30 + 15
+				}
+				if ( var_194 == 1 ) {
+					var_196 = var_134 + 4050 * 32 / 30 + 15
+				}
+				if ( var_194 == 2 ) {
+					var_196 = var_134 + 3433 * 32 / 30 + 15
+				}
+				if ( var_194 == 3 ) {
+					var_196 = var_134 + 3420 * 32 / 30 + 15
+				}
+				var_109 = var_194 + 1
+				var_110 = 1
+				if ( var_104(var_194 + 8) == 0 ) {
+					var_104(var_194 + 8) = 1
+				}
+			}
+		}
+		gosub *label_193
+		gosub *label_195
+		redraw 0
+		color 0, 0, 0
+		boxf
+		gsel 3
+		pget 0, 0
+		var_197 = ginfo(16)
+		var_198 = ginfo(17)
+		var_199 = ginfo(18)
+		gsel 0
+		color var_197, var_198, var_199
+		gmode 4, , , 256
+		var_200 = 16
+		var_201 = 16
+		var_126 = var_200
+		var_127 = var_201 + 32
+		if ( var_167 == 0 & var_163 >= 3 & var_156(var_145, var_146) == 2 ) {
+			if ( var_178 >= 1 ) {
+				var_126 += (var_178 - 1) \ 4 * 4 - 16
+			}
+		}
+		if ( var_167 == 0 & var_163 <= 2 & var_156(var_145, var_146) == 4 ) {
+			if ( var_178 >= 1 ) {
+				var_126 += (var_178 - 1) \ 4 * 4 - 16
+			}
+		}
+		if ( var_167 == 2 & var_163 >= 4 & var_156(var_145, var_146) == 2 ) {
+			if ( var_178 >= 1 ) {
+				var_126 -= (var_178 - 1) \ 4 * 4 - 16
+			}
+		}
+		if ( var_167 == 2 & var_163 <= 3 & var_156(var_145, var_146) == 4 ) {
+			if ( var_178 >= 1 ) {
+				var_126 -= (var_178 - 1) \ 4 * 4 - 16
+			}
+		}
+		if ( var_167 == 1 & var_164 >= 3 & var_156(var_145, var_146) == 3 ) {
+			if ( var_178 >= 1 ) {
+				var_127 += (var_178 - 1) \ 4 * 4 - 12
+			}
+		}
+		if ( var_167 == 1 & var_164 <= 2 & var_156(var_145, var_146) == 1 ) {
+			if ( var_178 >= 1 ) {
+				var_127 += (var_178 - 1) \ 4 * 4 - 12
+			}
+		}
+		if ( var_167 == 3 & var_164 >= 4 & var_156(var_145, var_146) == 3 ) {
+			if ( var_178 >= 1 ) {
+				var_127 -= (var_178 - 1) \ 4 * 4 - 12
+			}
+		}
+		if ( var_167 == 3 & var_164 <= 3 & var_156(var_145, var_146) == 1 ) {
+			if ( var_178 >= 1 ) {
+				var_127 -= (var_178 - 1) \ 4 * 4 - 12
+			}
+		}
+		if ( var_156(var_145, var_146) == 2 & var_163 >= 3 ) {
+			var_126 -= (var_163 - 3) * 16
+		}
+		if ( var_156(var_145, var_146) == 4 & var_163 <= 3 ) {
+			var_126 -= (var_163 - 3) * 16
+		}
+		if ( var_156(var_145, var_146) == 3 & var_164 >= 3 ) {
+			var_127 -= (var_164 - 3) * 12
+		}
+		if ( var_156(var_145, var_146) == 1 & var_164 <= 3 ) {
+			var_127 -= (var_164 - 3) * 12
+		}
+		if ( var_175 >= 1 ) {
+			if ( var_167 == 0 ) {
+				var_126 -= var_175 * 16 * 7 / 8 * var_175 / 8
+			}
+			if ( var_167 == 1 ) {
+				var_127 -= var_175 * 12 * 7 / 8 * var_175 / 8
+			}
+			if ( var_167 == 2 ) {
+				var_126 += var_175 * 16 * 7 / 8 * var_175 / 8
+			}
+			if ( var_167 == 3 ) {
+				var_127 += var_175 * 12 * 7 / 8 * var_175 / 8
+			}
+			var_112 = 2
+		}
+		else {
+			var_112 = 1
+		}
+		repeat var_112
+			color var_197, var_198, var_199
+			gmode 4, , , 256
+			if ( cnt == 1 ) {
+				if ( var_167 == 0 ) {
+					var_126 += 16 * 9
+				}
+				if ( var_167 == 1 ) {
+					var_127 += 16 * 9
+				}
+				if ( var_167 == 2 ) {
+					var_126 -= 16 * 9
+				}
+				if ( var_167 == 3 ) {
+					var_127 -= 16 * 9
+				}
+				var_202 = var_180
+				var_203 = var_181
+			}
+			else {
+				var_202 = var_145
+				var_203 = var_146
+			}
+			var_133 = 1
+			var_117 = 1
+			if ( var_156(var_202, var_203) == 4 | var_156(var_202, var_203) == 2 ) {
+				var_133 = 2
+			}
+			if ( var_156(var_202, var_203) == 1 | var_156(var_202, var_203) == 3 ) {
+				var_117 = 2
+			}
+			if ( var_156(var_202, var_203) == 4 ) {
+				var_124 = 7
+			}
+			else {
+				var_124 = 0
+			}
+			if ( var_156(var_202, var_203) == 1 ) {
+				var_115 = 7
+			}
+			else {
+				var_115 = 0
+			}
+			var_113 = var_155(var_202, var_203)
+			if ( var_113 >= 7 ) {
+				var_113 -= 1
+			}
+			var_98 = 0
+*label_173
+			exgoto var_98, 1, 7 * var_133, *label_176
+			var_97 = 0
+*label_174
+			exgoto var_97, 1, 10 + var_117 * 7 - 7, *label_175
+			pos var_98 * 16 + var_126 - var_124 * 16, var_97 * 12 - 36 + var_127 - var_115 * 12
+			if ( var_156(var_202, var_203) == 4 | var_156(var_202, var_203) == 1 ) {
+				var_204 = 1
+			}
+			else {
+				var_204 = 0
+			}
+			if ( var_97 <= 2 ) {
+				gcopy 3 + var_172, var_113 * 16, 288 + (var_98 + var_97 + var_202 + var_203 - var_204) \ 2 * 12, 16, 12
+			}
+			else {
+				gcopy 3 + var_172, var_113 * 16, 312 + (var_98 + var_97 + var_202 + var_203 - var_204) \ 2 * 12, 16, 12
+			}
+			if ( var_97 == 2 & var_172 == 3 ) {
+				gcopy 3 + var_172, var_113 * 16, 444, 16, 12
+			}
+			var_97 += 1
+			goto *label_174
+*label_175
+			var_98 += 1
+			goto *label_173
+*label_176
+			gmode 3, , , 256
+			if ( var_152(var_202, var_203) / 1 \ 2 == 1 & var_156(var_202, var_203) != 4 ) {
+				pos var_126 - 16, var_137(var_202, var_203, 0) * 12 - 24 + var_127
+				gcopy 3 + var_172, var_113 * 16, 30 * 12, 16, 36
+			}
+			if ( var_152(var_202, var_203) / 2 \ 2 == 1 & var_156(var_202, var_203) != 1 ) {
+				pos var_137(var_202, var_203, 1) * 16 + var_126, var_127 - 24
+				gcopy 3 + var_172, var_113 * 16, 28 * 12, 16, 24
+			}
+			if ( var_152(var_202, var_203) / 4 \ 2 == 1 & var_156(var_202, var_203) != 2 ) {
+				pos var_126 + 7 * 16, var_137((var_202 + 1) \ var_119, var_203, 0) * 12 - 24 + var_127
+				gcopy 3 + var_172, var_113 * 16, 33 * 12, 16, 36
+			}
+			if ( var_156(var_202, var_203) == 1 ) {
+				var_205 = 12 * 7
+			}
+			else {
+				var_205 = 0
+			}
+			if ( var_152(var_202, var_203) / 8 \ 2 == 1 & var_156(var_202, var_203) != 3 ) {
+				pos var_137(var_202, (var_203 + 1) \ var_120, 1) * 16 + var_126, var_127 + 7 * 12 - var_115 * 12 + var_205
+				gcopy 3 + var_172, var_113 * 16, 36 * 12, 16, 12
+			}
+			if ( var_156(var_202, var_203) >= 1 ) {
+				var_206 = var_202
+				var_207 = var_203
+				var_204 = 0
+				var_205 = 0
+				if ( var_156(var_202, var_203) == 4 ) {
+					var_206 -= 1
+					var_204 = (-16) * 7
+				}
+				if ( var_156(var_202, var_203) == 1 ) {
+					var_207 -= 1
+					var_205 = (-12) * 7
+				}
+				if ( var_156(var_202, var_203) == 2 ) {
+					var_206 += 1
+					var_204 = 16 * 7
+				}
+				if ( var_156(var_202, var_203) == 3 ) {
+					var_207 += 1
+					var_205 = 12 * 7
+				}
+				if ( var_152(var_206, var_207) / 1 \ 2 == 1 & var_156(var_206, var_207) != 4 ) {
+					pos var_126 - 16 + var_204, var_137(var_206, var_207, 0) * 12 - 24 + var_127 + var_205
+					gcopy 3 + var_172, var_113 * 16, 30 * 12, 16, 36
+				}
+				if ( var_152(var_206, var_207) / 2 \ 2 == 1 & var_156(var_206, var_207) != 1 ) {
+					pos var_137(var_206, var_207, 1) * 16 + var_126 + var_204, var_127 - 24 + var_205
+					gcopy 3 + var_172, var_113 * 16, 28 * 12, 16, 24
+				}
+				if ( var_152(var_206, var_207) / 4 \ 2 == 1 & var_156(var_206, var_207) != 2 ) {
+					pos var_126 + 7 * 16 + var_204, var_137((var_206 + 1) \ var_119, var_207, 0) * 12 - 24 + var_127 + var_205
+					gcopy 3 + var_172, var_113 * 16, 33 * 12, 16, 36
+				}
+				if ( var_152(var_206, var_207) / 8 \ 2 == 1 & var_156(var_206, var_207) != 3 ) {
+					pos var_137(var_206, (var_207 + 1) \ var_120, 1) * 16 + var_126 + var_204, var_127 + 7 * 12 - var_115 * 12 + var_205
+					gcopy 3 + var_172, var_113 * 16, 36 * 12, 16, 12
+				}
+			}
+			gmode 4, , , 256
+			if ( var_113 == 8 ) {
+				var_92 = 1
+			}
+			else {
+				var_92 = 3
+			}
+			var_106 = 0
+*label_177
+			exgoto var_106, 1, 3, *label_182
+			var_98 = 0
+*label_178
+			exgoto var_98, 1, 7 * var_133, *label_181
+			var_97 = 0
+*label_179
+			exgoto var_97, 1, 7 * var_117, *label_180
+			pos var_98 * 16 + var_126 - var_124 * 16, var_97 * 12 - var_106 * 12 + var_127 - var_115 * 12
+			if ( var_157(var_98 + var_202 * 7 - var_124, var_97 + var_203 * 7 - var_115) >= 1 ) {
+				gcopy 3 + var_172, var_157(var_98 + var_202 * 7 - var_124, var_97 + var_203 * 7 - var_115) * 16, 24 - var_106 * 12 + var_113 * 3 * 12, 16, 12
+			}
+			if ( var_98 == 3 & var_97 \ 7 == 3 ) {
+				pos var_98 * 16 + var_126, var_97 * 12 - var_106 * 12 + var_127 + 4
+				if ( var_135(var_202, var_203) == 5 ) {
+					gcopy 3 + var_172, var_134 / 4 \ 8 * 16 + 272, 96 - var_106 * 12, 16, 12
+				}
+				if ( var_135(var_202, var_203) == 6 ) {
+					gcopy 3 + var_172, var_134 / 6 \ 4 * 16 + 272, 132 - var_106 * 12, 16, 12
+				}
+				if ( var_135(var_202, var_203) == 7 ) {
+					if ( var_190 >= var_121 & var_177 <= 127 ) {
+						gcopy 3 + var_172, var_134 / 4 \ 4 * 16 + 272, 60 - var_106 * 12, 16, 12
+					}
+					else {
+						gcopy 3 + var_172, var_134 / 4 \ 4 * 16 + 272, 24 - var_106 * 12, 16, 12
+					}
+				}
+			}
+			var_97 += 1
+			goto *label_179
+*label_180
+			var_98 += 1
+			goto *label_178
+*label_181
+			if ( var_106 == 0 ) {
+				var_128 = var_126
+				var_129 = var_127
+				if ( var_178 >= 1 & var_167 == 0 ) {
+					var_128 -= (var_178 - 1) \ 4 * 4 - 16
+				}
+				if ( var_178 >= 1 & var_167 == 1 ) {
+					var_129 -= (var_178 - 1) \ 4 * 4 - 12
+				}
+				if ( var_178 >= 1 & var_167 == 2 ) {
+					var_128 += (var_178 - 1) \ 4 * 4 - 16
+				}
+				if ( var_178 >= 1 & var_167 == 3 ) {
+					var_129 += (var_178 - 1) \ 4 * 4 - 12
+				}
+				pos var_163 * 16 + var_128, var_164 * 12 + var_129 - 24
+				if ( var_155(var_145, var_146) == 8 ) {
+					var_132 = 192
+				}
+				else {
+					var_132 = 0
+				}
+				if ( var_178 >= 1 & var_193 == 0 ) {
+					gcopy 4, var_178 / 2 \ 8 * 16 + var_132, var_167 * 12 * 3, 16, 36
+					if ( var_172 == 3 ) {
+						gcopy 8, var_178 / 2 \ 8 * 16 + var_132, var_167 * 12 * 3, 16, 36
+					}
+				}
+				else {
+					if ( var_171 != 3 ) {
+						if ( var_177 == 0 & var_193 == 0 ) {
+							if ( var_182 <= 100 & var_187 == 0 & var_188 <= 116 | var_167 != 3 ) {
+								var_92 = 0
+								if ( var_176 == 0 ) {
+									if ( var_134 \ 300 >= 93 & var_134 \ 300 <= 98 ) {
+										var_92 = 1
+									}
+									if ( var_134 \ 300 >= 94 & var_134 \ 300 <= 96 ) {
+										var_92 = 2
+									}
+									if ( var_134 \ 300 >= 79 & var_134 \ 300 <= 84 ) {
+										var_92 = 1
+									}
+									if ( var_134 \ 300 >= 80 & var_134 \ 300 <= 82 ) {
+										var_92 = 2
+									}
+								}
+								gcopy 4, (8 + var_92) * 16 + var_132, var_167 * 12 * 3, 16, 36
+								if ( var_172 == 3 ) {
+									gcopy 8, (8 + var_92) * 16 + var_132, var_167 * 12 * 3, 16, 36
+								}
+							}
+							else {
+								var_92 = 0
+								if ( var_182 >= 101 & var_182 <= 108 ) {
+									var_92 = (var_182 - 101) / 2
+								}
+								if ( var_182 >= 109 & var_182 <= 112 ) {
+									var_92 = 4
+								}
+								if ( var_182 >= 113 & var_182 <= 116 ) {
+									var_92 = 5
+								}
+								if ( var_182 >= 117 ) {
+									var_92 = 6
+									var_131 = (var_182 - 40) \ 100
+									if ( var_131 >= 0 & var_131 <= 2 | var_131 >= 20 & var_131 <= 29 ) {
+										var_92 = 7
+									}
+									if ( var_131 >= 3 & var_131 <= 6 | var_131 >= 23 & var_131 <= 26 ) {
+										var_92 = 8
+									}
+									var_131 = (var_182 + 0) \ 200
+									if ( var_131 >= 23 & var_131 <= 28 ) {
+										var_92 = 9
+									}
+									if ( var_131 >= 9 & var_131 <= 14 ) {
+										var_92 = 9
+									}
+									if ( var_131 >= 24 & var_131 <= 27 ) {
+										var_92 = 10
+									}
+									if ( var_131 >= 10 & var_131 <= 13 ) {
+										var_92 = 10
+									}
+								}
+								if ( var_187 >= 1 & var_188 >= 117 ) {
+									var_92 = var_187 - 1
+								}
+								gcopy 4, var_92 * 16 + var_132, 4 * 12 * 3, 16, 36
+								if ( var_172 == 3 ) {
+									gcopy 8, var_92 * 16 + var_132, 4 * 12 * 3, 16, 36
+								}
+							}
+						}
+						else {
+							if ( var_177 >= 1 ) {
+								if ( var_177 <= 15 ) {
+									var_92 = var_177 / 4
+								}
+								if ( var_177 >= 16 & var_177 <= 31 ) {
+									var_92 = (var_177 / 2 + 4) \ 8
+								}
+								if ( var_177 >= 32 & var_177 <= 63 ) {
+									var_92 = var_177 \ 8
+								}
+								if ( var_177 >= 64 & var_177 <= 87 ) {
+									var_92 = var_177 - 64 + 8
+								}
+								if ( var_177 >= 88 & var_177 <= 127 ) {
+									var_92 = var_177 \ 8 + 32
+								}
+								if ( var_177 >= 128 & var_177 <= 135 ) {
+									var_92 = var_177 - 128 + 40
+								}
+								if ( var_177 <= 135 ) {
+									gcopy 4, var_92 \ 8 * 16, (var_92 / 8 + 5) * 12 * 3, 16, 36
+									if ( var_172 == 3 ) {
+										gcopy 8, var_92 \ 8 * 16, (var_92 / 8 + 5) * 12 * 3, 16, 36
+									}
+								}
+							}
+							else {
+								if ( var_193 >= 1 & var_193 <= 32 ) {
+									var_92 = (var_193 - 1) / 2
+									var_131 = 0
+									var_132 = 0
+									if ( var_167 == 0 | var_167 == 2 ) {
+										if ( var_92 == 8 ) {
+											var_132 = 2
+										}
+										if ( var_92 == 9 ) {
+											var_132 = 3
+										}
+										if ( var_92 == 10 ) {
+											var_132 = 4
+										}
+										if ( var_92 == 11 ) {
+											var_131 = 3
+											var_132 = 5
+										}
+										if ( var_92 == 12 ) {
+											var_131 = 6
+											var_132 = 7
+										}
+										if ( var_92 == 13 ) {
+											var_131 = 12
+											var_132 = 10
+										}
+										if ( var_92 == 14 ) {
+											var_131 = 24
+											var_132 = 12
+										}
+										if ( var_92 == 15 ) {
+											var_131 = 36
+											var_132 = 16
+										}
+									}
+									if ( var_167 == 0 ) {
+										pos var_163 * 16 + var_128 - var_132 - 16 - 5, var_164 * 12 + var_129 - 24 + var_131
+										if ( var_164 <= 2 ) {
+											gcopy 4, 128 + var_92 \ 8 * 32, 180 + var_92 / 8 * 36, 32, 36
+											if ( var_172 == 3 ) {
+												gcopy 8, 128 + var_92 \ 8 * 32, 180 + var_92 / 8 * 36, 32, 36
+											}
+										}
+										if ( var_164 == 3 & var_131 <= 23 ) {
+											gcopy 4, 128 + var_92 \ 8 * 32, 180 + var_92 / 8 * 36, 32, 36
+											if ( var_172 == 3 ) {
+												gcopy 8, 128 + var_92 \ 8 * 32, 180 + var_92 / 8 * 36, 32, 36
+											}
+										}
+										if ( var_164 == 3 & var_131 >= 24 ) {
+											gcopy 4, 128 + var_92 \ 8 * 32, 180 + var_92 / 8 * 36, 32, 36 - var_131 + 24
+											if ( var_172 == 3 ) {
+												gcopy 8, 128 + var_92 \ 8 * 32, 180 + var_92 / 8 * 36, 32, 36 - var_131 + 24
+											}
+										}
+										if ( var_164 == 4 & var_131 <= 11 ) {
+											gcopy 4, 128 + var_92 \ 8 * 32, 180 + var_92 / 8 * 36, 32, 36
+											if ( var_172 == 3 ) {
+												gcopy 8, 128 + var_92 \ 8 * 32, 180 + var_92 / 8 * 36, 32, 36
+											}
+										}
+										if ( var_164 == 4 & var_131 >= 12 ) {
+											gcopy 4, 128 + var_92 \ 8 * 32, 180 + var_92 / 8 * 36, 32, 36 - var_131 + 12
+											if ( var_172 == 3 ) {
+												gcopy 8, 128 + var_92 \ 8 * 32, 180 + var_92 / 8 * 36, 32, 36 - var_131 + 12
+											}
+										}
+										if ( var_164 == 5 ) {
+											gcopy 4, 128 + var_92 \ 8 * 32, 180 + var_92 / 8 * 36, 32, 36 - var_131
+											if ( var_172 == 3 ) {
+												gcopy 8, 128 + var_92 \ 8 * 32, 180 + var_92 / 8 * 36, 32, 36 - var_131
+											}
+										}
+									}
+									if ( var_167 == 2 ) {
+										pos var_163 * 16 + var_128 + var_132 + 5, var_164 * 12 + var_129 - 24 + var_131
+										if ( var_164 <= 2 ) {
+											gcopy 4, 128 + var_92 \ 8 * 32, 252 + var_92 / 8 * 36, 32, 36
+											if ( var_172 == 3 ) {
+												gcopy 8, 128 + var_92 \ 8 * 32, 252 + var_92 / 8 * 36, 32, 36
+											}
+										}
+										if ( var_164 == 3 & var_131 <= 23 ) {
+											gcopy 4, 128 + var_92 \ 8 * 32, 252 + var_92 / 8 * 36, 32, 36
+											if ( var_172 == 3 ) {
+												gcopy 8, 128 + var_92 \ 8 * 32, 252 + var_92 / 8 * 36, 32, 36
+											}
+										}
+										if ( var_164 == 3 & var_131 >= 24 ) {
+											gcopy 4, 128 + var_92 \ 8 * 32, 252 + var_92 / 8 * 36, 32, 36 - var_131 + 24
+											if ( var_172 == 3 ) {
+												gcopy 8, 128 + var_92 \ 8 * 32, 252 + var_92 / 8 * 36, 32, 36 - var_131 + 24
+											}
+										}
+										if ( var_164 == 4 & var_131 <= 11 ) {
+											gcopy 4, 128 + var_92 \ 8 * 32, 252 + var_92 / 8 * 36, 32, 36
+											if ( var_172 == 3 ) {
+												gcopy 8, 128 + var_92 \ 8 * 32, 252 + var_92 / 8 * 36, 32, 36
+											}
+										}
+										if ( var_164 == 4 & var_131 >= 12 ) {
+											gcopy 4, 128 + var_92 \ 8 * 32, 252 + var_92 / 8 * 36, 32, 36 - var_131 + 12
+											if ( var_172 == 3 ) {
+												gcopy 8, 128 + var_92 \ 8 * 32, 252 + var_92 / 8 * 36, 32, 36 - var_131 + 12
+											}
+										}
+										if ( var_164 == 5 ) {
+											gcopy 4, 128 + var_92 \ 8 * 32, 252 + var_92 / 8 * 36, 32, 36 - var_131
+											if ( var_172 == 3 ) {
+												gcopy 8, 128 + var_92 \ 8 * 32, 252 + var_92 / 8 * 36, 32, 36 - var_131
+											}
+										}
+									}
+									if ( var_167 == 1 ) {
+										if ( var_92 == 0 ) {
+											var_131 = -5
+										}
+										if ( var_92 == 1 ) {
+											var_131 = -4
+										}
+										if ( var_92 == 2 ) {
+											var_131 = -3
+										}
+										if ( var_92 == 3 ) {
+											var_131 = -2
+										}
+										if ( var_92 == 4 ) {
+											var_131 = -1
+										}
+										if ( var_92 == 9 ) {
+											var_131 = 1
+										}
+										if ( var_92 == 10 ) {
+											var_131 = 2
+										}
+										if ( var_92 == 11 ) {
+											var_131 = 3
+										}
+										if ( var_92 == 12 ) {
+											var_131 = 4
+										}
+										if ( var_92 == 13 ) {
+											var_131 = 5
+										}
+										if ( var_92 == 14 ) {
+											var_131 = 5
+										}
+										if ( var_92 == 15 ) {
+											var_131 = 5
+										}
+										pos var_163 * 16 + var_128, var_164 * 12 + var_129 - 24 - var_131 - 7
+										gcopy 4, 128 + var_92 * 16, 324, 16, 36
+										if ( var_172 == 3 ) {
+											gcopy 8, 128 + var_92 * 16, 324, 16, 36
+										}
+									}
+									if ( var_167 == 3 ) {
+										if ( var_92 == 13 ) {
+											var_131 = 5
+										}
+										if ( var_92 == 14 & (var_193 - 1) \ 2 == 0 ) {
+											var_131 = 12
+										}
+										if ( var_92 == 14 & (var_193 - 1) \ 2 == 1 ) {
+											var_131 = 15
+										}
+										if ( var_92 == 15 & (var_193 - 1) \ 2 == 0 ) {
+											var_131 = 19
+										}
+										if ( var_92 == 15 & (var_193 - 1) \ 2 == 1 ) {
+											var_131 = 24
+										}
+										pos var_163 * 16 + var_128, var_164 * 12 + var_129 - 24 + var_131
+										gcopy 4, 128 + var_92 * 16, 360, 16, 36
+										if ( var_172 == 3 ) {
+											gcopy 8, 128 + var_92 * 16, 360, 16, 36
+										}
+									}
+								}
+							}
+						}
+					}
+					else {
+						var_92 = 7 - var_134
+						if ( var_177 <= 135 ) {
+							gcopy 4, var_92 * 16, 360, 16, 36
+							if ( var_172 == 3 ) {
+								gcopy 8, var_92 * 16, 360, 16, 36
+							}
+						}
+					}
+				}
+			}
+			var_106 += 1
+			goto *label_177
+*label_182
+			if ( var_175 >= 1 ) {
+				if ( cnt == 0 ) {
+					gmode 3, , , var_175 * 32
+					pos var_126 - 16, var_127 - 48
+					gcopy 3 + var_172, 208, 288, 8 * 18, 12 * 11
+				}
+				if ( cnt == 1 ) {
+					gmode 3, , , 256 - var_175 * 32
+					pos var_126 - 16, var_127 - 48
+					gcopy 3 + var_172, 208, 288, 8 * 18, 12 * 11
+				}
+			}
+		loop
+		if ( var_189 >= 1 ) {
+			gmode 4, , , var_189 * 8
+			pos 16 * 3 + var_126, 18 - 32 + var_127 + var_189 * var_189 / 32
+			gcopy 2, var_189 \ 8 * 16, 192, 16, 16
+		}
+		var_126 = var_200
+		var_127 = var_201
+		color 0, 0, 0
+		boxf 0, 0, 256, var_127 - 5 - 8
+		boxf 0, var_127 + 12 * 10 + 4, 256, 144
+		boxf 0, 0, var_126 - 8, 144
+		boxf var_126 + 16 * 8 - 8, 0, 256, 144
+		color 0, 0, 0
+		var_98 = 0
+*label_183
+		exgoto var_98, 1, 13, *label_186
+		var_97 = 0
+*label_184
+		exgoto var_97, 1, 13, *label_185
+		var_128 = (var_145 + var_98 - 6 + var_119) \ var_119
+		var_129 = (var_146 + var_97 - 6 + var_120) \ var_120
+		gmode 4, , , 32
+		if ( var_98 >= 1 & var_97 >= 1 & var_98 <= 11 & var_97 <= 11 ) {
+			gmode 4, , , 64
+		}
+		if ( var_98 >= 2 & var_97 >= 2 & var_98 <= 10 & var_97 <= 10 ) {
+			gmode 4, , , 128
+		}
+		if ( var_98 >= 3 & var_97 >= 3 & var_98 <= 9 & var_97 <= 9 ) {
+			gmode 4, , , 192
+		}
+		if ( var_98 >= 4 & var_97 >= 4 & var_98 <= 8 & var_97 <= 8 ) {
+			gmode 4, , , 256
+		}
+		var_126 = var_200 + 128
+		var_127 = var_201 + 8
+		if ( var_175 >= 1 ) {
+			if ( var_167 == 0 ) {
+				var_126 -= var_175 * var_175 / 8
+			}
+			if ( var_167 == 1 ) {
+				var_127 -= var_175 * var_175 / 8
+			}
+			if ( var_167 == 2 ) {
+				var_126 += var_175 * var_175 / 8
+			}
+			if ( var_167 == 3 ) {
+				var_127 += var_175 * var_175 / 8
+			}
+		}
+		if ( var_156(var_145, var_146) >= 1 ) {
+			if ( var_156(var_145, var_146) == 2 & var_163 >= 3 ) {
+				var_126 -= var_163 - 3
+			}
+			if ( var_156(var_145, var_146) == 4 & var_163 <= 3 ) {
+				var_126 -= var_163 - 3
+			}
+			if ( var_156(var_145, var_146) == 3 & var_164 >= 3 ) {
+				var_127 -= var_164 - 3
+			}
+			if ( var_156(var_145, var_146) == 1 & var_164 <= 3 ) {
+				var_127 -= var_164 - 3
+			}
+		}
+		pos var_98 * 8 + var_126, var_97 * 8 + var_127
+		if ( var_165(var_128, var_129) >= 1 ) {
+			gcopy 2, var_152(var_128, var_129) * 8, var_155(var_128, var_129) * 8 + 8, 8, 8
+			if ( var_98 == 6 & var_97 == 6 ) {
+				gcopy 2, var_152(var_128, var_129) * 8, 0, 8, 8
+			}
+			if ( var_135(var_128, var_129) == 4 ) {
+				gcopy 2, 3 * 8, 11 * 8, 8, 8
+			}
+			if ( var_135(var_128, var_129) == 5 ) {
+				gcopy 2, 2 * 8, 11 * 8, 8, 8
+			}
+			if ( var_135(var_128, var_129) == 6 ) {
+				gcopy 2, 0 * 8, 11 * 8, 8, 8
+			}
+			if ( var_135(var_128, var_129) == 7 ) {
+				gcopy 2, 1 * 8, 11 * 8, 8, 8
+			}
+		}
+		else {
+			if ( var_166(var_128, var_129) == 1 ) {
+				gcopy 2, 5 * 8, 11 * 8, 8, 8
+			}
+			if ( var_166(var_128, var_129) == 2 ) {
+				gcopy 2, 6 * 8, 11 * 8, 8, 8
+			}
+		}
+		var_97 += 1
+		goto *label_184
+*label_185
+		var_98 += 1
+		goto *label_183
+*label_186
+		gmode 4, , , 256
+		pos 22 * 8 + var_200, 7 * 8 + var_201
+		gcopy 2, 9 * 8, 11 * 8, 8, 8
+		if ( var_182 >= 1 ) {
+			gmode 4, , , 256
+			if ( var_182 >= 0 & var_182 <= 1 ) {
+				var_92 = 3
+			}
+			if ( var_182 >= 2 & var_182 <= 3 ) {
+				var_92 = 2
+			}
+			if ( var_182 >= 4 & var_182 <= 6 ) {
+				var_92 = 1
+			}
+			if ( var_182 >= 7 ) {
+				var_92 = 0
+			}
+			var_126 = var_200 + 8 * 15 + 8 * 4
+			var_127 = var_201 + 8 * 4
+			if ( var_156(var_145, var_146) >= 1 ) {
+				if ( var_156(var_145, var_146) == 2 & var_163 >= 3 ) {
+					var_126 -= var_163 - 3
+				}
+				if ( var_156(var_145, var_146) == 4 & var_163 <= 3 ) {
+					var_126 -= var_163 - 3
+				}
+				if ( var_156(var_145, var_146) == 3 & var_164 >= 3 ) {
+					var_127 -= var_164 - 3
+				}
+				if ( var_156(var_145, var_146) == 1 & var_164 <= 3 ) {
+					var_127 -= var_164 - 3
+				}
+			}
+			pos var_126, var_127
+			gcopy 2, 0 * 8 + var_92 * 24, 15 * 8, 8, 8
+			pos var_126 + 8 * 6, var_127
+			gcopy 2, 2 * 8 + var_92 * 24, 15 * 8, 8, 8
+			pos var_126, var_127 + 8 * 6
+			gcopy 2, 0 * 8 + var_92 * 24, 17 * 8, 8, 8
+			pos var_126 + 8 * 6, var_127 + 8 * 6
+			gcopy 2, 2 * 8 + var_92 * 24, 17 * 8, 8, 8
+			repeat 5
+				pos var_126, var_127 + cnt * 8 + 8
+				gcopy 2, 0 * 8 + var_92 * 24, 16 * 8, 8, 8
+				pos var_126 + cnt * 8 + 8, var_127
+				gcopy 2, 1 * 8 + var_92 * 24, 15 * 8, 8, 8
+				pos var_126 + 8 * 6, var_127 + cnt * 8 + 8
+				gcopy 2, 2 * 8 + var_92 * 24, 16 * 8, 8, 8
+				pos var_126 + cnt * 8 + 8, var_127 + 8 * 6
+				gcopy 2, 1 * 8 + var_92 * 24, 17 * 8, 8, 8
+			loop
+			if ( var_186 >= 0 ) {
+				if ( var_185 >= 8 ) {
+					var_92 = 4
+				}
+				if ( var_185 >= 6 & var_185 <= 7 ) {
+					var_92 = 3
+				}
+				if ( var_185 >= 4 & var_185 <= 5 ) {
+					var_92 = 2
+				}
+				if ( var_185 >= 1 & var_185 <= 3 ) {
+					var_92 = 1
+				}
+				if ( var_185 == 0 ) {
+					var_92 = 0
+				}
+				pos var_126, var_127
+				gcopy 2, 128 + var_92 * 8, var_186 * 8, 8, 8
+			}
+			var_126 += (var_183 \ 5 + 1) * 8
+			var_127 += (var_183 / 5 + 1) * 8
+			pos var_126, var_127
+			gcopy 2, 4 * 8, 11 * 8, 8, 8
+		}
+		if ( var_175 >= 8 ) {
+			var_92 = 4
+		}
+		if ( var_175 >= 6 & var_175 <= 7 ) {
+			var_92 = 3
+		}
+		if ( var_175 >= 4 & var_175 <= 5 ) {
+			var_92 = 2
+		}
+		if ( var_175 >= 1 & var_175 <= 3 ) {
+			var_92 = 1
+		}
+		if ( var_175 == 0 ) {
+			var_92 = 0
+		}
+		pos var_200 + 8 * 15, var_201
+		gmode 4, , , 256
+		gcopy 2, 128 + var_92 * 8, var_155(var_145, var_146) * 8, 8, 8
+		repeat var_121
+			pos var_200 + 8 * 15, var_201 + 8 + cnt * 8
+			gmode 4, , , 256
+			if ( var_190 >= cnt + 1 ) {
+				gcopy 2, 64, 88, 8, 8
+			}
+			else {
+				gcopy 2, 56, 88, 8, 8
+			}
+		loop
+		repeat 2
+			pos var_200 + 8 * 15, var_201 + 8 * (var_121 + 2) + cnt * 8
+			gmode 4, , , 256
+			if ( var_168 >= cnt + 1 ) {
+				gcopy 2, 88, 88, 8, 8
+			}
+			else {
+				gcopy 2, 80, 88, 8, 8
+			}
+		loop
+		if ( var_177 == 0 ) {
+			var_92 = var_192 * 100 / var_170
+		}
+		else {
+			var_92 = var_191 * 100 / var_170
+		}
+		if ( var_92 >= 6000000 ) {
+			var_92 = 5999999
+		}
+		var_112 = var_200 + 8 * 15
+		var_113 = var_201
+		pos var_112 + 5 * 11, var_113
+		gcopy 2, var_92 / 1 \ 10 * 5, 96, 5, 8
+		pos var_112 + 5 * 10, var_113
+		gcopy 2, var_92 / 10 \ 10 * 5, 96, 5, 8
+		pos var_112 + 5 * 8, var_113
+		gcopy 2, var_92 / 100 \ 10 * 5, 96, 5, 8
+		if ( var_92 >= 1000 ) {
+			pos var_112 + 5 * 7, var_113
+			gcopy 2, var_92 / 1000 \ 6 * 5, 96, 5, 8
+		}
+		if ( var_92 >= 6000 ) {
+			pos var_112 + 5 * 5, var_113
+			gcopy 2, var_92 / 6000 \ 10 * 5, 96, 5, 8
+		}
+		if ( var_92 >= 60000 ) {
+			pos var_112 + 5 * 4, var_113
+			gcopy 2, var_92 / 60000 \ 10 * 5, 96, 5, 8
+		}
+		if ( var_92 >= 600000 ) {
+			pos var_112 + 5 * 3, var_113
+			gcopy 2, var_92 / 600000 \ 10 * 5, 96, 5, 8
+		}
+		if ( var_92 \ 100 <= 50 | var_177 >= 1 ) {
+			pos var_112 + 5 * 9, var_113
+			gcopy 2, 11 * 5, 96, 5, 8
+			if ( var_92 >= 6000 ) {
+				pos var_112 + 5 * 6, var_113
+				gcopy 2, 10 * 5, 96, 5, 8
+			}
+		}
+		if ( var_125 >= 1 ) {
+			if ( var_125 >= 0 & var_125 <= 1 ) {
+				var_92 = 3
+			}
+			if ( var_125 >= 2 & var_125 <= 3 ) {
+				var_92 = 2
+			}
+			if ( var_125 >= 4 & var_125 <= 6 ) {
+				var_92 = 1
+			}
+			if ( var_125 >= 7 ) {
+				var_92 = 0
+			}
+			var_126 = 8 * 7 - 4
+			var_127 = 8 * 2
+			color 0, 0, 0
+			boxf var_126 + 8, var_127 + 8, var_126 + 17 * 8, var_127 + 13 * 8
+			pos var_126, var_127
+			gcopy 2, 12 * 8 + var_92 * 24, 15 * 8, 8, 8
+			pos var_126 + 8 * 17, var_127
+			gcopy 2, 14 * 8 + var_92 * 24, 15 * 8, 8, 8
+			pos var_126, var_127 + 8 * 13
+			gcopy 2, 12 * 8 + var_92 * 24, 17 * 8, 8, 8
+			pos var_126 + 8 * 17, var_127 + 8 * 13
+			gcopy 2, 14 * 8 + var_92 * 24, 17 * 8, 8, 8
+			repeat 16
+				pos var_126 + cnt * 8 + 8, var_127
+				gcopy 2, 13 * 8 + var_92 * 24, 15 * 8, 8, 8
+				pos var_126 + cnt * 8 + 8, var_127 + 8 * 13
+				gcopy 2, 13 * 8 + var_92 * 24, 17 * 8, 8, 8
+			loop
+			repeat 12
+				pos var_126, var_127 + cnt * 8 + 8
+				gcopy 2, 12 * 8 + var_92 * 24, 16 * 8, 8, 8
+				pos var_126 + 8 * 17, var_127 + cnt * 8 + 8
+				gcopy 2, 14 * 8 + var_92 * 24, 16 * 8, 8, 8
+			loop
+		}
+		if ( var_193 >= 33 & var_193 <= 36 & var_171 == 2 ) {
+			color 0, 0, 0
+			boxf
+		}
+		if ( var_193 >= 30 & var_193 <= 33 & var_171 == 2 & var_168 >= 1 ) {
+			color 0, 0, 0
+			boxf
+		}
+		if ( var_193 >= 1 ) {
+			if ( var_193 >= 33 & var_171 == 2 | var_171 == 4 ) {
+				if ( var_193 >= 33 & var_171 == 2 ) {
+					var_112 = var_193 - 33
+					if ( var_112 >= 0 & var_112 <= 1 ) {
+						var_92 = 3
+					}
+					if ( var_112 >= 2 & var_112 <= 3 ) {
+						var_92 = 2
+					}
+					if ( var_112 >= 4 & var_112 <= 6 ) {
+						var_92 = 1
+					}
+					if ( var_112 >= 7 ) {
+						var_92 = 0
+					}
+					var_131 = 0
+				}
+				else {
+					if ( var_193 >= 1 & var_171 == 4 ) {
+						var_112 = var_193
+						if ( var_112 >= 0 & var_112 <= 1 ) {
+							var_92 = 3
+						}
+						if ( var_112 >= 2 & var_112 <= 3 ) {
+							var_92 = 2
+						}
+						if ( var_112 >= 4 & var_112 <= 6 ) {
+							var_92 = 1
+						}
+						if ( var_112 >= 7 ) {
+							var_92 = 0
+						}
+						var_131 = 1
+					}
+				}
+				var_126 = 8 * 7 - 4
+				var_127 = 8 * 2
+				color 0, 0, 0
+				boxf var_126 + 8, var_127 + 8, var_126 + 17 * 8, var_127 + 13 * 8
+				pos var_126, var_127
+				gcopy 2, 12 * 8 + var_92 * 24, (18 + var_131 * 3) * 8, 8, 8
+				pos var_126 + 8 * 17, var_127
+				gcopy 2, 14 * 8 + var_92 * 24, (18 + var_131 * 3) * 8, 8, 8
+				pos var_126, var_127 + 8 * 13
+				gcopy 2, 12 * 8 + var_92 * 24, (20 + var_131 * 3) * 8, 8, 8
+				pos var_126 + 8 * 17, var_127 + 8 * 13
+				gcopy 2, 14 * 8 + var_92 * 24, (20 + var_131 * 3) * 8, 8, 8
+				repeat 16
+					pos var_126 + cnt * 8 + 8, var_127
+					gcopy 2, 13 * 8 + var_92 * 24, (18 + var_131 * 3) * 8, 8, 8
+					pos var_126 + cnt * 8 + 8, var_127 + 8 * 13
+					gcopy 2, 13 * 8 + var_92 * 24, (20 + var_131 * 3) * 8, 8, 8
+				loop
+				repeat 12
+					pos var_126, var_127 + cnt * 8 + 8
+					gcopy 2, 12 * 8 + var_92 * 24, (19 + var_131 * 3) * 8, 8, 8
+					pos var_126 + 8 * 17, var_127 + cnt * 8 + 8
+					gcopy 2, 14 * 8 + var_92 * 24, (19 + var_131 * 3) * 8, 8, 8
+				loop
+			}
+		}
+		if ( var_125 >= 1 ) {
+			pos var_126 + 6 * 8 + 2, var_127 + 2 * 8
+			gcopy 2, 0, 13 * 8, 5 * 8, 16
+			pos var_126 + 4 * 8 + 4, var_127 + 5 * 8
+			gcopy 2, 0, 28 * 8, 10 * 8, 16
+			pos var_126 + 4 * 8 + 4, var_127 + 7 * 8 - 4
+			if ( var_111 == 7 ) {
+				gcopy 2, 80, 30 * 8, 10 * 8, 16
+			}
+			else {
+				gcopy 2, 0, 30 * 8, 9 * 8, 16
+			}
+			pos var_126 + 4 * 8 + 4, var_127 + 8 * 8
+			if ( var_111 == 8 ) {
+				gcopy 2, 80, 32 * 8, 9 * 8, 16
+			}
+			else {
+				gcopy 2, 0, 32 * 8, 9 * 8, 16
+			}
+			pos var_126 + 5 * 8 + 4, var_127 + 10 * 8
+			gcopy 2, 96, 208, 8 * 8, 8
+			pos var_126 + 5 * 8 + 4, var_127 + 11 * 8
+			gcopy 2, 96, 208, 8 * 8, 8
+			pos var_126 + 5 * 8 + 4, var_127 + 10 * 8
+			gcopy 2, 96, 216, var_100 * 56 / 100, 8
+			pos var_126 + 5 * 8 + 4, var_127 + 11 * 8
+			gcopy 2, 96, 216, var_101 * 56 / 100, 8
+			pos var_126 + 5 * 8 + 4 + var_100 * 56 / 100, var_127 + 10 * 8
+			gcopy 2, 160, 208, 8, 8
+			pos var_126 + 5 * 8 + 4 + var_101 * 56 / 100, var_127 + 11 * 8
+			gcopy 2, 160, 208, 8, 8
+			pos var_126 + 4 * 8 + 4, var_127 + 10 * 8
+			gcopy 2, 96, 224, 8, 8
+			pos var_126 + 4 * 8 + 4, var_127 + 11 * 8
+			gcopy 2, 96 + 8, 224, 8, 8
+			pos var_126 + 5 * 8 + 4, var_127 + 12 * 8
+			gcopy 2, 160, 216 + 8 * var_0, 8 * 8, 8
+			pos var_126 + 14 * 8 + 4, var_127 + 9 * 8 + 6
+			gcopy 3 + var_172, 192, 12, 16, 24
+			if ( var_118 == 3 ) {
+				pos var_126 + 14 * 8 + 9, var_127 + 9 * 8 + 4
+				gcopy 2, 17, 244, 7, 8
+			}
+			if ( var_111 == 0 ) {
+				var_92 = 4
+			}
+			if ( var_111 == 1 | var_111 == 7 ) {
+				var_92 = 2 * 8
+			}
+			if ( var_111 == 2 | var_111 == 8 ) {
+				var_92 = 3 * 8 + 4
+			}
+			if ( var_111 == 3 ) {
+				var_92 = 5 * 8
+			}
+			if ( var_111 == 4 ) {
+				var_92 = 6 * 8
+			}
+			if ( var_111 == 5 ) {
+				var_92 = 7 * 8
+			}
+			pos var_126 + 3 * 8 + 4, var_127 + 5 * 8 + var_92
+			gcopy 2, 168 + var_134 / 2 \ 6 * 8, 208, 8, 8
+		}
+		if ( var_193 >= 33 & var_171 == 2 ) {
+			pos var_126 + 4 * 8 + 2, var_127 + 2 * 8 + 4
+			gcopy 2, 5 * 8, 13 * 8, 9 * 8, 16
+			pos var_126 + 6 * 8 - 2, var_127 + 5 * 8 + 4
+			gcopy 5, 6 * 8 * var_118, 19 * 8, 6 * 8, 16
+			pos var_126 + 4 * 8 + 4, var_127 + 9 * 8 - 4
+			if ( var_111 == 2 ) {
+				gcopy 2, 80, 30 * 8, 10 * 8, 16
+			}
+			else {
+				gcopy 2, 0, 30 * 8, 9 * 8, 16
+			}
+			pos var_126 + 4 * 8 + 4, var_127 + 10 * 8
+			if ( var_111 == 3 ) {
+				gcopy 2, 80, 32 * 8, 9 * 8, 16
+			}
+			else {
+				gcopy 2, 0, 32 * 8, 9 * 8, 16
+			}
+			var_92 = 4 * 8
+			if ( var_111 == 0 | var_111 == 2 ) {
+				var_92 = 4 * 8
+			}
+			if ( var_111 == 1 | var_111 == 3 ) {
+				var_92 = 5 * 8 + 4
+			}
+			pos var_126 + 3 * 8 + 4, var_127 + 5 * 8 + var_92
+			gcopy 2, 168 + var_134 / 2 \ 6 * 8, 208, 8, 8
+		}
+		if ( var_193 >= 1 & var_171 == 4 ) {
+			pos var_126 + 6 * 8 + 2, var_127 + 1 * 8 + 4
+			gcopy 2, 14 * 8, 13 * 8, 5 * 8, 16
+			pos var_126 + 6 * 8 - 2, var_127 + 6 * 8 + 4
+			gcopy 5, 6 * 8 * var_118, 19 * 8, 6 * 8, 16
+			var_92 = var_191 * 100 / var_170
+			if ( var_92 >= 1000 ) {
+				var_132 = 1
+			}
+			else {
+				var_132 = 0
+			}
+			if ( var_92 >= 6000 ) {
+				var_132 = 3
+			}
+			if ( var_92 >= 60000 ) {
+				var_132 = 4
+			}
+			if ( var_92 >= 600000 ) {
+				var_132 = 5
+			}
+			pos var_126 + 4 * 8 + 2 - var_132 * 4, var_127 + 4 * 8
+			gcopy 2, 19 * 8, 13 * 8, 5 * 8, 16
+			if ( var_92 >= 6000000 ) {
+				var_92 = 5999999
+			}
+			var_112 = var_126 + 4 * 8 + 2 + var_132 * 4
+			var_113 = var_127 + 4 * 8
+			pos var_112 + 8 * 8, var_113
+			gcopy 2, var_92 / 1 \ 10 * 8, 208, 8, 16
+			pos var_112 + 8 * 7, var_113
+			gcopy 2, var_92 / 10 \ 10 * 8, 208, 8, 16
+			pos var_112 + 8 * 5, var_113
+			gcopy 2, var_92 / 100 \ 10 * 8, 208, 8, 16
+			if ( var_92 >= 1000 ) {
+				pos var_112 + 8 * 4, var_113
+				gcopy 2, var_92 / 1000 \ 6 * 8, 208, 8, 16
+			}
+			if ( var_92 >= 6000 ) {
+				pos var_112 + 8 * 2, var_113
+				gcopy 2, var_92 / 6000 \ 10 * 8, 208, 8, 16
+			}
+			if ( var_92 >= 60000 ) {
+				pos var_112 + 8 * 1, var_113
+				gcopy 2, var_92 / 60000 \ 10 * 8, 208, 8, 16
+			}
+			if ( var_92 >= 600000 ) {
+				pos var_112 + 8 * 0, var_113
+				gcopy 2, var_92 / 600000 \ 10 * 8, 208, 8, 16
+			}
+			pos var_112 + 8 * 6, var_113
+			gcopy 2, 11 * 8, 208, 8, 16
+			if ( var_92 >= 6000 ) {
+				pos var_112 + 8 * 3, var_113
+				gcopy 2, 10 * 8, 208, 8, 16
+			}
+			if ( var_103(1, var_118) >= 1 ) {
+				pos var_126 + 4 * 8 + 4, var_127 + 9 * 8
+				if ( var_111 == 2 ) {
+					gcopy 2, 80, 30 * 8, 10 * 8, 16
+				}
+				else {
+					gcopy 2, 0, 30 * 8, 9 * 8, 16
+				}
+				pos var_126 + 4 * 8 + 4, var_127 + 10 * 8 + 4
+				if ( var_111 == 3 ) {
+					gcopy 2, 80, 32 * 8, 9 * 8, 16
+				}
+				else {
+					gcopy 2, 0, 32 * 8, 9 * 8, 16
+				}
+				var_92 = 4 * 8
+				if ( var_111 == 0 | var_111 == 2 ) {
+					var_92 = 4 * 8 + 4
+				}
+				if ( var_111 == 1 | var_111 == 3 ) {
+					var_92 = 6 * 8
+				}
+				pos var_126 + 3 * 8 + 4, var_127 + 5 * 8 + var_92
+				gcopy 2, 168 + var_134 / 2 \ 6 * 8, 208, 8, 8
+			}
+		}
+		pos 0, 0
+		gzoom 256 * (1 + var_0), 144 * (1 + var_0), 0, 0, 0, 256, 144
+		redraw 1
+		var_134 += 1
+	}
+	await 0
+	goto *label_164
+*label_187
+	redraw 0
+	color 0, 0, 0
+	boxf
+	pos 144, 128
+	gcopy 5, 0, 168, 112, 16
+	var_92 = rnd(4)
+	pos 144, 96
+	gcopy 5, 40 * var_92, 184, 40, 32
+	pos 0, 0
+	gzoom 256 * (1 + var_0), 144 * (1 + var_0), 0, 0, 0, 256, 144
+	redraw 1
+	exist "data\\savedata\\100"
+	if ( strsize == (-1) ) {
+		if ( var_108(var_123) == 0 & var_123 == 0 ) {
+			ds_load "data\\ani\\a1.wav", var_99 + 24 + var_123
+			var_108(var_123) = 1
+		}
+		if ( var_108(var_123) == 0 & var_123 == 1 ) {
+			ds_load "data\\ani\\a2.wav", var_99 + 24 + var_123
+			var_108(var_123) = 1
+		}
+		if ( var_108(var_123) == 0 & var_123 == 2 ) {
+			ds_load "data\\ani\\a3.wav", var_99 + 24 + var_123
+			var_108(var_123) = 1
+		}
+		if ( var_108(var_123) == 0 & var_123 == 3 ) {
+			ds_load "data\\ani\\a4.wav", var_99 + 24 + var_123
+			var_108(var_123) = 1
+		}
+	}
+	ds_vol var_99 + 24 + var_123, var_101
+	var_169 = timeGetTime()
+	var_170 = 32
+	var_134 = 0
+	var_208 = 0
+	var_209 = 0
+*label_188
+	var_173 = timeGetTime() - var_169
+	if ( var_208 * 1000 / var_170 <= var_173 ) {
+		gosub *label_190
+		redraw 0
+		color 0, 0, 0
+		boxf
+		if ( var_123 == 0 ) {
+			if ( var_208 == 0 ) {
+				var_210 = "0011223344556677001122334455899::;;;;;<<44556677@ABCDEFGHHIIJJKK"
+				var_210 += "TTUUVVWWPPQQRRSSTTUUVVWWPPQQRRSS`aabbccddeeffgghhhhh"
+				var_210 += "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
+				var_211 = "6666666666666666666666666666555555555565666666666675555555555555"
+				var_211 += "66666666666666666666666666666666555555555>6655555555"
+				var_211 += "555555555555555555555555555555555555555555555555555555555555555555"
+				var_212 = 20
+				var_213 = 50
+				repeat 4
+					ds_stop var_99 + 24 + cnt
+				loop
+				ds_play var_99 + 24 + var_123
+			}
+			color 0, 0, 0
+			gmode 4, , , 256
+			pos 80, 48
+			gcopy 10, 2 * 32, 192, 32, 48
+			pos 140, 60
+			gcopy 10, 2 * 32, 192, 32, 48
+			pos 150, 50
+			gcopy 10, 1 * 32, 192, 32, 48
+			pos 173, 54
+			gcopy 10, 0 * 32, 192, 32, 48
+			pos 98, 50
+			gcopy 10, 3 * 32, 192, 32, 48
+			if ( var_208 \ 2 == 0 ) {
+				var_212 += peek(var_211, var_208 / 2) - 53
+			}
+			pos var_212, var_213
+			var_92 = 0
+			var_92 = peek(var_210, var_208 / 2) - 48
+			if ( var_92 >= 48 ) {
+				gcopy 10, var_92 \ 16 * 48, var_92 / 16 * 48, 48, 48
+			}
+			else {
+				gcopy 10, var_92 \ 16 * 32, var_92 / 16 * 48, 32, 48
+			}
+			pos 53, 54
+			gcopy 10, 0 * 32, 192, 32, 48
+			pos 70, 58
+			gcopy 10, 1 * 32, 192, 32, 48
+			if ( var_208 >= 212 ) {
+				pos 72, 40
+				gcopy 10, 48 * 0, 240, 48, 16
+				pos 138, 40
+				gcopy 10, 0, 256, 40, 16
+			}
+		}
+		if ( var_123 == 1 ) {
+			if ( var_208 == 0 ) {
+				var_210 = "////////////////////////////////////////////////"
+				var_210 += "////////////////////////"
+				var_210 += "00112233445566778899::;;<<==>>??8899::;;<<==@@@@"
+				var_210 += "@@AABBCCDDEEFFGGHHII@@BBDDEEFGHI@BDEFGHI@BDEFGHI"
+				var_210 += "@BDEFGHIJKLMNOPQRSTUVWXY"
+				var_210 += "`abcdefghijklmnohijklmnoprtv"
+				var_210 += "................................................"
+				var_211 = ""
+				var_211 += "555555555555555555555555555555555555555555555555"
+				var_211 += "555555555555555555555555"
+				var_211 += "666666666666666666666666666666666666666666655555"
+				var_211 += "555555555555555555555555555555555555555555555555"
+				var_211 += "555555555555555555555555555555555555555555555555"
+				var_211 += "555555555555555555555555555555555555555555555555"
+				var_211 += "555555555555555555555555555555555555555555555555"
+				var_212 = 69
+				var_213 = 50
+				repeat 4
+					ds_stop var_99 + 24 + cnt
+				loop
+				ds_play var_99 + 24 + var_123
+			}
+			if ( var_208 \ 2 == 0 ) {
+				var_212 += peek(var_211, var_208 / 2) - 53
+			}
+			color 0, 0, 0
+			gmode 4, , , 256
+			pos 80, 48
+			gcopy 10, 0 * 32, 192, 32, 48
+			pos 140, 60
+			gcopy 10, 0 * 32, 192, 32, 48
+			pos 150, 50
+			gcopy 10, 2 * 32, 192, 32, 48
+			pos 173, 54
+			gcopy 10, 1 * 32, 192, 32, 48
+			pos 112, 54
+			if ( var_208 >= 120 & var_208 <= 431 ) {
+				gcopy 11, var_208 \ 8 * 32, 240, 32, 48
+			}
+			else {
+				gcopy 11, var_208 \ 8 * 32 + 256, 240, 32, 48
+			}
+			pos var_212, var_213
+			var_92 = 0
+			var_92 = peek(var_210, var_208 / 2) - 48
+			if ( var_208 <= 431 ) {
+				gcopy 11, var_92 \ 16 * 32, var_92 / 16 * 48, 32, 48
+			}
+			else {
+				var_92 += var_208 \ 2
+				gcopy 11, var_92 \ 16 * 32, var_92 / 16 * 48, 32, 48
+			}
+			pos 53, 54
+			gcopy 10, 1 * 32, 192, 32, 48
+			pos 70, 58
+			gcopy 10, 2 * 32, 192, 32, 48
+			if ( var_208 >= 432 ) {
+				pos 72, 40
+				gcopy 10, 48 * 1, 240, 48, 16
+				pos 138, 40
+				gcopy 10, 0, 256, 40, 16
+			}
+		}
+		if ( var_123 == 2 ) {
+			if ( var_208 == 0 ) {
+				var_210 = "001111112233333344555555667777NN8999:;;;<===>???8999:;;;<===>???"
+				var_210 += "OBBB@ABBBBBB@ABBBBBB@ABBBBBBEFFF@ABBCDDD@ABBEFFF@ABBCDDAEGHIJKLM"
+				var_210 += "PQRSTUVWPQRXYZ[]^abcdefg`abcdefghiiijkkklmmmnooohiiijkkkpqrstuvw"
+				var_210 += "0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
+				var_210 += "`abcdefghijklmnopqrstuvw"
+				var_210 += "0123456789:;@ABCDEFGHIJKPQRSTUVWXYZ[`abcdeffghhhh"
+				var_210 += "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
+				var_214 = "0000000000000000000000000000000000000000000000000000000000000000"
+				var_214 += "0000000000000000000000000000000000000000000000000000000000000000"
+				var_214 += "0000000000000000000000000000000000000000000000000000000000000000"
+				var_214 += "111111111111111111111111111111111111111111111111"
+				var_214 += "1111111111111111111111111"
+				var_214 += "222222222222222222222222222222222222222222222222"
+				var_214 += "222222222222222222222222222222222222222222222222"
+				var_211 = "5555555595555555955555559555555585558555855585558555855585558555"
+				var_211 += "5555555555555555555555555555555555555555555555555555555555555555"
+				var_211 += "6666666666666455444444444444444455555555655555555555555565555555"
+				var_211 += "5555555555555555555555555555555555555555555555555555555555555555"
+				var_211 += "5555555555555555555555555555555555555555555555555555555555555555"
+				var_211 += "5555555555555555555555555555555555555555555555555555555555555555"
+				var_211 += "5555555555555555555555555555555555555555555555555555555555555555"
+				var_211 += "5555555555555555555555555555555555555555555555555555555555555555"
+				var_211 += "5555555555555555555555555555555555555555555555555555555555555555"
+				var_211 += "5555555555555555555555555555555555555555555555555555555555555555"
+				var_211 += "5555555555555555555555555555555555555555555555555555555555555555"
+				var_212 = 77
+				var_213 = 50
+				repeat 4
+					ds_stop var_99 + 24 + cnt
+				loop
+				ds_play var_99 + 24 + var_123
+			}
+			if ( var_208 >= 129 & var_208 <= 695 ) {
+				var_92 = 0
+			}
+			else {
+				var_92 = 128
+			}
+			color 0, 0, 0
+			gmode 4, , , 256
+			pos 80, 48
+			gcopy 10, 0 * 32 + var_92, 192, 32, 48
+			pos 140, 60
+			gcopy 10, 0 * 32 + var_92, 192, 32, 48
+			pos 150, 50
+			gcopy 10, 1 * 32 + var_92, 192, 32, 48
+			pos 173, 54
+			gcopy 10, 2 * 32 + var_92, 192, 32, 48
+			var_92 = 0
+			if ( var_208 <= 384 - 1 ) {
+				if ( var_208 / 2 >= var_209 ) {
+					var_92 = 1
+				}
+			}
+			else {
+				if ( (var_208 + 128) / 2 * 3 / 4 >= var_209 ) {
+					var_92 = 1
+				}
+			}
+			if ( var_92 == 1 ) {
+				var_212 += peek(var_211, var_209) - 53
+				var_209 += 1
+			}
+			pos var_212, var_213
+			var_92 = 0
+			if ( var_208 <= 384 - 1 ) {
+				var_92 = peek(var_210, var_208 / 2) - 48
+				var_126 = peek(var_214, var_208 / 2) - 48
+			}
+			else {
+				var_92 = peek(var_210, (var_208 + 128) / 2 * 3 / 4) - 48
+				var_126 = peek(var_214, (var_208 + 128) / 2 * 3 / 4) - 48
+			}
+			gcopy 12, var_92 \ 16 * 32, var_92 / 16 * 48 + var_126 * 48 * 5, 32, 48
+			if ( var_208 >= 129 & var_208 <= 695 ) {
+				var_92 = 0
+			}
+			else {
+				var_92 = 128
+			}
+			pos 53, 54
+			gcopy 10, 2 * 32 + var_92, 192, 32, 48
+			pos 70, 58
+			gcopy 10, 1 * 32 + var_92, 192, 32, 48
+			if ( var_208 >= 696 ) {
+				pos 72, 40
+				gcopy 10, 48 * 2, 240, 48, 16
+				pos 138, 40
+				gcopy 10, 0, 256, 40, 16
+			}
+		}
+		if ( var_123 == 3 ) {
+			if ( var_208 == 0 ) {
+				var_210 = "000000000000000000000000000000000000000000000000000000011111"
+				var_210 += "222222222222222222222222222222222222222222222222222222233333"
+				var_210 += "444444444444444444444444444444444444444444444444444444444444"
+				var_210 += "55555555555555555555555555555566666666667777788888@@@@@AAAAA"
+				var_210 += "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+				var_210 += "GCCCCCCCCCCCCCCCCCCCCCCCCCCCCCGDDDDDDDDDDDDDDDDDDDGEEEEEEEEE"
+				var_210 += "EEEEEEEEEEEEEGFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
+				var_210 += "H///////////////////////////////////////////////////////////"
+				var_212 = 100
+				var_213 = 60
+				repeat 4
+					ds_stop var_99 + 24 + cnt
+				loop
+				ds_play var_99 + 24 + var_123
+			}
+			var_112 = 0
+			if ( var_208 >= 600 ) {
+				var_112 = 224
+			}
+			if ( var_208 >= 840 ) {
+				var_112 = 320
+			}
+			if ( var_208 / 2 == 300 | var_208 / 2 == 330 | var_208 / 2 == 350 | var_208 / 2 == 372 ) {
+				var_112 = 416
+			}
+			if ( var_112 == 416 ) {
+				color 152, 36, 19
+				boxf
+			}
+			color 0, 0, 0
+			gmode 4, , , 256
+			pos 70, 48
+			gcopy 10, 2 * 32 + var_112, 192, 32, 48
+			pos 150, 60
+			gcopy 10, 2 * 32 + var_112, 192, 32, 48
+			pos 160, 50
+			gcopy 10, 0 * 32 + var_112, 192, 32, 48
+			pos 173, 54
+			gcopy 10, 1 * 32 + var_112, 192, 32, 48
+			color 0, 0, 0
+			pos var_212, var_213
+			var_92 = 0
+			var_92 = peek(var_210, var_208 / 2) - 48
+			gcopy 13, var_92 \ 16 * 48, var_92 / 16 * 48, 48, 48
+			pos 53, 54
+			gcopy 10, 1 * 32 + var_112, 192, 32, 48
+			pos 60, 58
+			gcopy 10, 0 * 32 + var_112, 192, 32, 48
+			if ( var_208 < 600 ) {
+				pos 112, 24
+				gcopy 13, var_208 / 2 \ 16 * 32, 192, 32, 48
+			}
+			color 212, 185, 93
+			color 192, 165, 73
+			var_127 = 128
+			var_128 = 42
+			var_92 = 0
+			if ( var_208 >= 600 ) {
+				if ( var_208 < 60 + 600 ) {
+					var_126 = 60 - (var_208 - 600)
+					var_129 = var_208 - 0 - 600
+					var_92 = var_208 - 0 - var_126 * var_126 * var_126 / 1000
+				}
+				else {
+					if ( var_208 < 100 + 600 ) {
+						var_126 = 40 - (var_208 - 60 - 600)
+						var_129 = var_208 - 60 - 600
+						var_92 = var_208 - 60 - var_126 * var_126 * var_126 / 200 + 60
+					}
+					else {
+						if ( var_208 < 145 + 600 ) {
+							var_126 = 45 - (var_208 - 100 - 600)
+							var_129 = var_208 - 100 - 600
+							var_92 = var_208 - 100 - var_126 * var_126 * var_126 / 200 + 100
+						}
+						else {
+							var_126 = 60 - (var_208 - 145 - 600)
+							var_129 = var_208 - 145 - 600
+							if ( var_126 <= 0 ) {
+								var_126 = 0
+							}
+							var_92 = var_208 - 145 - var_126 * var_126 * var_126 / 200 + 20
+						}
+					}
+				}
+				var_129 = 30 - var_129
+				if ( var_129 <= 0 ) {
+					var_129 = 0
+				}
+				var_129 += 100
+				circle (-10) * var_129 / 100 + var_127, (-10) * var_129 / 100 + var_128, 10 * var_129 / 100 + var_127, 10 * var_129 / 100 + var_128
+				repeat 4
+					line sin(0.0174532925199433 * var_92) * 8 * var_129 / 100 + var_127 - cnt \ 2, cos(0.0174532925199433 * var_92) * 8 * var_129 / 100 + var_128 - cnt / 2, sin(0.0174532925199433 * var_92) * 36 * var_129 / 100 + var_127 - cnt \ 2, cos(0.0174532925199433 * var_92) * 36 * var_129 / 100 + var_128 - cnt / 2
+					line sin(0.0174532925199433 * var_92) * 28 * var_129 / 100 + var_127 - cnt \ 2, cos(0.0174532925199433 * var_92) * 28 * var_129 / 100 + var_128 - cnt / 2, sin(0.0174532925199433 * (var_92 + 17)) * 29 * var_129 / 100 + var_127 - cnt \ 2, cos(0.0174532925199433 * (var_92 + 17)) * 29 * var_129 / 100 + var_128 - cnt / 2
+					line sin(0.0174532925199433 * var_92) * 33 * var_129 / 100 + var_127 - cnt \ 2, cos(0.0174532925199433 * var_92) * 33 * var_129 / 100 + var_128 - cnt / 2, sin(0.0174532925199433 * (var_92 + 11)) * 33.5 * var_129 / 100 + var_127 - cnt \ 2, cos(0.0174532925199433 * (var_92 + 11)) * 33.5 * var_129 / 100 + var_128 - cnt / 2
+					if ( var_208 >= 60 + 600 ) {
+						line sin(0.0174532925199433 * (var_92 - 60)) * 8 * var_129 / 100 + var_127 - cnt \ 2, cos(0.0174532925199433 * (var_92 - 60)) * 8 * var_129 / 100 + var_128 - cnt / 2, sin(0.0174532925199433 * (var_92 - 60)) * 13 * var_129 / 100 + var_127 - cnt \ 2, cos(0.0174532925199433 * (var_92 - 60)) * 13 * var_129 / 100 + var_128 - cnt / 2
+						line sin(0.0174532925199433 * (var_92 - 120)) * 8 * var_129 / 100 + var_127 - cnt \ 2, cos(0.0174532925199433 * (var_92 - 120)) * 8 * var_129 / 100 + var_128 - cnt / 2, sin(0.0174532925199433 * (var_92 - 120)) * 13 * var_129 / 100 + var_127 - cnt \ 2, cos(0.0174532925199433 * (var_92 - 120)) * 13 * var_129 / 100 + var_128 - cnt / 2
+						line sin(0.0174532925199433 * var_92) * 23 * var_129 / 100 + var_127 - cnt \ 2, cos(0.0174532925199433 * var_92) * 23 * var_129 / 100 + var_128 - cnt / 2, sin(0.0174532925199433 * (var_92 + 7)) * 24 * var_129 / 100 + var_127 - cnt \ 2, cos(0.0174532925199433 * (var_92 + 7)) * 24 * var_129 / 100 + var_128 - cnt / 2
+					}
+					if ( var_208 >= 100 + 600 ) {
+						line sin(0.0174532925199433 * (var_92 + 80)) * 8 * var_129 / 100 + var_127 - cnt \ 2, cos(0.0174532925199433 * (var_92 + 80)) * 8 * var_129 / 100 + var_128 - cnt / 2, sin(0.0174532925199433 * (var_92 + 80)) * 21 * var_129 / 100 + var_127 - cnt \ 2, cos(0.0174532925199433 * (var_92 + 80)) * 21 * var_129 / 100 + var_128 - cnt / 2
+						line sin(0.0174532925199433 * var_92) * 25 * var_129 / 100 + var_127 - cnt \ 2, cos(0.0174532925199433 * var_92) * 25 * var_129 / 100 + var_128 - cnt / 2, sin(0.0174532925199433 * (var_92 - 8)) * 26 * var_129 / 100 + var_127 - cnt \ 2, cos(0.0174532925199433 * (var_92 - 8)) * 26 * var_129 / 100 + var_128 - cnt / 2
+						pset sin(0.0174532925199433 * (var_92 - 120)) * 17 * var_129 / 100 + var_127 - cnt \ 2, cos(0.0174532925199433 * (var_92 - 120)) * 17 * var_129 / 100 + var_128 - cnt / 2
+					}
+					if ( var_208 >= 145 + 600 ) {
+						pset sin(0.0174532925199433 * var_92) * 40 * var_129 / 100 + var_127 - cnt \ 2, cos(0.0174532925199433 * var_92) * 40 * var_129 / 100 + var_128 - cnt / 2
+					}
+				loop
+				if ( var_208 >= 100 + 600 ) {
+					line sin(0.0174532925199433 * (var_92 - 140)) * 8 * var_129 / 100 + var_127 - cnt \ 2, cos(0.0174532925199433 * (var_92 - 140)) * 8 * var_129 / 100 + var_128 - cnt / 2, sin(0.0174532925199433 * (var_92 - 140)) * 11 * var_129 / 100 + var_127 - cnt \ 2, cos(0.0174532925199433 * (var_92 - 140)) * 11 * var_129 / 100 + var_128 - cnt / 2
+				}
+				color 0, 0, 0
+				if ( var_112 == 416 ) {
+					color 152, 36, 19
+				}
+				circle (-7) * var_129 / 100 + var_127, (-7) * var_129 / 100 + var_128, 7 * var_129 / 100 + var_127, 7 * var_129 / 100 + var_128
+				if ( var_208 >= 100 + 600 ) {
+					color 192, 165, 73
+					pset sin(0.0174532925199433 * (var_92 - 140)) * 14 * var_129 / 100 + var_127, cos(0.0174532925199433 * (var_92 - 140)) * 14 * var_129 / 100 + var_128
+					circle (-3) + sin(0.0174532925199433 * (var_92 + 80)) * 22 * var_129 / 100 + var_127, (-3) + cos(0.0174532925199433 * (var_92 + 80)) * 22 * var_129 / 100 + var_128, 3 + sin(0.0174532925199433 * (var_92 + 80)) * 22 * var_129 / 100 + var_127, 3 + cos(0.0174532925199433 * (var_92 + 80)) * 22 * var_129 / 100 + var_128
+					color 0, 0, 0
+					if ( var_112 == 416 ) {
+						color 152, 36, 19
+					}
+					circle (-2) + sin(0.0174532925199433 * (var_92 + 80)) * 22 * var_129 / 100 + var_127, (-2) + cos(0.0174532925199433 * (var_92 + 80)) * 22 * var_129 / 100 + var_128, 2 + sin(0.0174532925199433 * (var_92 + 80)) * 22 * var_129 / 100 + var_127, 2 + cos(0.0174532925199433 * (var_92 + 80)) * 22 * var_129 / 100 + var_128
+				}
+				if ( var_208 >= 145 + 600 ) {
+					color 192, 165, 73
+					circle (-5) + sin(0.0174532925199433 * (var_92 - 60)) * 17 * var_129 / 100 + var_127, (-5) + cos(0.0174532925199433 * (var_92 - 60)) * 17 * var_129 / 100 + var_128, 5 + sin(0.0174532925199433 * (var_92 - 60)) * 17 * var_129 / 100 + var_127, 5 + cos(0.0174532925199433 * (var_92 - 60)) * 17 * var_129 / 100 + var_128
+					color 0, 0, 0
+					if ( var_112 == 416 ) {
+						color 152, 36, 19
+					}
+					circle (-3) + sin(0.0174532925199433 * (var_92 - 60)) * 17 * var_129 / 100 + var_127, (-3) + cos(0.0174532925199433 * (var_92 - 60)) * 17 * var_129 / 100 + var_128, 3 + sin(0.0174532925199433 * (var_92 - 60)) * 17 * var_129 / 100 + var_127, 3 + cos(0.0174532925199433 * (var_92 - 60)) * 17 * var_129 / 100 + var_128
+					color 192, 165, 73
+					circle -var_129 / 30 + var_127, -var_129 / 30 + var_128, 1 * var_129 / 30 + var_127, 1 * var_129 / 30 + var_128
+				}
+			}
+			if ( var_208 >= 840 ) {
+				color 0, 0, 0
+				pos 73, 40
+				gcopy 10, 48 * 3, 240, 48, 16
+				pos 138, 40
+				gcopy 10, 0, 256, 40, 16
+			}
+		}
+		pos 0, 0
+		gzoom 256 * (1 + var_0), 144 * (1 + var_0), 0, 0, 0, 256, 144
+		redraw 1
+		var_208 += 1
+		var_92 = 0
+		if ( var_116(6) == 1 ) {
+			var_92 = 1
+		}
+		if ( var_123 == 0 & var_208 >= 212 + 64 ) {
+			var_92 = 1
+		}
+		if ( var_123 == 1 & var_208 >= 432 + 64 ) {
+			var_92 = 1
+		}
+		if ( var_123 == 2 & var_208 >= 696 + 96 ) {
+			var_92 = 1
+		}
+		if ( var_123 == 3 & var_208 >= 840 + 128 ) {
+			var_92 = 1
+		}
+		if ( var_92 == 1 ) {
+			repeat 4
+				ds_stop var_99 + 24 + cnt
+			loop
+			goto *label_024
+		}
+	}
+	await 0
+	goto *label_188
+*label_189
+	var_176 = 0
+	var_178 = 0
+	var_155 = 0
+	var_157 = 0
+	var_199 = 0
+	var_198 = 0
+	var_197 = 0
+	var_137 = 0
+	var_193 = 0
+	var_150 = 0
+	var_151 = 0
+	var_177 = 0
+	var_92 = 0
+	var_126 = 0
+	var_127 = 0
+	var_128 = 0
+	var_129 = 0
+	var_112 = 0
+	var_113 = 0
+	var_131 = 0
+	var_132 = 0
+	var_133 = 0
+	var_117 = 0
+	var_124 = 0
+	var_115 = 0
+	var_204 = 0
+	var_205 = 0
+	var_106 = 0
+	var_139 = 0
+	var_148 = 0
+	var_140 = 0
+	var_149 = 0
+	var_190 = 0
+	var_189 = 0
+	var_135 = 0
+	var_109 = 0
+	var_196 = 0
+	var_125 = 0
+	var_111 = 0
+	var_152 = 0
+	var_110 = 0
+	var_175 = 0
+	var_160 = 0
+	var_147 = 0
+	var_138 = 0
+	var_141 = 0
+	var_142 = 0
+	var_143 = 0
+	var_144 = 0
+	var_145 = 0
+	var_202 = 0
+	var_180 = 0
+	var_146 = 0
+	var_203 = 0
+	var_181 = 0
+	var_97 = 0
+	var_159 = 0
+	var_98 = 0
+	var_158 = 0
+	var_191 = 0
+	var_173 = 0
+	var_192 = 0
+	var_169 = 0
+	var_186 = 0
+	var_183 = 0
+	var_184 = 0
+	var_182 = 0
+	var_187 = 0
+	var_188 = 0
+	var_185 = 0
+	dim var_174, 4
+	return
+*label_190
+	if ( ginfo(2) == 0 ) {
+		getkey var_162(0), 37
+		getkey var_162(1), 38
+		getkey var_162(2), 39
+		getkey var_162(3), 40
+		getkey var_162(4), 90
+		getkey var_162(5), 88
+		getkey var_162(6), 65
+		getkey var_162(7), 84
+		getkey var_162(8), 82
+		getkey var_162(19), 27
+		var_106 = 0
+*label_191
+		exgoto var_106, 1, 20, *label_192
+		if ( var_162(var_106) == 1 ) {
+			var_116(var_106) += 1
+		}
+		else {
+			var_116(var_106) = 0
+		}
+		var_106 += 1
+		goto *label_191
+*label_192
+		if ( var_162(19) == 1 ) {
+			goto *label_199
+		}
+	}
+	else {
+		dim var_116, 20
+	}
+	return
+*label_193
+	if ( var_100 >= 1 ) {
+		repeat var_93
+			if ( var_95(cnt) == 1 ) {
+				ds_play var_93 * var_96(cnt) + cnt
+				var_95(cnt) = 0
+				var_96(cnt) = (var_96(cnt) + 1) \ var_94
+			}
+		loop
+		var_215 = 0
+	}
+	else {
+		var_215 = 0
+		var_215 = 1
+		dim var_95, var_93
+	}
+	return
+*label_194
+	repeat var_93 * var_94
+		ds_vol cnt, var_100
+	loop
+	repeat 50 + 1
+		ds_vol cnt + var_99, var_101
+	loop
+	return
+*label_195
+	if ( var_110 == 1 ) {
+		var_92 = 0
+*label_196
+		exgoto var_92, 1, 50, *label_197
+		ds_stop var_99 + var_92
+		var_92 += 1
+		goto *label_196
+*label_197
+		var_126 = 0
+		if ( var_109 == 0 ) {
+			ds_play var_99 + var_109
+			var_126 = 1
+		}
+		if ( var_109 == 1 ) {
+			ds_play var_99 + var_109
+			var_126 = 1
+		}
+		if ( var_109 == 2 ) {
+			ds_play var_99 + var_109
+			var_126 = 1
+		}
+		if ( var_109 == 3 ) {
+			ds_play var_99 + var_109
+			var_126 = 1
+		}
+		if ( var_109 == 4 ) {
+			ds_play var_99 + var_109
+			var_126 = 1
+		}
+		if ( var_109 == 21 ) {
+			ds_play var_99 + var_109
+			var_126 = 1
+		}
+		if ( var_109 == 22 ) {
+			ds_play var_99 + var_109
+			var_126 = 1
+		}
+		if ( var_126 == 0 ) {
+			ds_loop var_99 + var_109
+		}
+		var_110 = 0
+	}
+	return
+*label_198
+	screen 0, (var_0 + 1) * 256, (var_0 + 1) * 144, 4, ginfo(20) / 2 - 3 - (var_0 + 1) * 128, ginfo(21) / 2 - 22 - (var_0 + 1) * 72
+	return
+*label_199
+	var_105 = 0
+	if ( var_102 >= 1 ) {
+		var_105 = str(var_102)
+		bsave "data\\savedata\\0", var_105
+	}
+	var_106 = 0
+*label_200
+	exgoto var_106, 1, 4, *label_201
+	var_105 = 0
+	var_105 = ""
+	repeat 10
+		var_105 += str(var_103(cnt, var_106)) + "\n"
+	loop
+	bsave "data\\savedata\\" + str(var_106 + 1), var_105
+	var_106 += 1
+	goto *label_200
+*label_201
+	var_105 = 0
+	var_105 = ""
+	repeat 14
+		var_105 += str(var_104(cnt)) + "\n"
+	loop
+	bsave "data\\savedata\\5", var_105
+	end
