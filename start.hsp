@@ -61,11 +61,11 @@
 	goto *label_018
 *label_021
 	pos 360, 0
-	var_99 = gameSeCount * var_94 + 1
+	gameMuBufferStartId = gameSeCount * var_94 + 1
 	exist "data\\savedata\\100"
 	if ( strsize == (-1) ) {
 		repeat 50
-			ds_load "data\\mu\\" + cnt + ".wav", cnt + var_99
+			ds_load "data\\mu\\" + cnt + ".wav", cnt + gameMuBufferStartId
 			mes stat
 			await 0
 		loop
@@ -3865,23 +3865,23 @@
 	exist "data\\savedata\\100"
 	if ( strsize == (-1) ) {
 		if ( var_108(var_123) == 0 & var_123 == 0 ) {
-			ds_load "data\\ani\\a1.wav", var_99 + 24 + var_123
+			ds_load "data\\ani\\a1.wav", gameMuBufferStartId + 24 + var_123
 			var_108(var_123) = 1
 		}
 		if ( var_108(var_123) == 0 & var_123 == 1 ) {
-			ds_load "data\\ani\\a2.wav", var_99 + 24 + var_123
+			ds_load "data\\ani\\a2.wav", gameMuBufferStartId + 24 + var_123
 			var_108(var_123) = 1
 		}
 		if ( var_108(var_123) == 0 & var_123 == 2 ) {
-			ds_load "data\\ani\\a3.wav", var_99 + 24 + var_123
+			ds_load "data\\ani\\a3.wav", gameMuBufferStartId + 24 + var_123
 			var_108(var_123) = 1
 		}
 		if ( var_108(var_123) == 0 & var_123 == 3 ) {
-			ds_load "data\\ani\\a4.wav", var_99 + 24 + var_123
+			ds_load "data\\ani\\a4.wav", gameMuBufferStartId + 24 + var_123
 			var_108(var_123) = 1
 		}
 	}
-	ds_vol var_99 + 24 + var_123, var_101
+	ds_vol gameMuBufferStartId + 24 + var_123, var_101
 	roomTimeStarted = timeGetTime()
 	gameFrameRate = 32
 	var_134 = 0
@@ -3905,9 +3905,9 @@
 				var_212 = 20
 				var_213 = 50
 				repeat 4
-					ds_stop var_99 + 24 + cnt
+					ds_stop gameMuBufferStartId + 24 + cnt
 				loop
-				ds_play var_99 + 24 + var_123
+				ds_play gameMuBufferStartId + 24 + var_123
 			}
 			color 0, 0, 0
 			gmode 4, , , 256
@@ -3964,9 +3964,9 @@
 				var_212 = 69
 				var_213 = 50
 				repeat 4
-					ds_stop var_99 + 24 + cnt
+					ds_stop gameMuBufferStartId + 24 + cnt
 				loop
-				ds_play var_99 + 24 + var_123
+				ds_play gameMuBufferStartId + 24 + var_123
 			}
 			if ( var_208 \ 2 == 0 ) {
 				var_212 += peek(var_211, var_208 / 2) - 53
@@ -4039,9 +4039,9 @@
 				var_212 = 77
 				var_213 = 50
 				repeat 4
-					ds_stop var_99 + 24 + cnt
+					ds_stop gameMuBufferStartId + 24 + cnt
 				loop
-				ds_play var_99 + 24 + var_123
+				ds_play gameMuBufferStartId + 24 + var_123
 			}
 			if ( var_208 >= 129 & var_208 <= 695 ) {
 				var_92 = 0
@@ -4115,9 +4115,9 @@
 				var_212 = 100
 				var_213 = 60
 				repeat 4
-					ds_stop var_99 + 24 + cnt
+					ds_stop gameMuBufferStartId + 24 + cnt
 				loop
-				ds_play var_99 + 24 + var_123
+				ds_play gameMuBufferStartId + 24 + var_123
 			}
 			var_112 = 0
 			if ( var_208 >= 600 ) {
@@ -4273,7 +4273,7 @@
 		}
 		if ( var_92 == 1 ) {
 			repeat 4
-				ds_stop var_99 + 24 + cnt
+				ds_stop gameMuBufferStartId + 24 + cnt
 			loop
 			goto *label_024
 		}
@@ -4407,7 +4407,7 @@
 		ds_vol cnt, var_100
 	loop
 	repeat 50 + 1
-		ds_vol cnt + var_99, var_101
+		ds_vol cnt + gameMuBufferStartId, var_101
 	loop
 	return
 *label_195
@@ -4415,41 +4415,41 @@
 		var_92 = 0
 *label_196
 		exgoto var_92, 1, 50, *label_197
-		ds_stop var_99 + var_92
+		ds_stop gameMuBufferStartId + var_92
 		var_92 += 1
 		goto *label_196
 *label_197
 		var_126 = 0
 		if ( var_109 == 0 ) {
-			ds_play var_99 + var_109
+			ds_play gameMuBufferStartId + var_109
 			var_126 = 1
 		}
 		if ( var_109 == 1 ) {
-			ds_play var_99 + var_109
+			ds_play gameMuBufferStartId + var_109
 			var_126 = 1
 		}
 		if ( var_109 == 2 ) {
-			ds_play var_99 + var_109
+			ds_play gameMuBufferStartId + var_109
 			var_126 = 1
 		}
 		if ( var_109 == 3 ) {
-			ds_play var_99 + var_109
+			ds_play gameMuBufferStartId + var_109
 			var_126 = 1
 		}
 		if ( var_109 == 4 ) {
-			ds_play var_99 + var_109
+			ds_play gameMuBufferStartId + var_109
 			var_126 = 1
 		}
 		if ( var_109 == 21 ) {
-			ds_play var_99 + var_109
+			ds_play gameMuBufferStartId + var_109
 			var_126 = 1
 		}
 		if ( var_109 == 22 ) {
-			ds_play var_99 + var_109
+			ds_play gameMuBufferStartId + var_109
 			var_126 = 1
 		}
 		if ( var_126 == 0 ) {
-			ds_loop var_99 + var_109
+			ds_loop gameMuBufferStartId + var_109
 		}
 		var_110 = 0
 	}
