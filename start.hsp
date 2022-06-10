@@ -4414,11 +4414,11 @@
 	if ( gameMuStopped == 1 ) {
 		var_92 = 0
 *label_196
-		exgoto var_92, 1, 50, *gamePlayMu
+		exgoto var_92, 1, 50, *gameMuPlay
 		ds_stop gameMuBufferStartId + var_92
 		var_92 += 1
 		goto *label_196
-*gamePlayMu
+*gameMuPlay
 		roomCoordX = 0
 		if ( gameMuToPlay == 0 ) {
 			ds_play gameMuBufferStartId + gameMuToPlay
