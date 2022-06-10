@@ -601,17 +601,17 @@
 	var_136((var_138 + 0) \ 4) = levelSizeX / 2
 	var_136((var_138 + 1) \ 4) = levelSizeY * 3 / 4
 	var_136((var_138 + 2) \ 4) = levelSizeX / 2
-	var_139 = levelSizeX / 2
-	var_140 = levelSizeY / 2
+	roomCoordX2 = levelSizeX / 2
+	roomCoordY2 = levelSizeY / 2
 	var_141 = var_136(0) + var_136(1) + var_136(2) + var_136(3)
 	var_142 = var_141
 	var_92(0) = var_136(0)
 	var_92(1) = var_136(0) + var_136(1)
 	var_92(2) = var_136(0) + var_136(1) + var_136(2)
-	var_143 = var_139
-	var_144 = var_140
-	playerRoomCoordX2 = var_139
-	playerRoomCoordY2 = var_140
+	var_143 = roomCoordX2
+	var_144 = roomCoordY2
+	playerRoomCoordX2 = roomCoordX2
+	playerRoomCoordY2 = roomCoordY2
 	repeat
 		var_147 = rnd(var_141)
 		if ( var_147 >= var_92(2) ) {
@@ -631,26 +631,26 @@
 			}
 		}
 		if ( var_136(var_147) >= 1 ) {
-			var_148 = var_139
-			var_149 = var_140
+			var_148 = roomCoordX2
+			var_149 = roomCoordY2
 			if ( var_147 == 0 ) {
-				var_139 -= 1
+				roomCoordX2 -= 1
 			}
 			if ( var_147 == 1 ) {
-				var_140 -= 1
+				roomCoordY2 -= 1
 			}
 			if ( var_147 == 2 ) {
-				var_139 += 1
+				roomCoordX2 += 1
 			}
 			if ( var_147 == 3 ) {
-				var_140 += 1
+				roomCoordY2 += 1
 			}
-			var_139 = (var_139 + levelSizeX) \ levelSizeX
-			var_140 = (var_140 + levelSizeY) \ levelSizeY
-			if ( roomListType(var_139, var_140) == 0 | rnd(10) == 1 ) {
+			roomCoordX2 = (roomCoordX2 + levelSizeX) \ levelSizeX
+			roomCoordY2 = (roomCoordY2 + levelSizeY) \ levelSizeY
+			if ( roomListType(roomCoordX2, roomCoordY2) == 0 | rnd(10) == 1 ) {
 				color 255, 1, 0
-				pset var_139 * 2 + 1, var_140 * 2 + 1
-				roomListType(var_139, var_140) = 1
+				pset roomCoordX2 * 2 + 1, roomCoordY2 * 2 + 1
+				roomListType(roomCoordX2, roomCoordY2) = 1
 				if ( var_147 == 0 ) {
 					pset var_148 * 2 + 0, var_149 * 2 + 1
 				}
@@ -666,8 +666,8 @@
 				var_136(var_147) -= 1
 			}
 			else {
-				var_139 = var_148
-				var_140 = var_149
+				roomCoordX2 = var_148
+				roomCoordY2 = var_149
 			}
 		}
 		if ( var_136(0) + var_136(1) + var_136(2) + var_136(3) == 0 ) {
@@ -675,8 +675,8 @@
 		}
 		await 0
 	loop
-	var_150 = var_139
-	var_151 = var_140
+	var_150 = roomCoordX2
+	var_151 = roomCoordY2
 	repeat var_122
 		var_98 = 0
 *label_037
@@ -1798,19 +1798,19 @@
 		var_92 = rnd(4)
 		if ( var_161(var_92) >= 1 ) {
 			if ( var_92 == 0 ) {
-				var_139 -= 1
+				roomCoordX2 -= 1
 			}
 			if ( var_92 == 1 ) {
-				var_140 -= 1
+				roomCoordY2 -= 1
 			}
 			if ( var_92 == 2 ) {
-				var_139 += 1
+				roomCoordX2 += 1
 			}
 			if ( var_92 == 3 ) {
-				var_140 += 1
+				roomCoordY2 += 1
 			}
 			var_161(var_92) -= 1
-			var_157(var_139 + var_98 * 7, var_140 + var_97 * 7) = 0
+			var_157(roomCoordX2 + var_98 * 7, roomCoordY2 + var_97 * 7) = 0
 		}
 		if ( var_161(0) + var_161(1) + var_161(2) + var_161(3) == 0 ) {
 			break
@@ -1822,32 +1822,32 @@
 		dim var_161, 4
 		var_161(2) = roomList2(var_98, var_97, 1)
 		var_161(1) = roomList2(var_98, var_97, 0)
-		var_139 = 0
-		var_140 = roomList2(var_98, var_97, 0)
+		roomCoordX2 = 0
+		roomCoordY2 = roomList2(var_98, var_97, 0)
 		gosub *label_156
 	}
 	if ( var_147 == 1 ) {
 		dim var_161, 4
 		var_161(0) = 6 - roomList2(var_98, var_97, 1)
 		var_161(1) = roomList2((var_98 + 1) \ levelSizeX, var_97, 0)
-		var_139 = 6
-		var_140 = roomList2((var_98 + 1) \ levelSizeX, var_97, 0)
+		roomCoordX2 = 6
+		roomCoordY2 = roomList2((var_98 + 1) \ levelSizeX, var_97, 0)
 		gosub *label_156
 	}
 	if ( var_147 == 2 ) {
 		dim var_161, 4
 		var_161(2) = roomList2(var_98, (var_97 + 1) \ levelSizeY, 1)
 		var_161(3) = 6 - roomList2(var_98, var_97, 0)
-		var_139 = 0
-		var_140 = roomList2(var_98, var_97, 0)
+		roomCoordX2 = 0
+		roomCoordY2 = roomList2(var_98, var_97, 0)
 		gosub *label_156
 	}
 	if ( var_147 == 3 ) {
 		dim var_161, 4
 		var_161(0) = 6 - roomList2(var_98, (var_97 + 1) \ levelSizeY, 1)
 		var_161(3) = 6 - roomList2((var_98 + 1) \ levelSizeX, var_97, 0)
-		var_139 = 6
-		var_140 = roomList2((var_98 + 1) \ levelSizeX, var_97, 0)
+		roomCoordX2 = 6
+		roomCoordY2 = roomList2((var_98 + 1) \ levelSizeX, var_97, 0)
 		gosub *label_156
 	}
 	if ( var_147 == 4 ) {
@@ -1862,8 +1862,8 @@
 		var_161(2) = 6
 		var_161(1) += 1
 		var_161(3) += 1
-		var_139 = 0
-		var_140 = roomList2(var_98, var_97, 0)
+		roomCoordX2 = 0
+		roomCoordY2 = roomList2(var_98, var_97, 0)
 		gosub *label_156
 	}
 	if ( var_147 == 5 ) {
@@ -1878,8 +1878,8 @@
 		var_161(3) = 6
 		var_161(0) += 1
 		var_161(2) += 1
-		var_139 = roomList2(var_98, var_97, 1)
-		var_140 = 0
+		roomCoordX2 = roomList2(var_98, var_97, 1)
+		roomCoordY2 = 0
 		gosub *label_156
 	}
 	return
@@ -4309,9 +4309,9 @@
 	var_204 = 0
 	var_205 = 0
 	var_106 = 0
-	var_139 = 0
+	roomCoordX2 = 0
 	var_148 = 0
-	var_140 = 0
+	roomCoordY2 = 0
 	var_149 = 0
 	playerKeysCollected = 0
 	var_189 = 0
