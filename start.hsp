@@ -2307,18 +2307,18 @@
 	var_134 = 0
 	var_171 = 3
 	if ( roomType == 0 ) {
-		var_172 = 0
+		roomStyle = 0
 	}
 	if ( roomType == 1 ) {
-		var_172 = 3
+		roomStyle = 3
 	}
 	if ( roomType == 2 ) {
-		var_172 = 4
+		roomStyle = 4
 	}
 	if ( roomType == 3 ) {
-		var_172 = rnd(3)
-		if ( var_172 >= 1 ) {
-			var_172 += 2
+		roomStyle = rnd(3)
+		if ( roomStyle >= 1 ) {
+			roomStyle += 2
 		}
 	}
 *label_164
@@ -2456,10 +2456,10 @@
 			}
 			if ( var_178 \ 8 == 2 ) {
 				var_92 = 0
-				if ( var_172 == 0 ) {
+				if ( roomStyle == 0 ) {
 					var_92 = 20
 				}
-				if ( var_172 == 3 ) {
+				if ( roomStyle == 3 ) {
 					var_92 = 23
 				}
 				var_95(17 + rnd(3) + var_92) = 1
@@ -2651,10 +2651,10 @@
 			}
 			if ( var_175 == 7 ) {
 				var_92 = 0
-				if ( var_172 == 0 ) {
+				if ( roomStyle == 0 ) {
 					var_92 = 43
 				}
-				if ( var_172 == 3 ) {
+				if ( roomStyle == 3 ) {
 					var_92 = 43
 				}
 				var_95(17 + rnd(3) + var_92) = 1
@@ -2884,16 +2884,16 @@
 						gosub *gameWindowCreate
 					}
 					if ( var_116(8) == 1 & roomType == 3 ) {
-						if ( var_172 == 0 ) {
-							var_172 = 3
+						if ( roomStyle == 0 ) {
+							roomStyle = 3
 						}
 						else {
-							if ( var_172 == 3 ) {
-								var_172 = 4
+							if ( roomStyle == 3 ) {
+								roomStyle = 4
 							}
 							else {
-								if ( var_172 == 4 ) {
-									var_172 = 0
+								if ( roomStyle == 4 ) {
+									roomStyle = 0
 								}
 							}
 						}
@@ -3233,13 +3233,13 @@
 				var_204 = 0
 			}
 			if ( var_97 <= 2 ) {
-				gcopy 3 + var_172, var_113 * 16, 288 + (var_98 + var_97 + var_202 + var_203 - var_204) \ 2 * 12, 16, 12
+				gcopy 3 + roomStyle, var_113 * 16, 288 + (var_98 + var_97 + var_202 + var_203 - var_204) \ 2 * 12, 16, 12
 			}
 			else {
-				gcopy 3 + var_172, var_113 * 16, 312 + (var_98 + var_97 + var_202 + var_203 - var_204) \ 2 * 12, 16, 12
+				gcopy 3 + roomStyle, var_113 * 16, 312 + (var_98 + var_97 + var_202 + var_203 - var_204) \ 2 * 12, 16, 12
 			}
-			if ( var_97 == 2 & var_172 == 3 ) {
-				gcopy 3 + var_172, var_113 * 16, 444, 16, 12
+			if ( var_97 == 2 & roomStyle == 3 ) {
+				gcopy 3 + roomStyle, var_113 * 16, 444, 16, 12
 			}
 			var_97 += 1
 			goto *label_174
@@ -3250,15 +3250,15 @@
 			gmode 3, , , 256
 			if ( var_152(var_202, var_203) / 1 \ 2 == 1 & var_156(var_202, var_203) != 4 ) {
 				pos var_126 - 16, var_137(var_202, var_203, 0) * 12 - 24 + var_127
-				gcopy 3 + var_172, var_113 * 16, 30 * 12, 16, 36
+				gcopy 3 + roomStyle, var_113 * 16, 30 * 12, 16, 36
 			}
 			if ( var_152(var_202, var_203) / 2 \ 2 == 1 & var_156(var_202, var_203) != 1 ) {
 				pos var_137(var_202, var_203, 1) * 16 + var_126, var_127 - 24
-				gcopy 3 + var_172, var_113 * 16, 28 * 12, 16, 24
+				gcopy 3 + roomStyle, var_113 * 16, 28 * 12, 16, 24
 			}
 			if ( var_152(var_202, var_203) / 4 \ 2 == 1 & var_156(var_202, var_203) != 2 ) {
 				pos var_126 + 7 * 16, var_137((var_202 + 1) \ roomSizeX, var_203, 0) * 12 - 24 + var_127
-				gcopy 3 + var_172, var_113 * 16, 33 * 12, 16, 36
+				gcopy 3 + roomStyle, var_113 * 16, 33 * 12, 16, 36
 			}
 			if ( var_156(var_202, var_203) == 1 ) {
 				var_205 = 12 * 7
@@ -3268,7 +3268,7 @@
 			}
 			if ( var_152(var_202, var_203) / 8 \ 2 == 1 & var_156(var_202, var_203) != 3 ) {
 				pos var_137(var_202, (var_203 + 1) \ roomSizeY, 1) * 16 + var_126, var_127 + 7 * 12 - var_115 * 12 + var_205
-				gcopy 3 + var_172, var_113 * 16, 36 * 12, 16, 12
+				gcopy 3 + roomStyle, var_113 * 16, 36 * 12, 16, 12
 			}
 			if ( var_156(var_202, var_203) >= 1 ) {
 				var_206 = var_202
@@ -3293,19 +3293,19 @@
 				}
 				if ( var_152(var_206, var_207) / 1 \ 2 == 1 & var_156(var_206, var_207) != 4 ) {
 					pos var_126 - 16 + var_204, var_137(var_206, var_207, 0) * 12 - 24 + var_127 + var_205
-					gcopy 3 + var_172, var_113 * 16, 30 * 12, 16, 36
+					gcopy 3 + roomStyle, var_113 * 16, 30 * 12, 16, 36
 				}
 				if ( var_152(var_206, var_207) / 2 \ 2 == 1 & var_156(var_206, var_207) != 1 ) {
 					pos var_137(var_206, var_207, 1) * 16 + var_126 + var_204, var_127 - 24 + var_205
-					gcopy 3 + var_172, var_113 * 16, 28 * 12, 16, 24
+					gcopy 3 + roomStyle, var_113 * 16, 28 * 12, 16, 24
 				}
 				if ( var_152(var_206, var_207) / 4 \ 2 == 1 & var_156(var_206, var_207) != 2 ) {
 					pos var_126 + 7 * 16 + var_204, var_137((var_206 + 1) \ roomSizeX, var_207, 0) * 12 - 24 + var_127 + var_205
-					gcopy 3 + var_172, var_113 * 16, 33 * 12, 16, 36
+					gcopy 3 + roomStyle, var_113 * 16, 33 * 12, 16, 36
 				}
 				if ( var_152(var_206, var_207) / 8 \ 2 == 1 & var_156(var_206, var_207) != 3 ) {
 					pos var_137(var_206, (var_207 + 1) \ roomSizeY, 1) * 16 + var_126 + var_204, var_127 + 7 * 12 - var_115 * 12 + var_205
-					gcopy 3 + var_172, var_113 * 16, 36 * 12, 16, 12
+					gcopy 3 + roomStyle, var_113 * 16, 36 * 12, 16, 12
 				}
 			}
 			gmode 4, , , 256
@@ -3326,22 +3326,22 @@
 			exgoto var_97, 1, 7 * var_117, *label_180
 			pos var_98 * 16 + var_126 - var_124 * 16, var_97 * 12 - var_106 * 12 + var_127 - var_115 * 12
 			if ( var_157(var_98 + var_202 * 7 - var_124, var_97 + var_203 * 7 - var_115) >= 1 ) {
-				gcopy 3 + var_172, var_157(var_98 + var_202 * 7 - var_124, var_97 + var_203 * 7 - var_115) * 16, 24 - var_106 * 12 + var_113 * 3 * 12, 16, 12
+				gcopy 3 + roomStyle, var_157(var_98 + var_202 * 7 - var_124, var_97 + var_203 * 7 - var_115) * 16, 24 - var_106 * 12 + var_113 * 3 * 12, 16, 12
 			}
 			if ( var_98 == 3 & var_97 \ 7 == 3 ) {
 				pos var_98 * 16 + var_126, var_97 * 12 - var_106 * 12 + var_127 + 4
 				if ( var_135(var_202, var_203) == 5 ) {
-					gcopy 3 + var_172, var_134 / 4 \ 8 * 16 + 272, 96 - var_106 * 12, 16, 12
+					gcopy 3 + roomStyle, var_134 / 4 \ 8 * 16 + 272, 96 - var_106 * 12, 16, 12
 				}
 				if ( var_135(var_202, var_203) == 6 ) {
-					gcopy 3 + var_172, var_134 / 6 \ 4 * 16 + 272, 132 - var_106 * 12, 16, 12
+					gcopy 3 + roomStyle, var_134 / 6 \ 4 * 16 + 272, 132 - var_106 * 12, 16, 12
 				}
 				if ( var_135(var_202, var_203) == 7 ) {
 					if ( playerKeysCollected >= roomKeysNeeded & var_177 <= 127 ) {
-						gcopy 3 + var_172, var_134 / 4 \ 4 * 16 + 272, 60 - var_106 * 12, 16, 12
+						gcopy 3 + roomStyle, var_134 / 4 \ 4 * 16 + 272, 60 - var_106 * 12, 16, 12
 					}
 					else {
-						gcopy 3 + var_172, var_134 / 4 \ 4 * 16 + 272, 24 - var_106 * 12, 16, 12
+						gcopy 3 + roomStyle, var_134 / 4 \ 4 * 16 + 272, 24 - var_106 * 12, 16, 12
 					}
 				}
 			}
@@ -3375,7 +3375,7 @@
 				}
 				if ( var_178 >= 1 & var_193 == 0 ) {
 					gcopy 4, var_178 / 2 \ 8 * 16 + var_132, var_167 * 12 * 3, 16, 36
-					if ( var_172 == 3 ) {
+					if ( roomStyle == 3 ) {
 						gcopy 8, var_178 / 2 \ 8 * 16 + var_132, var_167 * 12 * 3, 16, 36
 					}
 				}
@@ -3399,7 +3399,7 @@
 									}
 								}
 								gcopy 4, (8 + var_92) * 16 + var_132, var_167 * 12 * 3, 16, 36
-								if ( var_172 == 3 ) {
+								if ( roomStyle == 3 ) {
 									gcopy 8, (8 + var_92) * 16 + var_132, var_167 * 12 * 3, 16, 36
 								}
 							}
@@ -3441,7 +3441,7 @@
 									var_92 = var_187 - 1
 								}
 								gcopy 4, var_92 * 16 + var_132, 4 * 12 * 3, 16, 36
-								if ( var_172 == 3 ) {
+								if ( roomStyle == 3 ) {
 									gcopy 8, var_92 * 16 + var_132, 4 * 12 * 3, 16, 36
 								}
 							}
@@ -3468,7 +3468,7 @@
 								}
 								if ( var_177 <= 135 ) {
 									gcopy 4, var_92 \ 8 * 16, (var_92 / 8 + 5) * 12 * 3, 16, 36
-									if ( var_172 == 3 ) {
+									if ( roomStyle == 3 ) {
 										gcopy 8, var_92 \ 8 * 16, (var_92 / 8 + 5) * 12 * 3, 16, 36
 									}
 								}
@@ -3513,37 +3513,37 @@
 										pos var_163 * 16 + var_128 - var_132 - 16 - 5, var_164 * 12 + var_129 - 24 + var_131
 										if ( var_164 <= 2 ) {
 											gcopy 4, 128 + var_92 \ 8 * 32, 180 + var_92 / 8 * 36, 32, 36
-											if ( var_172 == 3 ) {
+											if ( roomStyle == 3 ) {
 												gcopy 8, 128 + var_92 \ 8 * 32, 180 + var_92 / 8 * 36, 32, 36
 											}
 										}
 										if ( var_164 == 3 & var_131 <= 23 ) {
 											gcopy 4, 128 + var_92 \ 8 * 32, 180 + var_92 / 8 * 36, 32, 36
-											if ( var_172 == 3 ) {
+											if ( roomStyle == 3 ) {
 												gcopy 8, 128 + var_92 \ 8 * 32, 180 + var_92 / 8 * 36, 32, 36
 											}
 										}
 										if ( var_164 == 3 & var_131 >= 24 ) {
 											gcopy 4, 128 + var_92 \ 8 * 32, 180 + var_92 / 8 * 36, 32, 36 - var_131 + 24
-											if ( var_172 == 3 ) {
+											if ( roomStyle == 3 ) {
 												gcopy 8, 128 + var_92 \ 8 * 32, 180 + var_92 / 8 * 36, 32, 36 - var_131 + 24
 											}
 										}
 										if ( var_164 == 4 & var_131 <= 11 ) {
 											gcopy 4, 128 + var_92 \ 8 * 32, 180 + var_92 / 8 * 36, 32, 36
-											if ( var_172 == 3 ) {
+											if ( roomStyle == 3 ) {
 												gcopy 8, 128 + var_92 \ 8 * 32, 180 + var_92 / 8 * 36, 32, 36
 											}
 										}
 										if ( var_164 == 4 & var_131 >= 12 ) {
 											gcopy 4, 128 + var_92 \ 8 * 32, 180 + var_92 / 8 * 36, 32, 36 - var_131 + 12
-											if ( var_172 == 3 ) {
+											if ( roomStyle == 3 ) {
 												gcopy 8, 128 + var_92 \ 8 * 32, 180 + var_92 / 8 * 36, 32, 36 - var_131 + 12
 											}
 										}
 										if ( var_164 == 5 ) {
 											gcopy 4, 128 + var_92 \ 8 * 32, 180 + var_92 / 8 * 36, 32, 36 - var_131
-											if ( var_172 == 3 ) {
+											if ( roomStyle == 3 ) {
 												gcopy 8, 128 + var_92 \ 8 * 32, 180 + var_92 / 8 * 36, 32, 36 - var_131
 											}
 										}
@@ -3552,37 +3552,37 @@
 										pos var_163 * 16 + var_128 + var_132 + 5, var_164 * 12 + var_129 - 24 + var_131
 										if ( var_164 <= 2 ) {
 											gcopy 4, 128 + var_92 \ 8 * 32, 252 + var_92 / 8 * 36, 32, 36
-											if ( var_172 == 3 ) {
+											if ( roomStyle == 3 ) {
 												gcopy 8, 128 + var_92 \ 8 * 32, 252 + var_92 / 8 * 36, 32, 36
 											}
 										}
 										if ( var_164 == 3 & var_131 <= 23 ) {
 											gcopy 4, 128 + var_92 \ 8 * 32, 252 + var_92 / 8 * 36, 32, 36
-											if ( var_172 == 3 ) {
+											if ( roomStyle == 3 ) {
 												gcopy 8, 128 + var_92 \ 8 * 32, 252 + var_92 / 8 * 36, 32, 36
 											}
 										}
 										if ( var_164 == 3 & var_131 >= 24 ) {
 											gcopy 4, 128 + var_92 \ 8 * 32, 252 + var_92 / 8 * 36, 32, 36 - var_131 + 24
-											if ( var_172 == 3 ) {
+											if ( roomStyle == 3 ) {
 												gcopy 8, 128 + var_92 \ 8 * 32, 252 + var_92 / 8 * 36, 32, 36 - var_131 + 24
 											}
 										}
 										if ( var_164 == 4 & var_131 <= 11 ) {
 											gcopy 4, 128 + var_92 \ 8 * 32, 252 + var_92 / 8 * 36, 32, 36
-											if ( var_172 == 3 ) {
+											if ( roomStyle == 3 ) {
 												gcopy 8, 128 + var_92 \ 8 * 32, 252 + var_92 / 8 * 36, 32, 36
 											}
 										}
 										if ( var_164 == 4 & var_131 >= 12 ) {
 											gcopy 4, 128 + var_92 \ 8 * 32, 252 + var_92 / 8 * 36, 32, 36 - var_131 + 12
-											if ( var_172 == 3 ) {
+											if ( roomStyle == 3 ) {
 												gcopy 8, 128 + var_92 \ 8 * 32, 252 + var_92 / 8 * 36, 32, 36 - var_131 + 12
 											}
 										}
 										if ( var_164 == 5 ) {
 											gcopy 4, 128 + var_92 \ 8 * 32, 252 + var_92 / 8 * 36, 32, 36 - var_131
-											if ( var_172 == 3 ) {
+											if ( roomStyle == 3 ) {
 												gcopy 8, 128 + var_92 \ 8 * 32, 252 + var_92 / 8 * 36, 32, 36 - var_131
 											}
 										}
@@ -3626,7 +3626,7 @@
 										}
 										pos var_163 * 16 + var_128, var_164 * 12 + var_129 - 24 - var_131 - 7
 										gcopy 4, 128 + var_92 * 16, 324, 16, 36
-										if ( var_172 == 3 ) {
+										if ( roomStyle == 3 ) {
 											gcopy 8, 128 + var_92 * 16, 324, 16, 36
 										}
 									}
@@ -3648,7 +3648,7 @@
 										}
 										pos var_163 * 16 + var_128, var_164 * 12 + var_129 - 24 + var_131
 										gcopy 4, 128 + var_92 * 16, 360, 16, 36
-										if ( var_172 == 3 ) {
+										if ( roomStyle == 3 ) {
 											gcopy 8, 128 + var_92 * 16, 360, 16, 36
 										}
 									}
@@ -3660,7 +3660,7 @@
 						var_92 = 7 - var_134
 						if ( var_177 <= 135 ) {
 							gcopy 4, var_92 * 16, 360, 16, 36
-							if ( var_172 == 3 ) {
+							if ( roomStyle == 3 ) {
 								gcopy 8, var_92 * 16, 360, 16, 36
 							}
 						}
@@ -3674,12 +3674,12 @@
 				if ( cnt == 0 ) {
 					gmode 3, , , var_175 * 32
 					pos var_126 - 16, var_127 - 48
-					gcopy 3 + var_172, 208, 288, 8 * 18, 12 * 11
+					gcopy 3 + roomStyle, 208, 288, 8 * 18, 12 * 11
 				}
 				if ( cnt == 1 ) {
 					gmode 3, , , 256 - var_175 * 32
 					pos var_126 - 16, var_127 - 48
-					gcopy 3 + var_172, 208, 288, 8 * 18, 12 * 11
+					gcopy 3 + roomStyle, 208, 288, 8 * 18, 12 * 11
 				}
 			}
 		loop
@@ -4080,7 +4080,7 @@
 			pos var_126 + 5 * 8 + 4, var_127 + 12 * 8
 			gcopy 2, 160, 216 + 8 * gameWindowSize, 8 * 8, 8
 			pos var_126 + 14 * 8 + 4, var_127 + 9 * 8 + 6
-			gcopy 3 + var_172, 192, 12, 16, 24
+			gcopy 3 + roomStyle, 192, 12, 16, 24
 			if ( roomType == 3 ) {
 				pos var_126 + 14 * 8 + 9, var_127 + 9 * 8 + 4
 				gcopy 2, 17, 244, 7, 8
