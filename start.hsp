@@ -2302,7 +2302,7 @@
 	dim var_166, roomSizeX, roomSizeY
 	var_167 = 3
 	playerLivesLeft = 2
-	var_169 = timeGetTime()
+	roomTimeStarted = timeGetTime()
 	var_170 = 32
 	var_134 = 0
 	var_171 = 3
@@ -2322,7 +2322,7 @@
 		}
 	}
 *label_164
-	var_173 = timeGetTime() - var_169
+	var_173 = timeGetTime() - roomTimeStarted
 	if ( var_134 * 1000 / var_170 <= var_173 ) {
 		gosub *label_190
 		if ( var_171 == 0 ) {
@@ -4256,13 +4256,13 @@
 		}
 	}
 	ds_vol var_99 + 24 + var_123, var_101
-	var_169 = timeGetTime()
+	roomTimeStarted = timeGetTime()
 	var_170 = 32
 	var_134 = 0
 	var_208 = 0
 	var_209 = 0
 *label_188
-	var_173 = timeGetTime() - var_169
+	var_173 = timeGetTime() - roomTimeStarted
 	if ( var_208 * 1000 / var_170 <= var_173 ) {
 		gosub *label_190
 		redraw 0
@@ -4717,7 +4717,7 @@
 	var_191 = 0
 	var_173 = 0
 	var_192 = 0
-	var_169 = 0
+	roomTimeStarted = 0
 	var_186 = 0
 	var_183 = 0
 	var_184 = 0
