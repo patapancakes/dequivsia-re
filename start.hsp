@@ -10,7 +10,7 @@
 #uselib "winmm.dll"
 #cfunc timeGetTime "timeGetTime"
 
-	var_0 = 1
+	gameWindowSize = 1
 	title "Dequivsia"
 	goto *label_017
 #deffunc d3rotate var prm_28, var prm_29, double prm_30, double prm_31, double prm_32
@@ -405,7 +405,7 @@
 	pos 144, 96
 	gcopy 5, 40 * var_92, 184, 40, 32
 	pos 0, 0
-	gzoom 256 * (1 + var_0), 144 * (1 + var_0), 0, 0, 0, 256, 144
+	gzoom 256 * (1 + gameWindowSize), 144 * (1 + gameWindowSize), 0, 0, 0, 256, 144
 	var_93 = 75
 	var_94 = 3
 	ds_init 22050, 2
@@ -583,7 +583,7 @@
 		}
 		if ( var_111 == 4 & var_116(4) == 1 ) {
 			var_95(35) = 1
-			var_0 = (var_0 + 1) \ 3
+			gameWindowSize = (gameWindowSize + 1) \ 3
 			gosub *label_198
 		}
 		var_117 = 0
@@ -767,7 +767,7 @@
 		pos var_126 + 4 * 8 + 4, var_127 + 11 * 8 + 4
 		gcopy 5, 0 + 8, 48, 8, 8
 		pos var_126 + 4 * 8 + 4, var_127 + 13 * 8
-		gcopy 5, 12 * 8, 40 + 16 * var_0, 11 * 8, 16
+		gcopy 5, 12 * 8, 40 + 16 * gameWindowSize, 11 * 8, 16
 		if ( var_111 == 0 ) {
 			var_128 = 4
 			var_129 = 16
@@ -927,7 +927,7 @@
 		gcopy 5, 136 + var_125 / 2 \ 6 * 8, 32, 8, 8
 	}
 	pos 0, 0
-	gzoom 256 * (1 + var_0), 144 * (1 + var_0), 0, 0, 0, 256, 144
+	gzoom 256 * (1 + gameWindowSize), 144 * (1 + gameWindowSize), 0, 0, 0, 256, 144
 	pos 0, 0
 	color 255, 255, 255
 	mes var_102
@@ -944,7 +944,7 @@
 	pos 144, 96
 	gcopy 5, 40 * var_92, 184, 40, 32
 	pos 0, 0
-	gzoom 256 * (1 + var_0), 144 * (1 + var_0), 0, 0, 0, 256, 144
+	gzoom 256 * (1 + gameWindowSize), 144 * (1 + gameWindowSize), 0, 0, 0, 256, 144
 	var_109 = 0
 	var_110 = 1
 	gosub *label_195
@@ -2880,7 +2880,7 @@
 					}
 					if ( var_111 == 5 & var_116(4) == 1 ) {
 						var_95(31) = 1
-						var_0 = (var_0 + 1) \ 3
+						gameWindowSize = (gameWindowSize + 1) \ 3
 						gosub *label_198
 					}
 					if ( var_116(8) == 1 & var_118 == 3 ) {
@@ -4078,7 +4078,7 @@
 			pos var_126 + 4 * 8 + 4, var_127 + 11 * 8
 			gcopy 2, 96 + 8, 224, 8, 8
 			pos var_126 + 5 * 8 + 4, var_127 + 12 * 8
-			gcopy 2, 160, 216 + 8 * var_0, 8 * 8, 8
+			gcopy 2, 160, 216 + 8 * gameWindowSize, 8 * 8, 8
 			pos var_126 + 14 * 8 + 4, var_127 + 9 * 8 + 6
 			gcopy 3 + var_172, 192, 12, 16, 24
 			if ( var_118 == 3 ) {
@@ -4218,7 +4218,7 @@
 			}
 		}
 		pos 0, 0
-		gzoom 256 * (1 + var_0), 144 * (1 + var_0), 0, 0, 0, 256, 144
+		gzoom 256 * (1 + gameWindowSize), 144 * (1 + gameWindowSize), 0, 0, 0, 256, 144
 		redraw 1
 		var_134 += 1
 	}
@@ -4234,7 +4234,7 @@
 	pos 144, 96
 	gcopy 5, 40 * var_92, 184, 40, 32
 	pos 0, 0
-	gzoom 256 * (1 + var_0), 144 * (1 + var_0), 0, 0, 0, 256, 144
+	gzoom 256 * (1 + gameWindowSize), 144 * (1 + gameWindowSize), 0, 0, 0, 256, 144
 	redraw 1
 	exist "data\\savedata\\100"
 	if ( strsize == (-1) ) {
@@ -4626,7 +4626,7 @@
 			}
 		}
 		pos 0, 0
-		gzoom 256 * (1 + var_0), 144 * (1 + var_0), 0, 0, 0, 256, 144
+		gzoom 256 * (1 + gameWindowSize), 144 * (1 + gameWindowSize), 0, 0, 0, 256, 144
 		redraw 1
 		var_208 += 1
 		var_92 = 0
@@ -4829,7 +4829,7 @@
 	}
 	return
 *label_198
-	screen 0, (var_0 + 1) * 256, (var_0 + 1) * 144, 4, ginfo(20) / 2 - 3 - (var_0 + 1) * 128, ginfo(21) / 2 - 22 - (var_0 + 1) * 72
+	screen 0, (gameWindowSize + 1) * 256, (gameWindowSize + 1) * 144, 4, ginfo(20) / 2 - 3 - (gameWindowSize + 1) * 128, ginfo(21) / 2 - 22 - (gameWindowSize + 1) * 72
 	return
 *label_199
 	var_105 = 0
