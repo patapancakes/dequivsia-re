@@ -3885,17 +3885,17 @@
 	levelTimeStarted = timeGetTime()
 	gameFrameRate = 32
 	var_134 = 0
-	var_208 = 0
+	levelClearAnimFrame = 0
 	var_209 = 0
 *label_188
 	levelTimePlaying = timeGetTime() - levelTimeStarted
-	if ( var_208 * 1000 / gameFrameRate <= levelTimePlaying ) {
+	if ( levelClearAnimFrame * 1000 / gameFrameRate <= levelTimePlaying ) {
 		gosub *label_190
 		redraw 0
 		color 0, 0, 0
 		boxf
 		if ( levelClearAnimType == 0 ) {
-			if ( var_208 == 0 ) {
+			if ( levelClearAnimFrame == 0 ) {
 				var_210 = "0011223344556677001122334455899::;;;;;<<44556677@ABCDEFGHHIIJJKK"
 				var_210 += "TTUUVVWWPPQQRRSSTTUUVVWWPPQQRRSS`aabbccddeeffgghhhhh"
 				var_210 += "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
@@ -3921,12 +3921,12 @@
 			gcopy 10, 0 * 32, 192, 32, 48
 			pos 98, 50
 			gcopy 10, 3 * 32, 192, 32, 48
-			if ( var_208 \ 2 == 0 ) {
-				var_212 += peek(var_211, var_208 / 2) - 53
+			if ( levelClearAnimFrame \ 2 == 0 ) {
+				var_212 += peek(var_211, levelClearAnimFrame / 2) - 53
 			}
 			pos var_212, var_213
 			var_92 = 0
-			var_92 = peek(var_210, var_208 / 2) - 48
+			var_92 = peek(var_210, levelClearAnimFrame / 2) - 48
 			if ( var_92 >= 48 ) {
 				gcopy 10, var_92 \ 16 * 48, var_92 / 16 * 48, 48, 48
 			}
@@ -3937,7 +3937,7 @@
 			gcopy 10, 0 * 32, 192, 32, 48
 			pos 70, 58
 			gcopy 10, 1 * 32, 192, 32, 48
-			if ( var_208 >= 212 ) {
+			if ( levelClearAnimFrame >= 212 ) {
 				pos 72, 40
 				gcopy 10, 48 * 0, 240, 48, 16
 				pos 138, 40
@@ -3945,7 +3945,7 @@
 			}
 		}
 		if ( levelClearAnimType == 1 ) {
-			if ( var_208 == 0 ) {
+			if ( levelClearAnimFrame == 0 ) {
 				var_210 = "////////////////////////////////////////////////"
 				var_210 += "////////////////////////"
 				var_210 += "00112233445566778899::;;<<==>>??8899::;;<<==@@@@"
@@ -3968,8 +3968,8 @@
 				loop
 				ds_play gameMuBufferStartId + 24 + levelClearAnimType
 			}
-			if ( var_208 \ 2 == 0 ) {
-				var_212 += peek(var_211, var_208 / 2) - 53
+			if ( levelClearAnimFrame \ 2 == 0 ) {
+				var_212 += peek(var_211, levelClearAnimFrame / 2) - 53
 			}
 			color 0, 0, 0
 			gmode 4, , , 256
@@ -3982,27 +3982,27 @@
 			pos 173, 54
 			gcopy 10, 1 * 32, 192, 32, 48
 			pos 112, 54
-			if ( var_208 >= 120 & var_208 <= 431 ) {
-				gcopy 11, var_208 \ 8 * 32, 240, 32, 48
+			if ( levelClearAnimFrame >= 120 & levelClearAnimFrame <= 431 ) {
+				gcopy 11, levelClearAnimFrame \ 8 * 32, 240, 32, 48
 			}
 			else {
-				gcopy 11, var_208 \ 8 * 32 + 256, 240, 32, 48
+				gcopy 11, levelClearAnimFrame \ 8 * 32 + 256, 240, 32, 48
 			}
 			pos var_212, var_213
 			var_92 = 0
-			var_92 = peek(var_210, var_208 / 2) - 48
-			if ( var_208 <= 431 ) {
+			var_92 = peek(var_210, levelClearAnimFrame / 2) - 48
+			if ( levelClearAnimFrame <= 431 ) {
 				gcopy 11, var_92 \ 16 * 32, var_92 / 16 * 48, 32, 48
 			}
 			else {
-				var_92 += var_208 \ 2
+				var_92 += levelClearAnimFrame \ 2
 				gcopy 11, var_92 \ 16 * 32, var_92 / 16 * 48, 32, 48
 			}
 			pos 53, 54
 			gcopy 10, 1 * 32, 192, 32, 48
 			pos 70, 58
 			gcopy 10, 2 * 32, 192, 32, 48
-			if ( var_208 >= 432 ) {
+			if ( levelClearAnimFrame >= 432 ) {
 				pos 72, 40
 				gcopy 10, 48 * 1, 240, 48, 16
 				pos 138, 40
@@ -4010,7 +4010,7 @@
 			}
 		}
 		if ( levelClearAnimType == 2 ) {
-			if ( var_208 == 0 ) {
+			if ( levelClearAnimFrame == 0 ) {
 				var_210 = "001111112233333344555555667777NN8999:;;;<===>???8999:;;;<===>???"
 				var_210 += "OBBB@ABBBBBB@ABBBBBB@ABBBBBBEFFF@ABBCDDD@ABBEFFF@ABBCDDAEGHIJKLM"
 				var_210 += "PQRSTUVWPQRXYZ[]^abcdefg`abcdefghiiijkkklmmmnooohiiijkkkpqrstuvw"
@@ -4043,7 +4043,7 @@
 				loop
 				ds_play gameMuBufferStartId + 24 + levelClearAnimType
 			}
-			if ( var_208 >= 129 & var_208 <= 695 ) {
+			if ( levelClearAnimFrame >= 129 & levelClearAnimFrame <= 695 ) {
 				var_92 = 0
 			}
 			else {
@@ -4060,13 +4060,13 @@
 			pos 173, 54
 			gcopy 10, 2 * 32 + var_92, 192, 32, 48
 			var_92 = 0
-			if ( var_208 <= 384 - 1 ) {
-				if ( var_208 / 2 >= var_209 ) {
+			if ( levelClearAnimFrame <= 384 - 1 ) {
+				if ( levelClearAnimFrame / 2 >= var_209 ) {
 					var_92 = 1
 				}
 			}
 			else {
-				if ( (var_208 + 128) / 2 * 3 / 4 >= var_209 ) {
+				if ( (levelClearAnimFrame + 128) / 2 * 3 / 4 >= var_209 ) {
 					var_92 = 1
 				}
 			}
@@ -4076,16 +4076,16 @@
 			}
 			pos var_212, var_213
 			var_92 = 0
-			if ( var_208 <= 384 - 1 ) {
-				var_92 = peek(var_210, var_208 / 2) - 48
-				roomCoordX = peek(var_214, var_208 / 2) - 48
+			if ( levelClearAnimFrame <= 384 - 1 ) {
+				var_92 = peek(var_210, levelClearAnimFrame / 2) - 48
+				roomCoordX = peek(var_214, levelClearAnimFrame / 2) - 48
 			}
 			else {
-				var_92 = peek(var_210, (var_208 + 128) / 2 * 3 / 4) - 48
-				roomCoordX = peek(var_214, (var_208 + 128) / 2 * 3 / 4) - 48
+				var_92 = peek(var_210, (levelClearAnimFrame + 128) / 2 * 3 / 4) - 48
+				roomCoordX = peek(var_214, (levelClearAnimFrame + 128) / 2 * 3 / 4) - 48
 			}
 			gcopy 12, var_92 \ 16 * 32, var_92 / 16 * 48 + roomCoordX * 48 * 5, 32, 48
-			if ( var_208 >= 129 & var_208 <= 695 ) {
+			if ( levelClearAnimFrame >= 129 & levelClearAnimFrame <= 695 ) {
 				var_92 = 0
 			}
 			else {
@@ -4095,7 +4095,7 @@
 			gcopy 10, 2 * 32 + var_92, 192, 32, 48
 			pos 70, 58
 			gcopy 10, 1 * 32 + var_92, 192, 32, 48
-			if ( var_208 >= 696 ) {
+			if ( levelClearAnimFrame >= 696 ) {
 				pos 72, 40
 				gcopy 10, 48 * 2, 240, 48, 16
 				pos 138, 40
@@ -4103,7 +4103,7 @@
 			}
 		}
 		if ( levelClearAnimType == 3 ) {
-			if ( var_208 == 0 ) {
+			if ( levelClearAnimFrame == 0 ) {
 				var_210 = "000000000000000000000000000000000000000000000000000000011111"
 				var_210 += "222222222222222222222222222222222222222222222222222222233333"
 				var_210 += "444444444444444444444444444444444444444444444444444444444444"
@@ -4120,13 +4120,13 @@
 				ds_play gameMuBufferStartId + 24 + levelClearAnimType
 			}
 			roomCoordX8 = 0
-			if ( var_208 >= 600 ) {
+			if ( levelClearAnimFrame >= 600 ) {
 				roomCoordX8 = 224
 			}
-			if ( var_208 >= 840 ) {
+			if ( levelClearAnimFrame >= 840 ) {
 				roomCoordX8 = 320
 			}
-			if ( var_208 / 2 == 300 | var_208 / 2 == 330 | var_208 / 2 == 350 | var_208 / 2 == 372 ) {
+			if ( levelClearAnimFrame / 2 == 300 | levelClearAnimFrame / 2 == 330 | levelClearAnimFrame / 2 == 350 | levelClearAnimFrame / 2 == 372 ) {
 				roomCoordX8 = 416
 			}
 			if ( roomCoordX8 == 416 ) {
@@ -4146,46 +4146,46 @@
 			color 0, 0, 0
 			pos var_212, var_213
 			var_92 = 0
-			var_92 = peek(var_210, var_208 / 2) - 48
+			var_92 = peek(var_210, levelClearAnimFrame / 2) - 48
 			gcopy 13, var_92 \ 16 * 48, var_92 / 16 * 48, 48, 48
 			pos 53, 54
 			gcopy 10, 1 * 32 + roomCoordX8, 192, 32, 48
 			pos 60, 58
 			gcopy 10, 0 * 32 + roomCoordX8, 192, 32, 48
-			if ( var_208 < 600 ) {
+			if ( levelClearAnimFrame < 600 ) {
 				pos 112, 24
-				gcopy 13, var_208 / 2 \ 16 * 32, 192, 32, 48
+				gcopy 13, levelClearAnimFrame / 2 \ 16 * 32, 192, 32, 48
 			}
 			color 212, 185, 93
 			color 192, 165, 73
 			roomCoordY = 128
 			playerRoomCoordX = 42
 			var_92 = 0
-			if ( var_208 >= 600 ) {
-				if ( var_208 < 60 + 600 ) {
-					roomCoordX = 60 - (var_208 - 600)
-					playerRoomCoordY = var_208 - 0 - 600
-					var_92 = var_208 - 0 - roomCoordX * roomCoordX * roomCoordX / 1000
+			if ( levelClearAnimFrame >= 600 ) {
+				if ( levelClearAnimFrame < 60 + 600 ) {
+					roomCoordX = 60 - (levelClearAnimFrame - 600)
+					playerRoomCoordY = levelClearAnimFrame - 0 - 600
+					var_92 = levelClearAnimFrame - 0 - roomCoordX * roomCoordX * roomCoordX / 1000
 				}
 				else {
-					if ( var_208 < 100 + 600 ) {
-						roomCoordX = 40 - (var_208 - 60 - 600)
-						playerRoomCoordY = var_208 - 60 - 600
-						var_92 = var_208 - 60 - roomCoordX * roomCoordX * roomCoordX / 200 + 60
+					if ( levelClearAnimFrame < 100 + 600 ) {
+						roomCoordX = 40 - (levelClearAnimFrame - 60 - 600)
+						playerRoomCoordY = levelClearAnimFrame - 60 - 600
+						var_92 = levelClearAnimFrame - 60 - roomCoordX * roomCoordX * roomCoordX / 200 + 60
 					}
 					else {
-						if ( var_208 < 145 + 600 ) {
-							roomCoordX = 45 - (var_208 - 100 - 600)
-							playerRoomCoordY = var_208 - 100 - 600
-							var_92 = var_208 - 100 - roomCoordX * roomCoordX * roomCoordX / 200 + 100
+						if ( levelClearAnimFrame < 145 + 600 ) {
+							roomCoordX = 45 - (levelClearAnimFrame - 100 - 600)
+							playerRoomCoordY = levelClearAnimFrame - 100 - 600
+							var_92 = levelClearAnimFrame - 100 - roomCoordX * roomCoordX * roomCoordX / 200 + 100
 						}
 						else {
-							roomCoordX = 60 - (var_208 - 145 - 600)
-							playerRoomCoordY = var_208 - 145 - 600
+							roomCoordX = 60 - (levelClearAnimFrame - 145 - 600)
+							playerRoomCoordY = levelClearAnimFrame - 145 - 600
 							if ( roomCoordX <= 0 ) {
 								roomCoordX = 0
 							}
-							var_92 = var_208 - 145 - roomCoordX * roomCoordX * roomCoordX / 200 + 20
+							var_92 = levelClearAnimFrame - 145 - roomCoordX * roomCoordX * roomCoordX / 200 + 20
 						}
 					}
 				}
@@ -4199,21 +4199,21 @@
 					line sin(0.0174532925199433 * var_92) * 8 * playerRoomCoordY / 100 + roomCoordY - cnt \ 2, cos(0.0174532925199433 * var_92) * 8 * playerRoomCoordY / 100 + playerRoomCoordX - cnt / 2, sin(0.0174532925199433 * var_92) * 36 * playerRoomCoordY / 100 + roomCoordY - cnt \ 2, cos(0.0174532925199433 * var_92) * 36 * playerRoomCoordY / 100 + playerRoomCoordX - cnt / 2
 					line sin(0.0174532925199433 * var_92) * 28 * playerRoomCoordY / 100 + roomCoordY - cnt \ 2, cos(0.0174532925199433 * var_92) * 28 * playerRoomCoordY / 100 + playerRoomCoordX - cnt / 2, sin(0.0174532925199433 * (var_92 + 17)) * 29 * playerRoomCoordY / 100 + roomCoordY - cnt \ 2, cos(0.0174532925199433 * (var_92 + 17)) * 29 * playerRoomCoordY / 100 + playerRoomCoordX - cnt / 2
 					line sin(0.0174532925199433 * var_92) * 33 * playerRoomCoordY / 100 + roomCoordY - cnt \ 2, cos(0.0174532925199433 * var_92) * 33 * playerRoomCoordY / 100 + playerRoomCoordX - cnt / 2, sin(0.0174532925199433 * (var_92 + 11)) * 33.5 * playerRoomCoordY / 100 + roomCoordY - cnt \ 2, cos(0.0174532925199433 * (var_92 + 11)) * 33.5 * playerRoomCoordY / 100 + playerRoomCoordX - cnt / 2
-					if ( var_208 >= 60 + 600 ) {
+					if ( levelClearAnimFrame >= 60 + 600 ) {
 						line sin(0.0174532925199433 * (var_92 - 60)) * 8 * playerRoomCoordY / 100 + roomCoordY - cnt \ 2, cos(0.0174532925199433 * (var_92 - 60)) * 8 * playerRoomCoordY / 100 + playerRoomCoordX - cnt / 2, sin(0.0174532925199433 * (var_92 - 60)) * 13 * playerRoomCoordY / 100 + roomCoordY - cnt \ 2, cos(0.0174532925199433 * (var_92 - 60)) * 13 * playerRoomCoordY / 100 + playerRoomCoordX - cnt / 2
 						line sin(0.0174532925199433 * (var_92 - 120)) * 8 * playerRoomCoordY / 100 + roomCoordY - cnt \ 2, cos(0.0174532925199433 * (var_92 - 120)) * 8 * playerRoomCoordY / 100 + playerRoomCoordX - cnt / 2, sin(0.0174532925199433 * (var_92 - 120)) * 13 * playerRoomCoordY / 100 + roomCoordY - cnt \ 2, cos(0.0174532925199433 * (var_92 - 120)) * 13 * playerRoomCoordY / 100 + playerRoomCoordX - cnt / 2
 						line sin(0.0174532925199433 * var_92) * 23 * playerRoomCoordY / 100 + roomCoordY - cnt \ 2, cos(0.0174532925199433 * var_92) * 23 * playerRoomCoordY / 100 + playerRoomCoordX - cnt / 2, sin(0.0174532925199433 * (var_92 + 7)) * 24 * playerRoomCoordY / 100 + roomCoordY - cnt \ 2, cos(0.0174532925199433 * (var_92 + 7)) * 24 * playerRoomCoordY / 100 + playerRoomCoordX - cnt / 2
 					}
-					if ( var_208 >= 100 + 600 ) {
+					if ( levelClearAnimFrame >= 100 + 600 ) {
 						line sin(0.0174532925199433 * (var_92 + 80)) * 8 * playerRoomCoordY / 100 + roomCoordY - cnt \ 2, cos(0.0174532925199433 * (var_92 + 80)) * 8 * playerRoomCoordY / 100 + playerRoomCoordX - cnt / 2, sin(0.0174532925199433 * (var_92 + 80)) * 21 * playerRoomCoordY / 100 + roomCoordY - cnt \ 2, cos(0.0174532925199433 * (var_92 + 80)) * 21 * playerRoomCoordY / 100 + playerRoomCoordX - cnt / 2
 						line sin(0.0174532925199433 * var_92) * 25 * playerRoomCoordY / 100 + roomCoordY - cnt \ 2, cos(0.0174532925199433 * var_92) * 25 * playerRoomCoordY / 100 + playerRoomCoordX - cnt / 2, sin(0.0174532925199433 * (var_92 - 8)) * 26 * playerRoomCoordY / 100 + roomCoordY - cnt \ 2, cos(0.0174532925199433 * (var_92 - 8)) * 26 * playerRoomCoordY / 100 + playerRoomCoordX - cnt / 2
 						pset sin(0.0174532925199433 * (var_92 - 120)) * 17 * playerRoomCoordY / 100 + roomCoordY - cnt \ 2, cos(0.0174532925199433 * (var_92 - 120)) * 17 * playerRoomCoordY / 100 + playerRoomCoordX - cnt / 2
 					}
-					if ( var_208 >= 145 + 600 ) {
+					if ( levelClearAnimFrame >= 145 + 600 ) {
 						pset sin(0.0174532925199433 * var_92) * 40 * playerRoomCoordY / 100 + roomCoordY - cnt \ 2, cos(0.0174532925199433 * var_92) * 40 * playerRoomCoordY / 100 + playerRoomCoordX - cnt / 2
 					}
 				loop
-				if ( var_208 >= 100 + 600 ) {
+				if ( levelClearAnimFrame >= 100 + 600 ) {
 					line sin(0.0174532925199433 * (var_92 - 140)) * 8 * playerRoomCoordY / 100 + roomCoordY - cnt \ 2, cos(0.0174532925199433 * (var_92 - 140)) * 8 * playerRoomCoordY / 100 + playerRoomCoordX - cnt / 2, sin(0.0174532925199433 * (var_92 - 140)) * 11 * playerRoomCoordY / 100 + roomCoordY - cnt \ 2, cos(0.0174532925199433 * (var_92 - 140)) * 11 * playerRoomCoordY / 100 + playerRoomCoordX - cnt / 2
 				}
 				color 0, 0, 0
@@ -4221,7 +4221,7 @@
 					color 152, 36, 19
 				}
 				circle (-7) * playerRoomCoordY / 100 + roomCoordY, (-7) * playerRoomCoordY / 100 + playerRoomCoordX, 7 * playerRoomCoordY / 100 + roomCoordY, 7 * playerRoomCoordY / 100 + playerRoomCoordX
-				if ( var_208 >= 100 + 600 ) {
+				if ( levelClearAnimFrame >= 100 + 600 ) {
 					color 192, 165, 73
 					pset sin(0.0174532925199433 * (var_92 - 140)) * 14 * playerRoomCoordY / 100 + roomCoordY, cos(0.0174532925199433 * (var_92 - 140)) * 14 * playerRoomCoordY / 100 + playerRoomCoordX
 					circle (-3) + sin(0.0174532925199433 * (var_92 + 80)) * 22 * playerRoomCoordY / 100 + roomCoordY, (-3) + cos(0.0174532925199433 * (var_92 + 80)) * 22 * playerRoomCoordY / 100 + playerRoomCoordX, 3 + sin(0.0174532925199433 * (var_92 + 80)) * 22 * playerRoomCoordY / 100 + roomCoordY, 3 + cos(0.0174532925199433 * (var_92 + 80)) * 22 * playerRoomCoordY / 100 + playerRoomCoordX
@@ -4231,7 +4231,7 @@
 					}
 					circle (-2) + sin(0.0174532925199433 * (var_92 + 80)) * 22 * playerRoomCoordY / 100 + roomCoordY, (-2) + cos(0.0174532925199433 * (var_92 + 80)) * 22 * playerRoomCoordY / 100 + playerRoomCoordX, 2 + sin(0.0174532925199433 * (var_92 + 80)) * 22 * playerRoomCoordY / 100 + roomCoordY, 2 + cos(0.0174532925199433 * (var_92 + 80)) * 22 * playerRoomCoordY / 100 + playerRoomCoordX
 				}
-				if ( var_208 >= 145 + 600 ) {
+				if ( levelClearAnimFrame >= 145 + 600 ) {
 					color 192, 165, 73
 					circle (-5) + sin(0.0174532925199433 * (var_92 - 60)) * 17 * playerRoomCoordY / 100 + roomCoordY, (-5) + cos(0.0174532925199433 * (var_92 - 60)) * 17 * playerRoomCoordY / 100 + playerRoomCoordX, 5 + sin(0.0174532925199433 * (var_92 - 60)) * 17 * playerRoomCoordY / 100 + roomCoordY, 5 + cos(0.0174532925199433 * (var_92 - 60)) * 17 * playerRoomCoordY / 100 + playerRoomCoordX
 					color 0, 0, 0
@@ -4243,7 +4243,7 @@
 					circle -playerRoomCoordY / 30 + roomCoordY, -playerRoomCoordY / 30 + playerRoomCoordX, 1 * playerRoomCoordY / 30 + roomCoordY, 1 * playerRoomCoordY / 30 + playerRoomCoordX
 				}
 			}
-			if ( var_208 >= 840 ) {
+			if ( levelClearAnimFrame >= 840 ) {
 				color 0, 0, 0
 				pos 73, 40
 				gcopy 10, 48 * 3, 240, 48, 16
@@ -4254,21 +4254,21 @@
 		pos 0, 0
 		gzoom 256 * (1 + gameWindowSize), 144 * (1 + gameWindowSize), 0, 0, 0, 256, 144
 		redraw 1
-		var_208 += 1
+		levelClearAnimFrame += 1
 		var_92 = 0
 		if ( var_116(6) == 1 ) {
 			var_92 = 1
 		}
-		if ( levelClearAnimType == 0 & var_208 >= 212 + 64 ) {
+		if ( levelClearAnimType == 0 & levelClearAnimFrame >= 212 + 64 ) {
 			var_92 = 1
 		}
-		if ( levelClearAnimType == 1 & var_208 >= 432 + 64 ) {
+		if ( levelClearAnimType == 1 & levelClearAnimFrame >= 432 + 64 ) {
 			var_92 = 1
 		}
-		if ( levelClearAnimType == 2 & var_208 >= 696 + 96 ) {
+		if ( levelClearAnimType == 2 & levelClearAnimFrame >= 696 + 96 ) {
 			var_92 = 1
 		}
-		if ( levelClearAnimType == 3 & var_208 >= 840 + 128 ) {
+		if ( levelClearAnimType == 3 & levelClearAnimFrame >= 840 + 128 ) {
 			var_92 = 1
 		}
 		if ( var_92 == 1 ) {
