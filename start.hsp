@@ -2540,28 +2540,28 @@
 					if ( playerLivesLeft >= 1 ) {
 						var_192 += 1
 					}
-					if ( var_193 == 0 ) {
+					if ( playerDeathAnimFrame == 0 ) {
 						if ( playerLivesLeft <= 0 ) {
 							var_109 = 0
 							var_110 = 1
 						}
 					}
-					var_193 += 1
-					if ( var_193 == 1 ) {
+					playerDeathAnimFrame += 1
+					if ( playerDeathAnimFrame == 1 ) {
 						var_95(26) = 1
 					}
-					if ( var_193 == 33 & playerLivesLeft >= 1 ) {
+					if ( playerDeathAnimFrame == 33 & playerLivesLeft >= 1 ) {
 						var_95(36) = 1
 						var_171 = 0
-						var_193 = 0
+						playerDeathAnimFrame = 0
 						playerLivesLeft -= 1
 					}
-					if ( var_193 == 36 ) {
+					if ( playerDeathAnimFrame == 36 ) {
 						var_95(27) = 1
 						var_109 = 21
 						var_110 = 1
 					}
-					if ( var_193 >= 36 ) {
+					if ( playerDeathAnimFrame >= 36 ) {
 						if ( var_179 == 0 ) {
 							if ( var_125 == 1 ) {
 								menuItemSelected = 0
@@ -2620,8 +2620,8 @@
 					}
 					else {
 						if ( var_171 == 4 ) {
-							var_193 += 1
-							if ( var_193 == 1 ) {
+							playerDeathAnimFrame += 1
+							if ( playerDeathAnimFrame == 1 ) {
 								var_109 = 22
 								var_110 = 1
 								if ( var_102 <= 3 ) {
@@ -2999,7 +2999,7 @@
 				else {
 					var_132 = 0
 				}
-				if ( var_178 >= 1 & var_193 == 0 ) {
+				if ( var_178 >= 1 & playerDeathAnimFrame == 0 ) {
 					gcopy 4, var_178 / 2 \ 8 * 16 + var_132, var_167 * 12 * 3, 16, 36
 					if ( levelStyle == 3 ) {
 						gcopy 8, var_178 / 2 \ 8 * 16 + var_132, var_167 * 12 * 3, 16, 36
@@ -3007,7 +3007,7 @@
 				}
 				else {
 					if ( var_171 != 3 ) {
-						if ( playerClearAnimFrame == 0 & var_193 == 0 ) {
+						if ( playerClearAnimFrame == 0 & playerDeathAnimFrame == 0 ) {
 							if ( var_182 <= 100 & var_187 == 0 & var_188 <= 116 | var_167 != 3 ) {
 								var_92 = 0
 								if ( var_176 == 0 ) {
@@ -3100,8 +3100,8 @@
 								}
 							}
 							else {
-								if ( var_193 >= 1 & var_193 <= 32 ) {
-									var_92 = (var_193 - 1) / 2
+								if ( playerDeathAnimFrame >= 1 & playerDeathAnimFrame <= 32 ) {
+									var_92 = (playerDeathAnimFrame - 1) / 2
 									var_131 = 0
 									var_132 = 0
 									if ( var_167 == 0 | var_167 == 2 ) {
@@ -3260,16 +3260,16 @@
 										if ( var_92 == 13 ) {
 											var_131 = 5
 										}
-										if ( var_92 == 14 & (var_193 - 1) \ 2 == 0 ) {
+										if ( var_92 == 14 & (playerDeathAnimFrame - 1) \ 2 == 0 ) {
 											var_131 = 12
 										}
-										if ( var_92 == 14 & (var_193 - 1) \ 2 == 1 ) {
+										if ( var_92 == 14 & (playerDeathAnimFrame - 1) \ 2 == 1 ) {
 											var_131 = 15
 										}
-										if ( var_92 == 15 & (var_193 - 1) \ 2 == 0 ) {
+										if ( var_92 == 15 & (playerDeathAnimFrame - 1) \ 2 == 0 ) {
 											var_131 = 19
 										}
-										if ( var_92 == 15 & (var_193 - 1) \ 2 == 1 ) {
+										if ( var_92 == 15 & (playerDeathAnimFrame - 1) \ 2 == 1 ) {
 											var_131 = 24
 										}
 										pos var_163 * 16 + var_128, var_164 * 12 + var_129 - 24 + var_131
@@ -3598,18 +3598,18 @@
 				gcopy 2, 14 * 8 + var_92 * 24, 16 * 8, 8, 8
 			loop
 		}
-		if ( var_193 >= 33 & var_193 <= 36 & var_171 == 2 ) {
+		if ( playerDeathAnimFrame >= 33 & playerDeathAnimFrame <= 36 & var_171 == 2 ) {
 			color 0, 0, 0
 			boxf
 		}
-		if ( var_193 >= 30 & var_193 <= 33 & var_171 == 2 & playerLivesLeft >= 1 ) {
+		if ( playerDeathAnimFrame >= 30 & playerDeathAnimFrame <= 33 & var_171 == 2 & playerLivesLeft >= 1 ) {
 			color 0, 0, 0
 			boxf
 		}
-		if ( var_193 >= 1 ) {
-			if ( var_193 >= 33 & var_171 == 2 | var_171 == 4 ) {
-				if ( var_193 >= 33 & var_171 == 2 ) {
-					var_112 = var_193 - 33
+		if ( playerDeathAnimFrame >= 1 ) {
+			if ( playerDeathAnimFrame >= 33 & var_171 == 2 | var_171 == 4 ) {
+				if ( playerDeathAnimFrame >= 33 & var_171 == 2 ) {
+					var_112 = playerDeathAnimFrame - 33
 					if ( var_112 >= 0 & var_112 <= 1 ) {
 						var_92 = 3
 					}
@@ -3625,8 +3625,8 @@
 					var_131 = 0
 				}
 				else {
-					if ( var_193 >= 1 & var_171 == 4 ) {
-						var_112 = var_193
+					if ( playerDeathAnimFrame >= 1 & var_171 == 4 ) {
+						var_112 = playerDeathAnimFrame
 						if ( var_112 >= 0 & var_112 <= 1 ) {
 							var_92 = 3
 						}
@@ -3732,7 +3732,7 @@
 			pos var_126 + 3 * 8 + 4, var_127 + 5 * 8 + var_92
 			gcopy 2, 168 + var_134 / 2 \ 6 * 8, 208, 8, 8
 		}
-		if ( var_193 >= 33 & var_171 == 2 ) {
+		if ( playerDeathAnimFrame >= 33 & var_171 == 2 ) {
 			pos var_126 + 4 * 8 + 2, var_127 + 2 * 8 + 4
 			gcopy 2, 5 * 8, 13 * 8, 9 * 8, 16
 			pos var_126 + 6 * 8 - 2, var_127 + 5 * 8 + 4
@@ -3761,7 +3761,7 @@
 			pos var_126 + 3 * 8 + 4, var_127 + 5 * 8 + var_92
 			gcopy 2, 168 + var_134 / 2 \ 6 * 8, 208, 8, 8
 		}
-		if ( var_193 >= 1 & var_171 == 4 ) {
+		if ( playerDeathAnimFrame >= 1 & var_171 == 4 ) {
 			pos var_126 + 6 * 8 + 2, var_127 + 1 * 8 + 4
 			gcopy 2, 14 * 8, 13 * 8, 5 * 8, 16
 			pos var_126 + 6 * 8 - 2, var_127 + 6 * 8 + 4
@@ -4289,7 +4289,7 @@
 	var_198 = 0
 	var_197 = 0
 	var_137 = 0
-	var_193 = 0
+	playerDeathAnimFrame = 0
 	var_150 = 0
 	var_151 = 0
 	playerClearAnimFrame = 0
