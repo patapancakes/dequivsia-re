@@ -4366,7 +4366,7 @@
 		getkey gameKeyPressed(8), 82
 		getkey gameKeyPressed(19), 27
 		var_106 = 0
-*label_191
+*gameInputsInterpret
 		exgoto var_106, 1, 20, *label_192
 		if ( gameKeyPressed(var_106) == 1 ) {
 			gameKeyRead(var_106) += 1
@@ -4375,7 +4375,7 @@
 			gameKeyRead(var_106) = 0
 		}
 		var_106 += 1
-		goto *label_191
+		goto *gameInputsInterpret
 *label_192
 		if ( gameKeyPressed(19) == 1 ) {
 			goto *label_199
