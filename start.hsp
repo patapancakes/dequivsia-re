@@ -612,25 +612,25 @@
 				if ( var_118 == 0 ) {
 					var_119 = 13
 					var_120 = 13
-					var_121 = 1
+					roomKeysNeeded = 1
 					var_122 = 10
 				}
 				if ( var_118 == 1 ) {
 					var_119 = 21
 					var_120 = 21
-					var_121 = 2
+					roomKeysNeeded = 2
 					var_122 = 4
 				}
 				if ( var_118 == 2 ) {
 					var_119 = 31
 					var_120 = 31
-					var_121 = 3
+					roomKeysNeeded = 3
 					var_122 = 8
 				}
 				if ( var_118 == 3 ) {
 					var_119 = 51
 					var_120 = 51
-					var_121 = 6
+					roomKeysNeeded = 6
 					var_122 = 5
 				}
 				if ( var_104(var_118 * 2) == 0 ) {
@@ -1322,7 +1322,7 @@
 	goto *label_053
 *label_056
 	gosub *label_158
-	var_92 = var_121
+	var_92 = roomKeysNeeded
 	repeat
 		var_126 = rnd(var_119)
 		var_127 = rnd(var_120)
@@ -1616,7 +1616,7 @@
 	exgoto var_97, 1, var_120, *label_081
 	if ( var_153(var_98, var_97) == 0 ) {
 		if ( var_135(var_98, var_97) == 5 ) {
-			var_121 -= 1
+			roomKeysNeeded -= 1
 			var_154 += 1
 		}
 		var_135(var_98, var_97) = 4
@@ -1696,7 +1696,7 @@
 		if ( var_92 == 1 & var_135(var_98, var_97) == 2 & var_155(var_98, var_97) == 0 & var_128 == 0 ) {
 			var_135(var_98, var_97) = 5
 			var_128 = 1
-			var_121 += 1
+			roomKeysNeeded += 1
 		}
 		var_97 += 1
 		goto *label_094
@@ -2701,7 +2701,7 @@
 					var_95(20) = 1
 				}
 				if ( var_135(var_145, var_146) == 7 & var_177 == 0 ) {
-					if ( playerKeysCollected >= var_121 ) {
+					if ( playerKeysCollected >= roomKeysNeeded ) {
 						var_177 = 1
 						var_191 = var_192
 						var_92 = 0
@@ -3337,7 +3337,7 @@
 					gcopy 3 + var_172, var_134 / 6 \ 4 * 16 + 272, 132 - var_106 * 12, 16, 12
 				}
 				if ( var_135(var_202, var_203) == 7 ) {
-					if ( playerKeysCollected >= var_121 & var_177 <= 127 ) {
+					if ( playerKeysCollected >= roomKeysNeeded & var_177 <= 127 ) {
 						gcopy 3 + var_172, var_134 / 4 \ 4 * 16 + 272, 60 - var_106 * 12, 16, 12
 					}
 					else {
@@ -3873,7 +3873,7 @@
 		pos var_200 + 8 * 15, var_201
 		gmode 4, , , 256
 		gcopy 2, 128 + var_92 * 8, var_155(var_145, var_146) * 8, 8, 8
-		repeat var_121
+		repeat roomKeysNeeded
 			pos var_200 + 8 * 15, var_201 + 8 + cnt * 8
 			gmode 4, , , 256
 			if ( playerKeysCollected >= cnt + 1 ) {
@@ -3884,7 +3884,7 @@
 			}
 		loop
 		repeat 2
-			pos var_200 + 8 * 15, var_201 + 8 * (var_121 + 2) + cnt * 8
+			pos var_200 + 8 * 15, var_201 + 8 * (roomKeysNeeded + 2) + cnt * 8
 			gmode 4, , , 256
 			if ( var_168 >= cnt + 1 ) {
 				gcopy 2, 88, 88, 8, 8
