@@ -12,7 +12,7 @@
 
 	gameWindowSize = 1
 	title "Dequivsia"
-	goto *label_017
+	goto *gameInit
 #deffunc d3rotate var prm_28, var prm_29, double prm_30, double prm_31, double prm_32
 	prm_28 = prm_30 * cos(prm_32) - prm_31 * sin(prm_32)
 	prm_29 = prm_30 * sin(prm_32) + prm_31 * cos(prm_32)
@@ -387,7 +387,7 @@
 		loop
 	}
 	return var_90
-*label_017
+*gameInit
 	dim var_88, 32
 	var_91 = 20, 1, 100
 	gosub *label_198
