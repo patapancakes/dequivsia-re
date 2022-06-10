@@ -2696,12 +2696,12 @@
 			if ( var_163 * var_164 == 9 ) {
 				if ( var_135(var_145, var_146) == 5 ) {
 					var_135(var_145, var_146) = 2
-					var_190 += 1
+					playerKeysCollected += 1
 					var_189 = 32
 					var_95(20) = 1
 				}
 				if ( var_135(var_145, var_146) == 7 & var_177 == 0 ) {
-					if ( var_190 >= var_121 ) {
+					if ( playerKeysCollected >= var_121 ) {
 						var_177 = 1
 						var_191 = var_192
 						var_92 = 0
@@ -3337,7 +3337,7 @@
 					gcopy 3 + var_172, var_134 / 6 \ 4 * 16 + 272, 132 - var_106 * 12, 16, 12
 				}
 				if ( var_135(var_202, var_203) == 7 ) {
-					if ( var_190 >= var_121 & var_177 <= 127 ) {
+					if ( playerKeysCollected >= var_121 & var_177 <= 127 ) {
 						gcopy 3 + var_172, var_134 / 4 \ 4 * 16 + 272, 60 - var_106 * 12, 16, 12
 					}
 					else {
@@ -3876,7 +3876,7 @@
 		repeat var_121
 			pos var_200 + 8 * 15, var_201 + 8 + cnt * 8
 			gmode 4, , , 256
-			if ( var_190 >= cnt + 1 ) {
+			if ( playerKeysCollected >= cnt + 1 ) {
 				gcopy 2, 64, 88, 8, 8
 			}
 			else {
@@ -4687,7 +4687,7 @@
 	var_148 = 0
 	var_140 = 0
 	var_149 = 0
-	var_190 = 0
+	playerKeysCollected = 0
 	var_189 = 0
 	var_135 = 0
 	var_109 = 0
