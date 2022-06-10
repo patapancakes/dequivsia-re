@@ -3903,7 +3903,7 @@
 				levelClearAnimBackgroundTimeline += "66666666666666666666666666666666555555555>6655555555"
 				levelClearAnimBackgroundTimeline += "555555555555555555555555555555555555555555555555555555555555555555"
 				levelClearAnimPlayerStartPosX = 20
-				var_213 = 50
+				levelClearAnimPlayerStartPosY = 50
 				repeat 4
 					ds_stop gameMuBufferStartId + 24 + cnt
 				loop
@@ -3924,7 +3924,7 @@
 			if ( levelClearAnimFrame \ 2 == 0 ) {
 				levelClearAnimPlayerStartPosX += peek(levelClearAnimBackgroundTimeline, levelClearAnimFrame / 2) - 53
 			}
-			pos levelClearAnimPlayerStartPosX, var_213
+			pos levelClearAnimPlayerStartPosX, levelClearAnimPlayerStartPosY
 			var_92 = 0
 			var_92 = peek(levelClearAnimPlayerTimeline, levelClearAnimFrame / 2) - 48
 			if ( var_92 >= 48 ) {
@@ -3962,7 +3962,7 @@
 				levelClearAnimBackgroundTimeline += "555555555555555555555555555555555555555555555555"
 				levelClearAnimBackgroundTimeline += "555555555555555555555555555555555555555555555555"
 				levelClearAnimPlayerStartPosX = 69
-				var_213 = 50
+				levelClearAnimPlayerStartPosY = 50
 				repeat 4
 					ds_stop gameMuBufferStartId + 24 + cnt
 				loop
@@ -3988,7 +3988,7 @@
 			else {
 				gcopy 11, levelClearAnimFrame \ 8 * 32 + 256, 240, 32, 48
 			}
-			pos levelClearAnimPlayerStartPosX, var_213
+			pos levelClearAnimPlayerStartPosX, levelClearAnimPlayerStartPosY
 			var_92 = 0
 			var_92 = peek(levelClearAnimPlayerTimeline, levelClearAnimFrame / 2) - 48
 			if ( levelClearAnimFrame <= 431 ) {
@@ -4037,7 +4037,7 @@
 				levelClearAnimBackgroundTimeline += "5555555555555555555555555555555555555555555555555555555555555555"
 				levelClearAnimBackgroundTimeline += "5555555555555555555555555555555555555555555555555555555555555555"
 				levelClearAnimPlayerStartPosX = 77
-				var_213 = 50
+				levelClearAnimPlayerStartPosY = 50
 				repeat 4
 					ds_stop gameMuBufferStartId + 24 + cnt
 				loop
@@ -4074,7 +4074,7 @@
 				levelClearAnimPlayerStartPosX += peek(levelClearAnimBackgroundTimeline, var_209) - 53
 				var_209 += 1
 			}
-			pos levelClearAnimPlayerStartPosX, var_213
+			pos levelClearAnimPlayerStartPosX, levelClearAnimPlayerStartPosY
 			var_92 = 0
 			if ( levelClearAnimFrame <= 384 - 1 ) {
 				var_92 = peek(levelClearAnimPlayerTimeline, levelClearAnimFrame / 2) - 48
@@ -4113,7 +4113,7 @@
 				levelClearAnimPlayerTimeline += "EEEEEEEEEEEEEGFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
 				levelClearAnimPlayerTimeline += "H///////////////////////////////////////////////////////////"
 				levelClearAnimPlayerStartPosX = 100
-				var_213 = 60
+				levelClearAnimPlayerStartPosY = 60
 				repeat 4
 					ds_stop gameMuBufferStartId + 24 + cnt
 				loop
@@ -4144,7 +4144,7 @@
 			pos 173, 54
 			gcopy 10, 1 * 32 + roomCoordX8, 192, 32, 48
 			color 0, 0, 0
-			pos levelClearAnimPlayerStartPosX, var_213
+			pos levelClearAnimPlayerStartPosX, levelClearAnimPlayerStartPosY
 			var_92 = 0
 			var_92 = peek(levelClearAnimPlayerTimeline, levelClearAnimFrame / 2) - 48
 			gcopy 13, var_92 \ 16 * 48, var_92 / 16 * 48, 48, 48
