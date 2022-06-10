@@ -106,7 +106,7 @@
 		var_104(cnt) = int(var_107)
 	loop
 	onexit goto *label_199
-	dim var_108, 4
+	dim levelClearAnimPlaying, 4
 *label_024
 	color 0, 0, 0
 	boxf
@@ -3864,21 +3864,21 @@
 	redraw 1
 	exist "data\\savedata\\100"
 	if ( strsize == (-1) ) {
-		if ( var_108(levelClearAnimType) == 0 & levelClearAnimType == 0 ) {
+		if ( levelClearAnimPlaying(levelClearAnimType) == 0 & levelClearAnimType == 0 ) {
 			ds_load "data\\ani\\a1.wav", gameMuBufferStartId + 24 + levelClearAnimType
-			var_108(levelClearAnimType) = 1
+			levelClearAnimPlaying(levelClearAnimType) = 1
 		}
-		if ( var_108(levelClearAnimType) == 0 & levelClearAnimType == 1 ) {
+		if ( levelClearAnimPlaying(levelClearAnimType) == 0 & levelClearAnimType == 1 ) {
 			ds_load "data\\ani\\a2.wav", gameMuBufferStartId + 24 + levelClearAnimType
-			var_108(levelClearAnimType) = 1
+			levelClearAnimPlaying(levelClearAnimType) = 1
 		}
-		if ( var_108(levelClearAnimType) == 0 & levelClearAnimType == 2 ) {
+		if ( levelClearAnimPlaying(levelClearAnimType) == 0 & levelClearAnimType == 2 ) {
 			ds_load "data\\ani\\a3.wav", gameMuBufferStartId + 24 + levelClearAnimType
-			var_108(levelClearAnimType) = 1
+			levelClearAnimPlaying(levelClearAnimType) = 1
 		}
-		if ( var_108(levelClearAnimType) == 0 & levelClearAnimType == 3 ) {
+		if ( levelClearAnimPlaying(levelClearAnimType) == 0 & levelClearAnimType == 3 ) {
 			ds_load "data\\ani\\a4.wav", gameMuBufferStartId + 24 + levelClearAnimType
-			var_108(levelClearAnimType) = 1
+			levelClearAnimPlaying(levelClearAnimType) = 1
 		}
 	}
 	ds_vol gameMuBufferStartId + 24 + levelClearAnimType, var_101
