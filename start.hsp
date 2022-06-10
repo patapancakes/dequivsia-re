@@ -578,7 +578,7 @@
 	redraw 0
 	dim roomList, levelSizeX, levelSizeY
 	dim var_136, 4
-	dim var_137, levelSizeX, levelSizeY, 2
+	dim roomList2, levelSizeX, levelSizeY, 2
 	color 0, 0, 0
 	boxf
 	var_98 = 0
@@ -1387,7 +1387,7 @@
 	var_106 = 0
 *label_105
 	exgoto var_106, 1, 2, *label_106
-	var_137(var_98, var_97, var_106) = rnd(5) + 1
+	roomList2(var_98, var_97, var_106) = rnd(5) + 1
 	var_106 += 1
 	goto *label_105
 *label_106
@@ -1412,20 +1412,20 @@
 	roomCoordX = (var_98 + 1) \ levelSizeX
 	roomCoordY = (var_97 + 1) \ levelSizeY
 	if ( roomList8(var_98, var_97) == 2 ) {
-		var_137(var_98, var_97, 1) = 1 + rnd(3)
-		var_137(var_98, roomCoordY, 1) = 1 + rnd(3)
+		roomList2(var_98, var_97, 1) = 1 + rnd(3)
+		roomList2(var_98, roomCoordY, 1) = 1 + rnd(3)
 	}
 	if ( roomList8(var_98, var_97) == 4 ) {
-		var_137(var_98, var_97, 1) = 3 + rnd(3)
-		var_137(var_98, roomCoordY, 1) = 3 + rnd(3)
+		roomList2(var_98, var_97, 1) = 3 + rnd(3)
+		roomList2(var_98, roomCoordY, 1) = 3 + rnd(3)
 	}
 	if ( roomList8(var_98, var_97) == 3 ) {
-		var_137(var_98, var_97, 0) = 1 + rnd(3)
-		var_137(roomCoordX, var_97, 0) = 1 + rnd(3)
+		roomList2(var_98, var_97, 0) = 1 + rnd(3)
+		roomList2(roomCoordX, var_97, 0) = 1 + rnd(3)
 	}
 	if ( roomList8(var_98, var_97) == 1 ) {
-		var_137(var_98, var_97, 0) = 3 + rnd(3)
-		var_137(roomCoordX, var_97, 0) = 3 + rnd(3)
+		roomList2(var_98, var_97, 0) = 3 + rnd(3)
+		roomList2(roomCoordX, var_97, 0) = 3 + rnd(3)
 	}
 	var_97 += 1
 	goto *label_112
@@ -1442,16 +1442,16 @@
 	roomCoordX = (var_98 + 1) \ levelSizeX
 	roomCoordY = (var_97 + 1) \ levelSizeY
 	if ( roomList8(var_98, var_97) == 2 & roomList8(var_98, roomCoordY) == 4 ) {
-		var_137(var_98, roomCoordY, 1) = 3
+		roomList2(var_98, roomCoordY, 1) = 3
 	}
 	if ( roomList8(var_98, var_97) == 4 & roomList8(var_98, roomCoordY) == 2 ) {
-		var_137(var_98, roomCoordY, 1) = 3
+		roomList2(var_98, roomCoordY, 1) = 3
 	}
 	if ( roomList8(var_98, var_97) == 1 & roomList8(roomCoordX, var_97) == 3 ) {
-		var_137(roomCoordX, var_97, 0) = 3
+		roomList2(roomCoordX, var_97, 0) = 3
 	}
 	if ( roomList8(var_98, var_97) == 3 & roomList8(roomCoordX, var_97) == 1 ) {
-		var_137(roomCoordX, var_97, 0) = 3
+		roomList2(roomCoordX, var_97, 0) = 3
 	}
 	var_97 += 1
 	goto *label_116
@@ -1781,16 +1781,16 @@
 	goto *label_163
 *label_155
 	if ( var_152(var_98, var_97) / 1 \ 2 == 1 ) {
-		var_157(var_98 * 7 + 0, var_97 * 7 + var_137(var_98, var_97, 0)) = 0
+		var_157(var_98 * 7 + 0, var_97 * 7 + roomList2(var_98, var_97, 0)) = 0
 	}
 	if ( var_152(var_98, var_97) / 2 \ 2 == 1 ) {
-		var_157(var_98 * 7 + var_137(var_98, var_97, 1), var_97 * 7 + 0) = 0
+		var_157(var_98 * 7 + roomList2(var_98, var_97, 1), var_97 * 7 + 0) = 0
 	}
 	if ( var_152(var_98, var_97) / 4 \ 2 == 1 ) {
-		var_157(var_98 * 7 + 6, var_97 * 7 + var_137((var_98 + 1) \ levelSizeX, var_97, 0)) = 0
+		var_157(var_98 * 7 + 6, var_97 * 7 + roomList2((var_98 + 1) \ levelSizeX, var_97, 0)) = 0
 	}
 	if ( var_152(var_98, var_97) / 8 \ 2 == 1 ) {
-		var_157(var_98 * 7 + var_137(var_98, (var_97 + 1) \ levelSizeY, 1), var_97 * 7 + 6) = 0
+		var_157(var_98 * 7 + roomList2(var_98, (var_97 + 1) \ levelSizeY, 1), var_97 * 7 + 6) = 0
 	}
 	return
 *label_156
@@ -1820,39 +1820,39 @@
 *label_157
 	if ( var_147 == 0 ) {
 		dim var_161, 4
-		var_161(2) = var_137(var_98, var_97, 1)
-		var_161(1) = var_137(var_98, var_97, 0)
+		var_161(2) = roomList2(var_98, var_97, 1)
+		var_161(1) = roomList2(var_98, var_97, 0)
 		var_139 = 0
-		var_140 = var_137(var_98, var_97, 0)
+		var_140 = roomList2(var_98, var_97, 0)
 		gosub *label_156
 	}
 	if ( var_147 == 1 ) {
 		dim var_161, 4
-		var_161(0) = 6 - var_137(var_98, var_97, 1)
-		var_161(1) = var_137((var_98 + 1) \ levelSizeX, var_97, 0)
+		var_161(0) = 6 - roomList2(var_98, var_97, 1)
+		var_161(1) = roomList2((var_98 + 1) \ levelSizeX, var_97, 0)
 		var_139 = 6
-		var_140 = var_137((var_98 + 1) \ levelSizeX, var_97, 0)
+		var_140 = roomList2((var_98 + 1) \ levelSizeX, var_97, 0)
 		gosub *label_156
 	}
 	if ( var_147 == 2 ) {
 		dim var_161, 4
-		var_161(2) = var_137(var_98, (var_97 + 1) \ levelSizeY, 1)
-		var_161(3) = 6 - var_137(var_98, var_97, 0)
+		var_161(2) = roomList2(var_98, (var_97 + 1) \ levelSizeY, 1)
+		var_161(3) = 6 - roomList2(var_98, var_97, 0)
 		var_139 = 0
-		var_140 = var_137(var_98, var_97, 0)
+		var_140 = roomList2(var_98, var_97, 0)
 		gosub *label_156
 	}
 	if ( var_147 == 3 ) {
 		dim var_161, 4
-		var_161(0) = 6 - var_137(var_98, (var_97 + 1) \ levelSizeY, 1)
-		var_161(3) = 6 - var_137((var_98 + 1) \ levelSizeX, var_97, 0)
+		var_161(0) = 6 - roomList2(var_98, (var_97 + 1) \ levelSizeY, 1)
+		var_161(3) = 6 - roomList2((var_98 + 1) \ levelSizeX, var_97, 0)
 		var_139 = 6
-		var_140 = var_137((var_98 + 1) \ levelSizeX, var_97, 0)
+		var_140 = roomList2((var_98 + 1) \ levelSizeX, var_97, 0)
 		gosub *label_156
 	}
 	if ( var_147 == 4 ) {
 		dim var_161, 4
-		var_92 = var_137(var_98, var_97, 0) - var_137((var_98 + 1) \ levelSizeX, var_97, 0)
+		var_92 = roomList2(var_98, var_97, 0) - roomList2((var_98 + 1) \ levelSizeX, var_97, 0)
 		if ( var_92 >= 1 ) {
 			var_161(1) = var_92
 		}
@@ -1863,12 +1863,12 @@
 		var_161(1) += 1
 		var_161(3) += 1
 		var_139 = 0
-		var_140 = var_137(var_98, var_97, 0)
+		var_140 = roomList2(var_98, var_97, 0)
 		gosub *label_156
 	}
 	if ( var_147 == 5 ) {
 		dim var_161, 4
-		var_92 = var_137(var_98, var_97, 1) - var_137(var_98, (var_97 + 1) \ levelSizeY, 1)
+		var_92 = roomList2(var_98, var_97, 1) - roomList2(var_98, (var_97 + 1) \ levelSizeY, 1)
 		if ( var_92 >= 1 ) {
 			var_161(0) = var_92
 		}
@@ -1878,7 +1878,7 @@
 		var_161(3) = 6
 		var_161(0) += 1
 		var_161(2) += 1
-		var_139 = var_137(var_98, var_97, 1)
+		var_139 = roomList2(var_98, var_97, 1)
 		var_140 = 0
 		gosub *label_156
 	}
@@ -1963,7 +1963,7 @@
 					if ( var_163 == 0 & roomList8(playerRoomCoordX2, playerRoomCoordY2) != 4 ) {
 						var_174(cnt) = 1
 					}
-					if ( var_137(playerRoomCoordX2, playerRoomCoordY2, 0) == var_164 & var_163 == 0 & var_152(playerRoomCoordX2, playerRoomCoordY2) / 1 \ 2 == 1 ) {
+					if ( roomList2(playerRoomCoordX2, playerRoomCoordY2, 0) == var_164 & var_163 == 0 & var_152(playerRoomCoordX2, playerRoomCoordY2) / 1 \ 2 == 1 ) {
 						var_174(cnt) = 0
 					}
 				}
@@ -1976,7 +1976,7 @@
 					if ( var_164 == 0 & roomList8(playerRoomCoordX2, playerRoomCoordY2) != 1 ) {
 						var_174(cnt) = 1
 					}
-					if ( var_137(playerRoomCoordX2, playerRoomCoordY2, 1) == var_163 & var_164 == 0 & var_152(playerRoomCoordX2, playerRoomCoordY2) / 2 \ 2 == 1 ) {
+					if ( roomList2(playerRoomCoordX2, playerRoomCoordY2, 1) == var_163 & var_164 == 0 & var_152(playerRoomCoordX2, playerRoomCoordY2) / 2 \ 2 == 1 ) {
 						var_174(cnt) = 0
 					}
 				}
@@ -1989,7 +1989,7 @@
 					if ( var_163 == 6 & roomList8(playerRoomCoordX2, playerRoomCoordY2) != 2 ) {
 						var_174(cnt) = 1
 					}
-					if ( var_137((playerRoomCoordX2 + 1) \ levelSizeX, playerRoomCoordY2, 0) == var_164 & var_163 == 6 & var_152(playerRoomCoordX2, playerRoomCoordY2) / 4 \ 2 == 1 ) {
+					if ( roomList2((playerRoomCoordX2 + 1) \ levelSizeX, playerRoomCoordY2, 0) == var_164 & var_163 == 6 & var_152(playerRoomCoordX2, playerRoomCoordY2) / 4 \ 2 == 1 ) {
 						var_174(cnt) = 0
 					}
 				}
@@ -2002,7 +2002,7 @@
 					if ( var_164 == 6 & roomList8(playerRoomCoordX2, playerRoomCoordY2) != 3 ) {
 						var_174(cnt) = 1
 					}
-					if ( var_137(playerRoomCoordX2, (playerRoomCoordY2 + 1) \ levelSizeY, 1) == var_163 & var_164 == 6 & var_152(playerRoomCoordX2, playerRoomCoordY2) / 8 \ 2 == 1 ) {
+					if ( roomList2(playerRoomCoordX2, (playerRoomCoordY2 + 1) \ levelSizeY, 1) == var_163 & var_164 == 6 & var_152(playerRoomCoordX2, playerRoomCoordY2) / 8 \ 2 == 1 ) {
 						var_174(cnt) = 0
 					}
 				}
@@ -2122,7 +2122,7 @@
 			}
 			if ( var_171 == 0 ) {
 				if ( var_163 <= (-1) ) {
-					if ( var_152(playerRoomCoordX2, playerRoomCoordY2) / 1 \ 2 == 1 & var_137(playerRoomCoordX2, playerRoomCoordY2, 0) == var_164 & roomList8(playerRoomCoordX2, playerRoomCoordY2) != 4 ) {
+					if ( var_152(playerRoomCoordX2, playerRoomCoordY2) / 1 \ 2 == 1 & roomList2(playerRoomCoordX2, playerRoomCoordY2, 0) == var_164 & roomList8(playerRoomCoordX2, playerRoomCoordY2) != 4 ) {
 						var_163 += 7
 						var_180 = playerRoomCoordX2
 						var_181 = playerRoomCoordY2
@@ -2142,7 +2142,7 @@
 					}
 				}
 				if ( var_164 <= (-1) ) {
-					if ( var_152(playerRoomCoordX2, playerRoomCoordY2) / 2 \ 2 == 1 & var_137(playerRoomCoordX2, playerRoomCoordY2, 1) == var_163 & roomList8(playerRoomCoordX2, playerRoomCoordY2) != 1 ) {
+					if ( var_152(playerRoomCoordX2, playerRoomCoordY2) / 2 \ 2 == 1 & roomList2(playerRoomCoordX2, playerRoomCoordY2, 1) == var_163 & roomList8(playerRoomCoordX2, playerRoomCoordY2) != 1 ) {
 						var_164 += 7
 						var_180 = playerRoomCoordX2
 						var_181 = playerRoomCoordY2
@@ -2162,7 +2162,7 @@
 					}
 				}
 				if ( var_163 >= 7 ) {
-					if ( var_152(playerRoomCoordX2, playerRoomCoordY2) / 4 \ 2 == 1 & var_137((playerRoomCoordX2 + 1) \ levelSizeX, playerRoomCoordY2, 0) == var_164 & roomList8(playerRoomCoordX2, playerRoomCoordY2) != 2 ) {
+					if ( var_152(playerRoomCoordX2, playerRoomCoordY2) / 4 \ 2 == 1 & roomList2((playerRoomCoordX2 + 1) \ levelSizeX, playerRoomCoordY2, 0) == var_164 & roomList8(playerRoomCoordX2, playerRoomCoordY2) != 2 ) {
 						var_163 -= 7
 						var_180 = playerRoomCoordX2
 						var_181 = playerRoomCoordY2
@@ -2182,7 +2182,7 @@
 					}
 				}
 				if ( var_164 >= 7 ) {
-					if ( var_152(playerRoomCoordX2, playerRoomCoordY2) / 8 \ 2 == 1 & var_137(playerRoomCoordX2, (playerRoomCoordY2 + 1) \ levelSizeY, 1) == var_163 & roomList8(playerRoomCoordX2, playerRoomCoordY2) != 3 ) {
+					if ( var_152(playerRoomCoordX2, playerRoomCoordY2) / 8 \ 2 == 1 & roomList2(playerRoomCoordX2, (playerRoomCoordY2 + 1) \ levelSizeY, 1) == var_163 & roomList8(playerRoomCoordX2, playerRoomCoordY2) != 3 ) {
 						var_164 -= 7
 						var_180 = playerRoomCoordX2
 						var_181 = playerRoomCoordY2
@@ -2875,15 +2875,15 @@
 *label_176
 			gmode 3, , , 256
 			if ( var_152(var_202, var_203) / 1 \ 2 == 1 & roomList8(var_202, var_203) != 4 ) {
-				pos roomCoordX - 16, var_137(var_202, var_203, 0) * 12 - 24 + roomCoordY
+				pos roomCoordX - 16, roomList2(var_202, var_203, 0) * 12 - 24 + roomCoordY
 				gcopy 3 + levelStyle, var_113 * 16, 30 * 12, 16, 36
 			}
 			if ( var_152(var_202, var_203) / 2 \ 2 == 1 & roomList8(var_202, var_203) != 1 ) {
-				pos var_137(var_202, var_203, 1) * 16 + roomCoordX, roomCoordY - 24
+				pos roomList2(var_202, var_203, 1) * 16 + roomCoordX, roomCoordY - 24
 				gcopy 3 + levelStyle, var_113 * 16, 28 * 12, 16, 24
 			}
 			if ( var_152(var_202, var_203) / 4 \ 2 == 1 & roomList8(var_202, var_203) != 2 ) {
-				pos roomCoordX + 7 * 16, var_137((var_202 + 1) \ levelSizeX, var_203, 0) * 12 - 24 + roomCoordY
+				pos roomCoordX + 7 * 16, roomList2((var_202 + 1) \ levelSizeX, var_203, 0) * 12 - 24 + roomCoordY
 				gcopy 3 + levelStyle, var_113 * 16, 33 * 12, 16, 36
 			}
 			if ( roomList8(var_202, var_203) == 1 ) {
@@ -2893,7 +2893,7 @@
 				var_205 = 0
 			}
 			if ( var_152(var_202, var_203) / 8 \ 2 == 1 & roomList8(var_202, var_203) != 3 ) {
-				pos var_137(var_202, (var_203 + 1) \ levelSizeY, 1) * 16 + roomCoordX, roomCoordY + 7 * 12 - var_115 * 12 + var_205
+				pos roomList2(var_202, (var_203 + 1) \ levelSizeY, 1) * 16 + roomCoordX, roomCoordY + 7 * 12 - var_115 * 12 + var_205
 				gcopy 3 + levelStyle, var_113 * 16, 36 * 12, 16, 12
 			}
 			if ( roomList8(var_202, var_203) >= 1 ) {
@@ -2918,19 +2918,19 @@
 					var_205 = 12 * 7
 				}
 				if ( var_152(var_206, var_207) / 1 \ 2 == 1 & roomList8(var_206, var_207) != 4 ) {
-					pos roomCoordX - 16 + var_204, var_137(var_206, var_207, 0) * 12 - 24 + roomCoordY + var_205
+					pos roomCoordX - 16 + var_204, roomList2(var_206, var_207, 0) * 12 - 24 + roomCoordY + var_205
 					gcopy 3 + levelStyle, var_113 * 16, 30 * 12, 16, 36
 				}
 				if ( var_152(var_206, var_207) / 2 \ 2 == 1 & roomList8(var_206, var_207) != 1 ) {
-					pos var_137(var_206, var_207, 1) * 16 + roomCoordX + var_204, roomCoordY - 24 + var_205
+					pos roomList2(var_206, var_207, 1) * 16 + roomCoordX + var_204, roomCoordY - 24 + var_205
 					gcopy 3 + levelStyle, var_113 * 16, 28 * 12, 16, 24
 				}
 				if ( var_152(var_206, var_207) / 4 \ 2 == 1 & roomList8(var_206, var_207) != 2 ) {
-					pos roomCoordX + 7 * 16 + var_204, var_137((var_206 + 1) \ levelSizeX, var_207, 0) * 12 - 24 + roomCoordY + var_205
+					pos roomCoordX + 7 * 16 + var_204, roomList2((var_206 + 1) \ levelSizeX, var_207, 0) * 12 - 24 + roomCoordY + var_205
 					gcopy 3 + levelStyle, var_113 * 16, 33 * 12, 16, 36
 				}
 				if ( var_152(var_206, var_207) / 8 \ 2 == 1 & roomList8(var_206, var_207) != 3 ) {
-					pos var_137(var_206, (var_207 + 1) \ levelSizeY, 1) * 16 + roomCoordX + var_204, roomCoordY + 7 * 12 - var_115 * 12 + var_205
+					pos roomList2(var_206, (var_207 + 1) \ levelSizeY, 1) * 16 + roomCoordX + var_204, roomCoordY + 7 * 12 - var_115 * 12 + var_205
 					gcopy 3 + levelStyle, var_113 * 16, 36 * 12, 16, 12
 				}
 			}
@@ -4288,7 +4288,7 @@
 	var_199 = 0
 	var_198 = 0
 	var_197 = 0
-	var_137 = 0
+	roomList2 = 0
 	playerDeathAnimFrame = 0
 	var_150 = 0
 	var_151 = 0
