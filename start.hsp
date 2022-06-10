@@ -70,7 +70,7 @@
 			await 0
 		loop
 	}
-	var_100 = 50
+	gameSeVolume = 50
 	var_101 = 50
 	gosub *label_194
 	var_102 = 1
@@ -177,15 +177,15 @@
 		}
 		if ( menuItemSelected == 2 & var_116(0) * var_116(2) == 0 ) {
 			if ( var_116(0) == 1 | var_116(0) >= 8 ) {
-				if ( var_100 >= 5 ) {
-					var_100 -= 5
+				if ( gameSeVolume >= 5 ) {
+					gameSeVolume -= 5
 					gosub *label_194
 					gameSePlaying(34) = 1
 				}
 			}
 			if ( var_116(2) == 1 | var_116(2) >= 8 ) {
-				if ( var_100 <= 95 ) {
-					var_100 += 5
+				if ( gameSeVolume <= 95 ) {
+					gameSeVolume += 5
 					gosub *label_194
 					gameSePlaying(34) = 1
 				}
@@ -381,10 +381,10 @@
 		pos roomCoordX + 5 * 8 + 4, roomCoordY + 11 * 8 + 4
 		gcopy 5, 0, 32, 10 * 8, 8
 		pos roomCoordX + 5 * 8 + 5, roomCoordY + 10 * 8
-		gcopy 5, 80 - var_100 * 72 / 100, 40, var_100 * 72 / 100, 8
+		gcopy 5, 80 - gameSeVolume * 72 / 100, 40, gameSeVolume * 72 / 100, 8
 		pos roomCoordX + 5 * 8 + 5, roomCoordY + 11 * 8 + 4
 		gcopy 5, 80 - var_101 * 72 / 100, 40, var_101 * 72 / 100, 8
-		pos roomCoordX + 5 * 8 + 4 + var_100 * 72 / 100, roomCoordY + 10 * 8
+		pos roomCoordX + 5 * 8 + 4 + gameSeVolume * 72 / 100, roomCoordY + 10 * 8
 		gcopy 5, 80, 32, 8, 8
 		pos roomCoordX + 5 * 8 + 4 + var_101 * 72 / 100, roomCoordY + 11 * 8 + 4
 		gcopy 5, 80, 32, 8, 8
@@ -2474,15 +2474,15 @@
 					}
 					if ( menuItemSelected == 3 & var_116(0) * var_116(2) == 0 ) {
 						if ( var_116(0) == 1 | var_116(0) >= 8 ) {
-							if ( var_100 >= 5 ) {
-								var_100 -= 5
+							if ( gameSeVolume >= 5 ) {
+								gameSeVolume -= 5
 								gosub *label_194
 								gameSePlaying(30) = 1
 							}
 						}
 						if ( var_116(2) == 1 | var_116(2) >= 8 ) {
-							if ( var_100 <= 95 ) {
-								var_100 += 5
+							if ( gameSeVolume <= 95 ) {
+								gameSeVolume += 5
 								gosub *label_194
 								gameSePlaying(30) = 1
 							}
@@ -3692,10 +3692,10 @@
 			pos roomCoordX + 5 * 8 + 4, roomCoordY + 11 * 8
 			gcopy 2, 96, 208, 8 * 8, 8
 			pos roomCoordX + 5 * 8 + 4, roomCoordY + 10 * 8
-			gcopy 2, 96, 216, var_100 * 56 / 100, 8
+			gcopy 2, 96, 216, gameSeVolume * 56 / 100, 8
 			pos roomCoordX + 5 * 8 + 4, roomCoordY + 11 * 8
 			gcopy 2, 96, 216, var_101 * 56 / 100, 8
-			pos roomCoordX + 5 * 8 + 4 + var_100 * 56 / 100, roomCoordY + 10 * 8
+			pos roomCoordX + 5 * 8 + 4 + gameSeVolume * 56 / 100, roomCoordY + 10 * 8
 			gcopy 2, 160, 208, 8, 8
 			pos roomCoordX + 5 * 8 + 4 + var_101 * 56 / 100, roomCoordY + 11 * 8
 			gcopy 2, 160, 208, 8, 8
@@ -4386,7 +4386,7 @@
 	}
 	return
 *label_193
-	if ( var_100 >= 1 ) {
+	if ( gameSeVolume >= 1 ) {
 		repeat gameSeCount
 			if ( gameSePlaying(cnt) == 1 ) {
 				ds_play gameSeCount * var_96(cnt) + cnt
@@ -4404,7 +4404,7 @@
 	return
 *label_194
 	repeat gameSeCount * var_94
-		ds_vol cnt, var_100
+		ds_vol cnt, gameSeVolume
 	loop
 	repeat 50 + 1
 		ds_vol cnt + gameMuBufferStartId, var_101
