@@ -1921,7 +1921,7 @@
 	return
 *label_163
 	dim var_116, 20
-	dim var_162, 20
+	dim gameKeyPressed, 20
 	var_163 = 3
 	var_164 = 3
 	dim roomListVisited, levelSizeX, levelSizeY
@@ -4355,20 +4355,20 @@
 	return
 *label_190
 	if ( ginfo(2) == 0 ) {
-		getkey var_162(0), 37
-		getkey var_162(1), 38
-		getkey var_162(2), 39
-		getkey var_162(3), 40
-		getkey var_162(4), 90
-		getkey var_162(5), 88
-		getkey var_162(6), 65
-		getkey var_162(7), 84
-		getkey var_162(8), 82
-		getkey var_162(19), 27
+		getkey gameKeyPressed(0), 37
+		getkey gameKeyPressed(1), 38
+		getkey gameKeyPressed(2), 39
+		getkey gameKeyPressed(3), 40
+		getkey gameKeyPressed(4), 90
+		getkey gameKeyPressed(5), 88
+		getkey gameKeyPressed(6), 65
+		getkey gameKeyPressed(7), 84
+		getkey gameKeyPressed(8), 82
+		getkey gameKeyPressed(19), 27
 		var_106 = 0
 *label_191
 		exgoto var_106, 1, 20, *label_192
-		if ( var_162(var_106) == 1 ) {
+		if ( gameKeyPressed(var_106) == 1 ) {
 			var_116(var_106) += 1
 		}
 		else {
@@ -4377,7 +4377,7 @@
 		var_106 += 1
 		goto *label_191
 *label_192
-		if ( var_162(19) == 1 ) {
+		if ( gameKeyPressed(19) == 1 ) {
 			goto *label_199
 		}
 	}
