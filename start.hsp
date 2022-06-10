@@ -144,7 +144,7 @@
 	loop
 	var_115 = -1
 *label_025
-	gosub *label_190
+	gosub *gameInputsRead
 	if ( roomCoordX8 == 0 & var_116(1) * var_116(3) == 0 ) {
 		if ( var_116(1) == 1 | var_116(1) >= 8 ) {
 			menuItemSelected = (menuItemSelected + 4) \ 5
@@ -1950,7 +1950,7 @@
 *label_164
 	levelTimePlaying = timeGetTime() - levelTimeStarted
 	if ( var_134 * 1000 / gameFrameRate <= levelTimePlaying ) {
-		gosub *label_190
+		gosub *gameInputsRead
 		if ( var_171 == 0 ) {
 			dim var_174, 4
 			repeat 4
@@ -3890,7 +3890,7 @@
 *label_188
 	levelTimePlaying = timeGetTime() - levelTimeStarted
 	if ( levelClearAnimFrame * 1000 / gameFrameRate <= levelTimePlaying ) {
-		gosub *label_190
+		gosub *gameInputsRead
 		redraw 0
 		color 0, 0, 0
 		boxf
@@ -4353,7 +4353,7 @@
 	var_185 = 0
 	dim var_174, 4
 	return
-*label_190
+*gameInputsRead
 	if ( ginfo(2) == 0 ) {
 		getkey gameKeyPressed(0), 37
 		getkey gameKeyPressed(1), 38
