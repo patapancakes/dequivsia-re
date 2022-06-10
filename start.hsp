@@ -2007,11 +2007,11 @@
 					}
 				}
 			loop
-			if ( var_116(6) == 0 | var_175 >= 1 ) {
+			if ( var_116(6) == 0 | roomTransitionFrame >= 1 ) {
 				if ( var_116(0) * var_116(2) == 0 & var_116(1) * var_116(3) == 0 ) {
 					var_147 = 0
 					var_176 = 0
-					if ( var_175 == 0 ) {
+					if ( roomTransitionFrame == 0 ) {
 						repeat 4
 							var_92 = (cnt + 1) \ 4
 							var_126 = (cnt + 3) \ 4
@@ -2065,19 +2065,19 @@
 			}
 			var_126 = var_163
 			var_127 = var_164
-			if ( var_178 \ 4 == 1 & var_147 == 0 & var_175 == 0 ) {
+			if ( var_178 \ 4 == 1 & var_147 == 0 & roomTransitionFrame == 0 ) {
 				var_163 -= 1
 			}
-			if ( var_178 \ 4 == 1 & var_147 == 1 & var_175 == 0 ) {
+			if ( var_178 \ 4 == 1 & var_147 == 1 & roomTransitionFrame == 0 ) {
 				var_164 -= 1
 			}
-			if ( var_178 \ 4 == 1 & var_147 == 2 & var_175 == 0 ) {
+			if ( var_178 \ 4 == 1 & var_147 == 2 & roomTransitionFrame == 0 ) {
 				var_163 += 1
 			}
-			if ( var_178 \ 4 == 1 & var_147 == 3 & var_175 == 0 ) {
+			if ( var_178 \ 4 == 1 & var_147 == 3 & roomTransitionFrame == 0 ) {
 				var_164 += 1
 			}
-			if ( var_178 \ 4 == 1 & var_175 == 0 ) {
+			if ( var_178 \ 4 == 1 & roomTransitionFrame == 0 ) {
 				var_167 = var_147
 			}
 			if ( var_178 \ 8 == 2 ) {
@@ -2114,7 +2114,7 @@
 			}
 			else {
 			}
-			if ( var_155(var_145, var_146) == 8 & var_175 == 1 ) {
+			if ( var_155(var_145, var_146) == 8 & roomTransitionFrame == 1 ) {
 				var_171 = 2
 				menuItemSelected = 0
 				var_125 = 0
@@ -2127,7 +2127,7 @@
 						var_180 = var_145
 						var_181 = var_146
 						var_145 = (var_145 - 1 + levelSizeX) \ levelSizeX
-						var_175 = 8
+						roomTransitionFrame = 8
 						var_95(8) = 1
 					}
 					else {
@@ -2147,7 +2147,7 @@
 						var_180 = var_145
 						var_181 = var_146
 						var_146 = (var_146 - 1 + levelSizeY) \ levelSizeY
-						var_175 = 8
+						roomTransitionFrame = 8
 						var_95(9) = 1
 					}
 					else {
@@ -2167,7 +2167,7 @@
 						var_180 = var_145
 						var_181 = var_146
 						var_145 = (var_145 + 1) \ levelSizeX
-						var_175 = 8
+						roomTransitionFrame = 8
 						var_95(10) = 1
 					}
 					else {
@@ -2187,7 +2187,7 @@
 						var_180 = var_145
 						var_181 = var_146
 						var_146 = (var_146 + 1) \ levelSizeY
-						var_175 = 8
+						roomTransitionFrame = 8
 						var_95(11) = 1
 					}
 					else {
@@ -2202,11 +2202,11 @@
 					}
 				}
 			}
-			if ( var_175 >= 1 ) {
-				var_175 -= 1
+			if ( roomTransitionFrame >= 1 ) {
+				roomTransitionFrame -= 1
 			}
 			else {
-				var_175 = 0
+				roomTransitionFrame = 0
 			}
 			if ( var_116(6) >= 1 & playerClearAnimFrame == 0 ) {
 				var_176 = 0
@@ -2275,7 +2275,7 @@
 				var_188 = var_182
 				var_182 = -1
 			}
-			if ( var_175 == 7 ) {
+			if ( roomTransitionFrame == 7 ) {
 				var_92 = 0
 				if ( levelStyle == 0 ) {
 					var_92 = 43
@@ -2297,7 +2297,7 @@
 			if ( var_189 >= 1 ) {
 				var_189 -= 1
 			}
-			if ( var_175 >= 1 ) {
+			if ( roomTransitionFrame >= 1 ) {
 				var_189 = 0
 			}
 			if ( playerClearAnimFrame == 1 ) {
@@ -2348,7 +2348,7 @@
 					}
 				}
 			}
-			if ( var_175 == 5 | var_182 == (-1) | var_134 == 12 ) {
+			if ( roomTransitionFrame == 5 | var_182 == (-1) | var_134 == 12 ) {
 				var_98 = var_145 - 6 + levelSizeX
 *label_165
 				exgoto var_98, 1, var_145 + 7 + levelSizeX, *label_168
@@ -2780,18 +2780,18 @@
 		if ( var_156(var_145, var_146) == 1 & var_164 <= 3 ) {
 			var_127 -= (var_164 - 3) * 12
 		}
-		if ( var_175 >= 1 ) {
+		if ( roomTransitionFrame >= 1 ) {
 			if ( var_167 == 0 ) {
-				var_126 -= var_175 * 16 * 7 / 8 * var_175 / 8
+				var_126 -= roomTransitionFrame * 16 * 7 / 8 * roomTransitionFrame / 8
 			}
 			if ( var_167 == 1 ) {
-				var_127 -= var_175 * 12 * 7 / 8 * var_175 / 8
+				var_127 -= roomTransitionFrame * 12 * 7 / 8 * roomTransitionFrame / 8
 			}
 			if ( var_167 == 2 ) {
-				var_126 += var_175 * 16 * 7 / 8 * var_175 / 8
+				var_126 += roomTransitionFrame * 16 * 7 / 8 * roomTransitionFrame / 8
 			}
 			if ( var_167 == 3 ) {
-				var_127 += var_175 * 12 * 7 / 8 * var_175 / 8
+				var_127 += roomTransitionFrame * 12 * 7 / 8 * roomTransitionFrame / 8
 			}
 			var_112 = 2
 		}
@@ -3296,14 +3296,14 @@
 			var_106 += 1
 			goto *label_177
 *label_182
-			if ( var_175 >= 1 ) {
+			if ( roomTransitionFrame >= 1 ) {
 				if ( cnt == 0 ) {
-					gmode 3, , , var_175 * 32
+					gmode 3, , , roomTransitionFrame * 32
 					pos var_126 - 16, var_127 - 48
 					gcopy 3 + levelStyle, 208, 288, 8 * 18, 12 * 11
 				}
 				if ( cnt == 1 ) {
-					gmode 3, , , 256 - var_175 * 32
+					gmode 3, , , 256 - roomTransitionFrame * 32
 					pos var_126 - 16, var_127 - 48
 					gcopy 3 + levelStyle, 208, 288, 8 * 18, 12 * 11
 				}
@@ -3345,18 +3345,18 @@
 		}
 		var_126 = var_200 + 128
 		var_127 = var_201 + 8
-		if ( var_175 >= 1 ) {
+		if ( roomTransitionFrame >= 1 ) {
 			if ( var_167 == 0 ) {
-				var_126 -= var_175 * var_175 / 8
+				var_126 -= roomTransitionFrame * roomTransitionFrame / 8
 			}
 			if ( var_167 == 1 ) {
-				var_127 -= var_175 * var_175 / 8
+				var_127 -= roomTransitionFrame * roomTransitionFrame / 8
 			}
 			if ( var_167 == 2 ) {
-				var_126 += var_175 * var_175 / 8
+				var_126 += roomTransitionFrame * roomTransitionFrame / 8
 			}
 			if ( var_167 == 3 ) {
-				var_127 += var_175 * var_175 / 8
+				var_127 += roomTransitionFrame * roomTransitionFrame / 8
 			}
 		}
 		if ( var_156(var_145, var_146) >= 1 ) {
@@ -3481,19 +3481,19 @@
 			pos var_126, var_127
 			gcopy 2, 4 * 8, 11 * 8, 8, 8
 		}
-		if ( var_175 >= 8 ) {
+		if ( roomTransitionFrame >= 8 ) {
 			var_92 = 4
 		}
-		if ( var_175 >= 6 & var_175 <= 7 ) {
+		if ( roomTransitionFrame >= 6 & roomTransitionFrame <= 7 ) {
 			var_92 = 3
 		}
-		if ( var_175 >= 4 & var_175 <= 5 ) {
+		if ( roomTransitionFrame >= 4 & roomTransitionFrame <= 5 ) {
 			var_92 = 2
 		}
-		if ( var_175 >= 1 & var_175 <= 3 ) {
+		if ( roomTransitionFrame >= 1 & roomTransitionFrame <= 3 ) {
 			var_92 = 1
 		}
-		if ( var_175 == 0 ) {
+		if ( roomTransitionFrame == 0 ) {
 			var_92 = 0
 		}
 		pos var_200 + 8 * 15, var_201
@@ -4322,7 +4322,7 @@
 	menuItemSelected = 0
 	var_152 = 0
 	var_110 = 0
-	var_175 = 0
+	roomTransitionFrame = 0
 	var_160 = 0
 	var_147 = 0
 	var_138 = 0
