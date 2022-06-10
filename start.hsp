@@ -2303,7 +2303,7 @@
 	var_167 = 3
 	playerLivesLeft = 2
 	roomTimeStarted = timeGetTime()
-	var_170 = 32
+	gameFrameRate = 32
 	var_134 = 0
 	var_171 = 3
 	if ( roomType == 0 ) {
@@ -2323,7 +2323,7 @@
 	}
 *label_164
 	roomTimePlaying = timeGetTime() - roomTimeStarted
-	if ( var_134 * 1000 / var_170 <= roomTimePlaying ) {
+	if ( var_134 * 1000 / gameFrameRate <= roomTimePlaying ) {
 		gosub *label_190
 		if ( var_171 == 0 ) {
 			dim var_174, 4
@@ -2707,9 +2707,9 @@
 						var_92 = 0
 						repeat 10
 							if ( var_92 == 0 ) {
-								if ( var_103(cnt, roomType) >= var_191 * 100 / var_170 | var_103(cnt, roomType) == 0 ) {
+								if ( var_103(cnt, roomType) >= var_191 * 100 / gameFrameRate | var_103(cnt, roomType) == 0 ) {
 									var_126 = var_103(cnt, roomType)
-									var_103(cnt, roomType) = var_191 * 100 / var_170
+									var_103(cnt, roomType) = var_191 * 100 / gameFrameRate
 									var_92 = 1
 								}
 							}
@@ -3894,10 +3894,10 @@
 			}
 		loop
 		if ( playerClearAnimFrame == 0 ) {
-			var_92 = var_192 * 100 / var_170
+			var_92 = var_192 * 100 / gameFrameRate
 		}
 		else {
-			var_92 = var_191 * 100 / var_170
+			var_92 = var_191 * 100 / gameFrameRate
 		}
 		if ( var_92 >= 6000000 ) {
 			var_92 = 5999999
@@ -4140,7 +4140,7 @@
 			gcopy 2, 14 * 8, 13 * 8, 5 * 8, 16
 			pos var_126 + 6 * 8 - 2, var_127 + 6 * 8 + 4
 			gcopy 5, 6 * 8 * roomType, 19 * 8, 6 * 8, 16
-			var_92 = var_191 * 100 / var_170
+			var_92 = var_191 * 100 / gameFrameRate
 			if ( var_92 >= 1000 ) {
 				var_132 = 1
 			}
@@ -4257,13 +4257,13 @@
 	}
 	ds_vol var_99 + 24 + var_123, var_101
 	roomTimeStarted = timeGetTime()
-	var_170 = 32
+	gameFrameRate = 32
 	var_134 = 0
 	var_208 = 0
 	var_209 = 0
 *label_188
 	roomTimePlaying = timeGetTime() - roomTimeStarted
-	if ( var_208 * 1000 / var_170 <= roomTimePlaying ) {
+	if ( var_208 * 1000 / gameFrameRate <= roomTimePlaying ) {
 		gosub *label_190
 		redraw 0
 		color 0, 0, 0
