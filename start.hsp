@@ -112,7 +112,7 @@
 	boxf
 	gosub *gameVarsInit
 	gameMuToPlay = 5
-	var_110 = 1
+	gameMuStopped = 1
 	menuItemSelected = 0
 	roomCoordX8 = 0
 	roomCoordY8 = rnd(3)
@@ -264,7 +264,7 @@
 				}
 				gosub *label_193
 				gameMuToPlay = 0
-				var_110 = 1
+				gameMuStopped = 1
 				gosub *label_195
 				goto *label_032
 			}
@@ -272,7 +272,7 @@
 				if ( var_103(0, menuItemSelected) >= 1 ) {
 					levelClearAnimType = menuItemSelected
 					gameMuToPlay = 0
-					var_110 = 1
+					gameMuStopped = 1
 					gosub *label_195
 					goto *label_187
 				}
@@ -572,7 +572,7 @@
 	pos 0, 0
 	gzoom 256 * (1 + gameWindowSize), 144 * (1 + gameWindowSize), 0, 0, 0, 256, 144
 	gameMuToPlay = 0
-	var_110 = 1
+	gameMuStopped = 1
 	gosub *label_195
 	gosub *gameVarsInit
 	redraw 0
@@ -2543,7 +2543,7 @@
 					if ( playerDeathAnimFrame == 0 ) {
 						if ( playerLivesLeft <= 0 ) {
 							gameMuToPlay = 0
-							var_110 = 1
+							gameMuStopped = 1
 						}
 					}
 					playerDeathAnimFrame += 1
@@ -2559,7 +2559,7 @@
 					if ( playerDeathAnimFrame == 36 ) {
 						gameSeToPlay(27) = 1
 						gameMuToPlay = 21
-						var_110 = 1
+						gameMuStopped = 1
 					}
 					if ( playerDeathAnimFrame >= 36 ) {
 						if ( var_179 == 0 ) {
@@ -2623,7 +2623,7 @@
 							playerDeathAnimFrame += 1
 							if ( playerDeathAnimFrame == 1 ) {
 								gameMuToPlay = 22
-								var_110 = 1
+								gameMuStopped = 1
 								if ( var_102 <= 3 ) {
 									if ( levelType + 1 >= var_102 ) {
 										var_102 += 1
@@ -2639,7 +2639,7 @@
 									if ( var_116(4) == 1 & var_195 >= 74 ) {
 										levelClearAnimType = levelType
 										gameMuToPlay = 0
-										var_110 = 1
+										gameMuStopped = 1
 										gosub *label_195
 										goto *label_187
 									}
@@ -2705,7 +2705,7 @@
 					var_196 = var_134 + 3420 * 32 / 30 + 15
 				}
 				gameMuToPlay = var_194 + 1
-				var_110 = 1
+				gameMuStopped = 1
 				if ( var_104(var_194 + 8) == 0 ) {
 					var_104(var_194 + 8) = 1
 				}
@@ -4321,7 +4321,7 @@
 	var_125 = 0
 	menuItemSelected = 0
 	roomList3 = 0
-	var_110 = 0
+	gameMuStopped = 0
 	roomTransitionFrame = 0
 	var_160 = 0
 	var_147 = 0
@@ -4411,7 +4411,7 @@
 	loop
 	return
 *label_195
-	if ( var_110 == 1 ) {
+	if ( gameMuStopped == 1 ) {
 		var_92 = 0
 *label_196
 		exgoto var_92, 1, 50, *gamePlayMu
@@ -4451,7 +4451,7 @@
 		if ( roomCoordX == 0 ) {
 			ds_loop gameMuBufferStartId + gameMuToPlay
 		}
-		var_110 = 0
+		gameMuStopped = 0
 	}
 	return
 *gameWindowCreate
