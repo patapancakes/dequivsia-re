@@ -3896,9 +3896,9 @@
 		boxf
 		if ( levelClearAnimType == 0 ) {
 			if ( levelClearAnimFrame == 0 ) {
-				var_210 = "0011223344556677001122334455899::;;;;;<<44556677@ABCDEFGHHIIJJKK"
-				var_210 += "TTUUVVWWPPQQRRSSTTUUVVWWPPQQRRSS`aabbccddeeffgghhhhh"
-				var_210 += "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
+				levelClearAnimPlayerTimeline = "0011223344556677001122334455899::;;;;;<<44556677@ABCDEFGHHIIJJKK"
+				levelClearAnimPlayerTimeline += "TTUUVVWWPPQQRRSSTTUUVVWWPPQQRRSS`aabbccddeeffgghhhhh"
+				levelClearAnimPlayerTimeline += "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
 				var_211 = "6666666666666666666666666666555555555565666666666675555555555555"
 				var_211 += "66666666666666666666666666666666555555555>6655555555"
 				var_211 += "555555555555555555555555555555555555555555555555555555555555555555"
@@ -3926,7 +3926,7 @@
 			}
 			pos var_212, var_213
 			var_92 = 0
-			var_92 = peek(var_210, levelClearAnimFrame / 2) - 48
+			var_92 = peek(levelClearAnimPlayerTimeline, levelClearAnimFrame / 2) - 48
 			if ( var_92 >= 48 ) {
 				gcopy 10, var_92 \ 16 * 48, var_92 / 16 * 48, 48, 48
 			}
@@ -3946,13 +3946,13 @@
 		}
 		if ( levelClearAnimType == 1 ) {
 			if ( levelClearAnimFrame == 0 ) {
-				var_210 = "////////////////////////////////////////////////"
-				var_210 += "////////////////////////"
-				var_210 += "00112233445566778899::;;<<==>>??8899::;;<<==@@@@"
-				var_210 += "@@AABBCCDDEEFFGGHHII@@BBDDEEFGHI@BDEFGHI@BDEFGHI"
-				var_210 += "@BDEFGHIJKLMNOPQRSTUVWXY"
-				var_210 += "`abcdefghijklmnohijklmnoprtv"
-				var_210 += "................................................"
+				levelClearAnimPlayerTimeline = "////////////////////////////////////////////////"
+				levelClearAnimPlayerTimeline += "////////////////////////"
+				levelClearAnimPlayerTimeline += "00112233445566778899::;;<<==>>??8899::;;<<==@@@@"
+				levelClearAnimPlayerTimeline += "@@AABBCCDDEEFFGGHHII@@BBDDEEFGHI@BDEFGHI@BDEFGHI"
+				levelClearAnimPlayerTimeline += "@BDEFGHIJKLMNOPQRSTUVWXY"
+				levelClearAnimPlayerTimeline += "`abcdefghijklmnohijklmnoprtv"
+				levelClearAnimPlayerTimeline += "................................................"
 				var_211 = ""
 				var_211 += "555555555555555555555555555555555555555555555555"
 				var_211 += "555555555555555555555555"
@@ -3990,7 +3990,7 @@
 			}
 			pos var_212, var_213
 			var_92 = 0
-			var_92 = peek(var_210, levelClearAnimFrame / 2) - 48
+			var_92 = peek(levelClearAnimPlayerTimeline, levelClearAnimFrame / 2) - 48
 			if ( levelClearAnimFrame <= 431 ) {
 				gcopy 11, var_92 \ 16 * 32, var_92 / 16 * 48, 32, 48
 			}
@@ -4011,13 +4011,13 @@
 		}
 		if ( levelClearAnimType == 2 ) {
 			if ( levelClearAnimFrame == 0 ) {
-				var_210 = "001111112233333344555555667777NN8999:;;;<===>???8999:;;;<===>???"
-				var_210 += "OBBB@ABBBBBB@ABBBBBB@ABBBBBBEFFF@ABBCDDD@ABBEFFF@ABBCDDAEGHIJKLM"
-				var_210 += "PQRSTUVWPQRXYZ[]^abcdefg`abcdefghiiijkkklmmmnooohiiijkkkpqrstuvw"
-				var_210 += "0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
-				var_210 += "`abcdefghijklmnopqrstuvw"
-				var_210 += "0123456789:;@ABCDEFGHIJKPQRSTUVWXYZ[`abcdeffghhhh"
-				var_210 += "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
+				levelClearAnimPlayerTimeline = "001111112233333344555555667777NN8999:;;;<===>???8999:;;;<===>???"
+				levelClearAnimPlayerTimeline += "OBBB@ABBBBBB@ABBBBBB@ABBBBBBEFFF@ABBCDDD@ABBEFFF@ABBCDDAEGHIJKLM"
+				levelClearAnimPlayerTimeline += "PQRSTUVWPQRXYZ[]^abcdefg`abcdefghiiijkkklmmmnooohiiijkkkpqrstuvw"
+				levelClearAnimPlayerTimeline += "0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
+				levelClearAnimPlayerTimeline += "`abcdefghijklmnopqrstuvw"
+				levelClearAnimPlayerTimeline += "0123456789:;@ABCDEFGHIJKPQRSTUVWXYZ[`abcdeffghhhh"
+				levelClearAnimPlayerTimeline += "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
 				var_214 = "0000000000000000000000000000000000000000000000000000000000000000"
 				var_214 += "0000000000000000000000000000000000000000000000000000000000000000"
 				var_214 += "0000000000000000000000000000000000000000000000000000000000000000"
@@ -4077,11 +4077,11 @@
 			pos var_212, var_213
 			var_92 = 0
 			if ( levelClearAnimFrame <= 384 - 1 ) {
-				var_92 = peek(var_210, levelClearAnimFrame / 2) - 48
+				var_92 = peek(levelClearAnimPlayerTimeline, levelClearAnimFrame / 2) - 48
 				roomCoordX = peek(var_214, levelClearAnimFrame / 2) - 48
 			}
 			else {
-				var_92 = peek(var_210, (levelClearAnimFrame + 128) / 2 * 3 / 4) - 48
+				var_92 = peek(levelClearAnimPlayerTimeline, (levelClearAnimFrame + 128) / 2 * 3 / 4) - 48
 				roomCoordX = peek(var_214, (levelClearAnimFrame + 128) / 2 * 3 / 4) - 48
 			}
 			gcopy 12, var_92 \ 16 * 32, var_92 / 16 * 48 + roomCoordX * 48 * 5, 32, 48
@@ -4104,14 +4104,14 @@
 		}
 		if ( levelClearAnimType == 3 ) {
 			if ( levelClearAnimFrame == 0 ) {
-				var_210 = "000000000000000000000000000000000000000000000000000000011111"
-				var_210 += "222222222222222222222222222222222222222222222222222222233333"
-				var_210 += "444444444444444444444444444444444444444444444444444444444444"
-				var_210 += "55555555555555555555555555555566666666667777788888@@@@@AAAAA"
-				var_210 += "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
-				var_210 += "GCCCCCCCCCCCCCCCCCCCCCCCCCCCCCGDDDDDDDDDDDDDDDDDDDGEEEEEEEEE"
-				var_210 += "EEEEEEEEEEEEEGFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
-				var_210 += "H///////////////////////////////////////////////////////////"
+				levelClearAnimPlayerTimeline = "000000000000000000000000000000000000000000000000000000011111"
+				levelClearAnimPlayerTimeline += "222222222222222222222222222222222222222222222222222222233333"
+				levelClearAnimPlayerTimeline += "444444444444444444444444444444444444444444444444444444444444"
+				levelClearAnimPlayerTimeline += "55555555555555555555555555555566666666667777788888@@@@@AAAAA"
+				levelClearAnimPlayerTimeline += "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+				levelClearAnimPlayerTimeline += "GCCCCCCCCCCCCCCCCCCCCCCCCCCCCCGDDDDDDDDDDDDDDDDDDDGEEEEEEEEE"
+				levelClearAnimPlayerTimeline += "EEEEEEEEEEEEEGFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
+				levelClearAnimPlayerTimeline += "H///////////////////////////////////////////////////////////"
 				var_212 = 100
 				var_213 = 60
 				repeat 4
@@ -4146,7 +4146,7 @@
 			color 0, 0, 0
 			pos var_212, var_213
 			var_92 = 0
-			var_92 = peek(var_210, levelClearAnimFrame / 2) - 48
+			var_92 = peek(levelClearAnimPlayerTimeline, levelClearAnimFrame / 2) - 48
 			gcopy 13, var_92 \ 16 * 48, var_92 / 16 * 48, 48, 48
 			pos 53, 54
 			gcopy 10, 1 * 32 + roomCoordX8, 192, 32, 48
