@@ -610,25 +610,25 @@
 				var_95(35) = 1
 				var_118 = var_111
 				if ( var_118 == 0 ) {
-					var_119 = 13
+					roomSizeX = 13
 					var_120 = 13
 					roomKeysNeeded = 1
 					var_122 = 10
 				}
 				if ( var_118 == 1 ) {
-					var_119 = 21
+					roomSizeX = 21
 					var_120 = 21
 					roomKeysNeeded = 2
 					var_122 = 4
 				}
 				if ( var_118 == 2 ) {
-					var_119 = 31
+					roomSizeX = 31
 					var_120 = 31
 					roomKeysNeeded = 3
 					var_122 = 8
 				}
 				if ( var_118 == 3 ) {
-					var_119 = 51
+					roomSizeX = 51
 					var_120 = 51
 					roomKeysNeeded = 6
 					var_122 = 5
@@ -950,14 +950,14 @@
 	gosub *label_195
 	gosub *label_189
 	redraw 0
-	dim var_135, var_119, var_120
+	dim var_135, roomSizeX, var_120
 	dim var_136, 4
-	dim var_137, var_119, var_120, 2
+	dim var_137, roomSizeX, var_120, 2
 	color 0, 0, 0
 	boxf
 	var_98 = 0
 *label_033
-	exgoto var_98, 1, var_119, *label_036
+	exgoto var_98, 1, roomSizeX, *label_036
 	var_97 = 0
 *label_034
 	exgoto var_97, 1, var_120, *label_035
@@ -972,10 +972,10 @@
 	goto *label_033
 *label_036
 	var_138 = rnd(4)
-	var_136((var_138 + 0) \ 4) = var_119 / 2
+	var_136((var_138 + 0) \ 4) = roomSizeX / 2
 	var_136((var_138 + 1) \ 4) = var_120 * 3 / 4
-	var_136((var_138 + 2) \ 4) = var_119 / 2
-	var_139 = var_119 / 2
+	var_136((var_138 + 2) \ 4) = roomSizeX / 2
+	var_139 = roomSizeX / 2
 	var_140 = var_120 / 2
 	var_141 = var_136(0) + var_136(1) + var_136(2) + var_136(3)
 	var_142 = var_141
@@ -1019,7 +1019,7 @@
 			if ( var_147 == 3 ) {
 				var_140 += 1
 			}
-			var_139 = (var_139 + var_119) \ var_119
+			var_139 = (var_139 + roomSizeX) \ roomSizeX
 			var_140 = (var_140 + var_120) \ var_120
 			if ( var_135(var_139, var_140) == 0 | rnd(10) == 1 ) {
 				color 255, 1, 0
@@ -1032,7 +1032,7 @@
 					pset var_148 * 2 + 1, var_149 * 2 + 0
 				}
 				if ( var_147 == 2 ) {
-					pset (var_148 * 2 + 2) \ (var_119 * 2), var_149 * 2 + 1
+					pset (var_148 * 2 + 2) \ (roomSizeX * 2), var_149 * 2 + 1
 				}
 				if ( var_147 == 3 ) {
 					pset var_148 * 2 + 1, (var_149 * 2 + 2) \ (var_120 * 2)
@@ -1054,7 +1054,7 @@
 	repeat var_122
 		var_98 = 0
 *label_037
-		exgoto var_98, 1, var_119, *label_040
+		exgoto var_98, 1, roomSizeX, *label_040
 		var_97 = 0
 *label_038
 		exgoto var_97, 1, var_120, *label_039
@@ -1074,7 +1074,7 @@
 					color 200, 200, 200
 				}
 			}
-			if ( var_147 == 0 & var_135((var_98 + var_119 - 1) \ var_119, var_97) >= 1 ) {
+			if ( var_147 == 0 & var_135((var_98 + roomSizeX - 1) \ roomSizeX, var_97) >= 1 ) {
 				var_135(var_98, var_97) = var_92
 				pset var_98 * 2 + 0, var_97 * 2 + 1
 			}
@@ -1082,9 +1082,9 @@
 				var_135(var_98, var_97) = var_92
 				pset var_98 * 2 + 1, var_97 * 2 + 0
 			}
-			if ( var_147 == 2 & var_135((var_98 + 1) \ var_119, var_97) >= 1 ) {
+			if ( var_147 == 2 & var_135((var_98 + 1) \ roomSizeX, var_97) >= 1 ) {
 				var_135(var_98, var_97) = var_92
-				pset (var_98 * 2 + 2) \ (var_119 * 2), var_97 * 2 + 1
+				pset (var_98 * 2 + 2) \ (roomSizeX * 2), var_97 * 2 + 1
 			}
 			if ( var_147 == 3 & var_135(var_98, (var_97 + 1) \ var_120) >= 1 ) {
 				var_135(var_98, var_97) = var_92
@@ -1101,7 +1101,7 @@
 	loop
 	var_98 = 0
 *label_041
-	exgoto var_98, 1, var_119, *label_044
+	exgoto var_98, 1, roomSizeX, *label_044
 	var_97 = 0
 *label_042
 	exgoto var_97, 1, var_120, *label_043
@@ -1135,10 +1135,10 @@
 	var_98 += 1
 	goto *label_041
 *label_044
-	dim var_152, var_119, var_120
+	dim var_152, roomSizeX, var_120
 	var_98 = 0
 *label_045
-	exgoto var_98, 1, var_119, *label_048
+	exgoto var_98, 1, roomSizeX, *label_048
 	var_97 = 0
 *label_046
 	exgoto var_97, 1, var_120, *label_047
@@ -1181,7 +1181,7 @@
 	if ( ginfo(16) >= 1 ) {
 		var_152(var_98, var_97) += 2
 	}
-	pget (var_98 + var_119 + 1) \ var_119 * 2, var_97 * 2 + 1
+	pget (var_98 + roomSizeX + 1) \ roomSizeX * 2, var_97 * 2 + 1
 	if ( ginfo(16) >= 1 ) {
 		var_152(var_98, var_97) += 4
 	}
@@ -1197,7 +1197,7 @@
 		pset var_98 * 2 + 1, var_97 * 2 + 0
 	}
 	if ( var_152(var_98, var_97) / 4 \ 2 == 1 ) {
-		pset (var_98 * 2 + 2) \ (2 * var_119), var_97 * 2 + 1
+		pset (var_98 * 2 + 2) \ (2 * roomSizeX), var_97 * 2 + 1
 	}
 	if ( var_152(var_98, var_97) / 8 \ 2 == 1 ) {
 		pset var_98 * 2 + 1, (var_97 * 2 + 2) \ (2 * var_120)
@@ -1208,9 +1208,9 @@
 	var_98 += 1
 	goto *label_045
 *label_048
-	var_92 = var_119
+	var_92 = roomSizeX
 	repeat
-		var_126 = rnd(var_119)
+		var_126 = rnd(roomSizeX)
 		var_127 = rnd(var_120)
 		if ( var_135(var_126, var_127) == 2 ) {
 			if ( var_152(var_126, var_127) / 1 \ 2 + var_152(var_126, var_127) / 2 \ 2 + var_152(var_126, var_127) / 4 \ 2 + var_152(var_126, var_127) / 8 \ 2 == 1 | cnt >= 5000 ) {
@@ -1222,38 +1222,38 @@
 			break
 		}
 	loop
-	dim var_153, var_119, var_120
+	dim var_153, roomSizeX, var_120
 	var_153(var_143, var_144) = 1
 	var_153(var_150, var_151) = 2
 	repeat 800
 		var_92 = 0
 		var_98 = 0
 *label_049
-		exgoto var_98, 1, var_119, *label_052
+		exgoto var_98, 1, roomSizeX, *label_052
 		var_97 = 0
 *label_050
 		exgoto var_97, 1, var_120, *label_051
-		var_128 = (var_98 + 1) \ var_119
+		var_128 = (var_98 + 1) \ roomSizeX
 		var_129 = (var_97 + 1) \ var_120
-		var_126 = (var_98 + 0) \ var_119
+		var_126 = (var_98 + 0) \ roomSizeX
 		var_127 = (var_97 + 1) \ var_120
 		if ( var_153(var_128, var_129) == 0 & var_153(var_126, var_127) >= 1 & var_152(var_126, var_127) / 4 \ 2 == 1 ) {
 			var_153(var_128, var_129) = var_153(var_126, var_127)
 			var_92 = 1
 		}
-		var_126 = (var_98 + 1) \ var_119
+		var_126 = (var_98 + 1) \ roomSizeX
 		var_127 = (var_97 + 0) \ var_120
 		if ( var_153(var_128, var_129) == 0 & var_153(var_126, var_127) >= 1 & var_152(var_126, var_127) / 8 \ 2 == 1 ) {
 			var_153(var_128, var_129) = var_153(var_126, var_127)
 			var_92 = 1
 		}
-		var_126 = (var_98 + 2) \ var_119
+		var_126 = (var_98 + 2) \ roomSizeX
 		var_127 = (var_97 + 1) \ var_120
 		if ( var_153(var_128, var_129) == 0 & var_153(var_126, var_127) >= 1 & var_152(var_126, var_127) / 1 \ 2 == 1 ) {
 			var_153(var_128, var_129) = var_153(var_126, var_127)
 			var_92 = 1
 		}
-		var_126 = (var_98 + 1) \ var_119
+		var_126 = (var_98 + 1) \ roomSizeX
 		var_127 = (var_97 + 2) \ var_120
 		if ( var_153(var_128, var_129) == 0 & var_153(var_126, var_127) >= 1 & var_152(var_126, var_127) / 2 \ 2 == 1 ) {
 			var_153(var_128, var_129) = var_153(var_126, var_127)
@@ -1271,18 +1271,18 @@
 	loop
 	var_98 = 0
 *label_053
-	exgoto var_98, 1, var_119, *label_056
+	exgoto var_98, 1, roomSizeX, *label_056
 	var_97 = 0
 *label_054
 	exgoto var_97, 1, var_120, *label_055
-	var_128 = (var_98 + 1) \ var_119
+	var_128 = (var_98 + 1) \ roomSizeX
 	var_129 = (var_97 + 1) \ var_120
 	var_92 = 0
 	if ( rnd(7000) == 0 & var_135(var_128, var_129) == 4 ) {
 		var_92 = 1
 	}
 	if ( var_92 == 1 ) {
-		var_126 = (var_98 + 0) \ var_119
+		var_126 = (var_98 + 0) \ roomSizeX
 		var_127 = (var_97 + 1) \ var_120
 		if ( var_135(var_126, var_127) == 4 & var_153(var_128, var_129) >= 1 & var_152(var_128, var_129) / 1 \ 2 == 0 ) {
 			var_152(var_128, var_129) += 1
@@ -1290,7 +1290,7 @@
 		if ( var_153(var_126, var_127) == var_153(var_128, var_129) & var_152(var_128, var_129) / 1 \ 2 == 0 ) {
 			var_152(var_128, var_129) += 1
 		}
-		var_126 = (var_98 + 1) \ var_119
+		var_126 = (var_98 + 1) \ roomSizeX
 		var_127 = (var_97 + 0) \ var_120
 		if ( var_135(var_126, var_127) == 4 & var_153(var_128, var_129) >= 1 & var_152(var_128, var_129) / 2 \ 2 == 0 ) {
 			var_152(var_128, var_129) += 2
@@ -1298,7 +1298,7 @@
 		if ( var_153(var_126, var_127) == var_153(var_128, var_129) & var_152(var_128, var_129) / 2 \ 2 == 0 ) {
 			var_152(var_128, var_129) += 2
 		}
-		var_126 = (var_98 + 2) \ var_119
+		var_126 = (var_98 + 2) \ roomSizeX
 		var_127 = (var_97 + 1) \ var_120
 		if ( var_135(var_126, var_127) == 4 & var_153(var_128, var_129) >= 1 & var_152(var_128, var_129) / 4 \ 2 == 0 ) {
 			var_152(var_128, var_129) += 4
@@ -1306,7 +1306,7 @@
 		if ( var_153(var_126, var_127) == var_153(var_128, var_129) & var_152(var_128, var_129) / 4 \ 2 == 0 ) {
 			var_152(var_128, var_129) += 4
 		}
-		var_126 = (var_98 + 1) \ var_119
+		var_126 = (var_98 + 1) \ roomSizeX
 		var_127 = (var_97 + 2) \ var_120
 		if ( var_135(var_126, var_127) == 4 & var_153(var_128, var_129) >= 1 & var_152(var_128, var_129) / 8 \ 2 == 0 ) {
 			var_152(var_128, var_129) += 8
@@ -1324,7 +1324,7 @@
 	gosub *label_158
 	var_92 = roomKeysNeeded
 	repeat
-		var_126 = rnd(var_119)
+		var_126 = rnd(roomSizeX)
 		var_127 = rnd(var_120)
 		if ( var_135(var_126, var_127) == 2 ) {
 			if ( var_152(var_126, var_127) / 1 \ 2 + var_152(var_126, var_127) / 2 \ 2 + var_152(var_126, var_127) / 4 \ 2 + var_152(var_126, var_127) / 8 \ 2 == 1 | cnt >= 5000 ) {
@@ -1340,15 +1340,15 @@
 	var_135(var_150, var_151) = 7
 	var_98 = 0
 *label_057
-	exgoto var_98, 1, var_119, *label_062
+	exgoto var_98, 1, roomSizeX, *label_062
 	var_97 = 0
 *label_058
 	exgoto var_97, 1, var_120, *label_061
-	if ( var_135((var_98 + 1) \ var_119, (var_97 + 1) \ var_120) >= 5 ) {
+	if ( var_135((var_98 + 1) \ roomSizeX, (var_97 + 1) \ var_120) >= 5 ) {
 		var_106 = 0
 *label_059
 		exgoto var_106, 1, 9, *label_060
-		var_126 = (var_98 + var_106 \ 3) \ var_119
+		var_126 = (var_98 + var_106 \ 3) \ roomSizeX
 		var_127 = (var_97 + var_106 / 3) \ var_120
 		if ( var_135(var_126, var_127) == 4 ) {
 			var_135(var_126, var_127) = 2
@@ -1413,38 +1413,38 @@
 	var_98 += 1
 	goto *label_057
 *label_062
-	dim var_153, var_119, var_120
+	dim var_153, roomSizeX, var_120
 	var_153(var_143, var_144) = 1
 	var_153(var_150, var_151) = 2
 	repeat 800
 		var_92 = 0
 		var_98 = 0
 *label_063
-		exgoto var_98, 1, var_119, *label_066
+		exgoto var_98, 1, roomSizeX, *label_066
 		var_97 = 0
 *label_064
 		exgoto var_97, 1, var_120, *label_065
-		var_128 = (var_98 + 1) \ var_119
+		var_128 = (var_98 + 1) \ roomSizeX
 		var_129 = (var_97 + 1) \ var_120
-		var_126 = (var_98 + 0) \ var_119
+		var_126 = (var_98 + 0) \ roomSizeX
 		var_127 = (var_97 + 1) \ var_120
 		if ( var_153(var_128, var_129) == 0 & var_153(var_126, var_127) >= 1 & var_152(var_126, var_127) / 4 \ 2 == 1 & var_135(var_128, var_129) != 4 ) {
 			var_153(var_128, var_129) = var_153(var_126, var_127)
 			var_92 = 1
 		}
-		var_126 = (var_98 + 1) \ var_119
+		var_126 = (var_98 + 1) \ roomSizeX
 		var_127 = (var_97 + 0) \ var_120
 		if ( var_153(var_128, var_129) == 0 & var_153(var_126, var_127) >= 1 & var_152(var_126, var_127) / 8 \ 2 == 1 & var_135(var_128, var_129) != 4 ) {
 			var_153(var_128, var_129) = var_153(var_126, var_127)
 			var_92 = 1
 		}
-		var_126 = (var_98 + 2) \ var_119
+		var_126 = (var_98 + 2) \ roomSizeX
 		var_127 = (var_97 + 1) \ var_120
 		if ( var_153(var_128, var_129) == 0 & var_153(var_126, var_127) >= 1 & var_152(var_126, var_127) / 1 \ 2 == 1 & var_135(var_128, var_129) != 4 ) {
 			var_153(var_128, var_129) = var_153(var_126, var_127)
 			var_92 = 1
 		}
-		var_126 = (var_98 + 1) \ var_119
+		var_126 = (var_98 + 1) \ roomSizeX
 		var_127 = (var_97 + 2) \ var_120
 		if ( var_153(var_128, var_129) == 0 & var_153(var_126, var_127) >= 1 & var_152(var_126, var_127) / 2 \ 2 == 1 & var_135(var_128, var_129) != 4 ) {
 			var_153(var_128, var_129) = var_153(var_126, var_127)
@@ -1462,22 +1462,22 @@
 	loop
 	var_98 = 0
 *label_067
-	exgoto var_98, 1, var_119, *label_070
+	exgoto var_98, 1, roomSizeX, *label_070
 	var_97 = 0
 *label_068
 	exgoto var_97, 1, var_120, *label_069
-	var_128 = (var_98 + 1) \ var_119
+	var_128 = (var_98 + 1) \ roomSizeX
 	var_129 = (var_97 + 1) \ var_120
 	if ( var_153(var_128, var_129) == 0 & var_135(var_128, var_129) == 2 ) {
 		var_92 = 0
-		var_126 = (var_98 + 0) \ var_119
+		var_126 = (var_98 + 0) \ roomSizeX
 		var_127 = (var_97 + 1) \ var_120
 		if ( var_153(var_126, var_127) >= 1 & var_152(var_128, var_129) / 1 \ 2 == 0 ) {
 			var_153(var_128, var_129) = var_153(var_126, var_127)
 			var_152(var_128, var_129) += 1
 			var_92 = var_153(var_128, var_129)
 		}
-		var_126 = (var_98 + 1) \ var_119
+		var_126 = (var_98 + 1) \ roomSizeX
 		var_127 = (var_97 + 0) \ var_120
 		if ( var_153(var_126, var_127) >= 1 & var_152(var_128, var_129) / 2 \ 2 == 0 ) {
 			if ( var_92 == var_153(var_126, var_127) | var_92 == 0 ) {
@@ -1486,7 +1486,7 @@
 				var_92 = var_153(var_128, var_129)
 			}
 		}
-		var_126 = (var_98 + 2) \ var_119
+		var_126 = (var_98 + 2) \ roomSizeX
 		var_127 = (var_97 + 1) \ var_120
 		if ( var_153(var_126, var_127) >= 1 & var_152(var_128, var_129) / 4 \ 2 == 0 ) {
 			if ( var_92 == var_153(var_126, var_127) | var_92 == 0 ) {
@@ -1495,7 +1495,7 @@
 				var_92 = var_153(var_128, var_129)
 			}
 		}
-		var_126 = (var_98 + 1) \ var_119
+		var_126 = (var_98 + 1) \ roomSizeX
 		var_127 = (var_97 + 2) \ var_120
 		if ( var_153(var_126, var_127) >= 1 & var_152(var_128, var_129) / 8 \ 2 == 0 ) {
 			if ( var_92 == var_153(var_126, var_127) | var_92 == 0 ) {
@@ -1513,30 +1513,30 @@
 *label_070
 	var_98 = 0
 *label_071
-	exgoto var_98, 1, var_119, *label_074
+	exgoto var_98, 1, roomSizeX, *label_074
 	var_97 = 0
 *label_072
 	exgoto var_97, 1, var_120, *label_073
-	var_128 = (var_98 + 1) \ var_119
+	var_128 = (var_98 + 1) \ roomSizeX
 	var_129 = (var_97 + 1) \ var_120
 	if ( var_153(var_128, var_129) == 0 ) {
 		var_92 = 0
-		var_126 = (var_98 + 0) \ var_119
+		var_126 = (var_98 + 0) \ roomSizeX
 		var_127 = (var_97 + 1) \ var_120
 		if ( var_135(var_126, var_127) == 4 & var_135(var_128, var_129) != 4 ) {
 			var_92 += 1
 		}
-		var_126 = (var_98 + 1) \ var_119
+		var_126 = (var_98 + 1) \ roomSizeX
 		var_127 = (var_97 + 0) \ var_120
 		if ( var_135(var_126, var_127) == 4 & var_135(var_128, var_129) != 4 ) {
 			var_92 += 1
 		}
-		var_126 = (var_98 + 2) \ var_119
+		var_126 = (var_98 + 2) \ roomSizeX
 		var_127 = (var_97 + 1) \ var_120
 		if ( var_135(var_126, var_127) == 4 & var_135(var_128, var_129) != 4 ) {
 			var_92 += 1
 		}
-		var_126 = (var_98 + 1) \ var_119
+		var_126 = (var_98 + 1) \ roomSizeX
 		var_127 = (var_97 + 2) \ var_120
 		if ( var_135(var_126, var_127) == 4 & var_135(var_128, var_129) != 4 ) {
 			var_92 += 1
@@ -1552,7 +1552,7 @@
 	goto *label_071
 *label_074
 	gosub *label_158
-	dim var_153, var_119, var_120
+	dim var_153, roomSizeX, var_120
 	var_153(var_143, var_144) = 1
 	var_153(var_150, var_151) = 2
 	var_112 = 0
@@ -1561,35 +1561,35 @@
 		var_112 += 1
 		var_98 = 0
 *label_075
-		exgoto var_98, 1, var_119, *label_078
+		exgoto var_98, 1, roomSizeX, *label_078
 		var_97 = 0
 *label_076
 		exgoto var_97, 1, var_120, *label_077
-		var_128 = (var_98 + 1) \ var_119
+		var_128 = (var_98 + 1) \ roomSizeX
 		var_129 = (var_97 + 1) \ var_120
 		if ( var_135(var_128, var_129) != 4 ) {
-			var_126 = (var_98 + 0) \ var_119
+			var_126 = (var_98 + 0) \ roomSizeX
 			var_127 = (var_97 + 1) \ var_120
 			if ( var_153(var_128, var_129) == 0 & var_153(var_126, var_127) >= 1 & var_152(var_126, var_127) / 4 \ 2 == 1 ) {
 				var_153(var_128, var_129) = var_153(var_126, var_127)
 				var_92 = 1
 				var_112 = 0
 			}
-			var_126 = (var_98 + 1) \ var_119
+			var_126 = (var_98 + 1) \ roomSizeX
 			var_127 = (var_97 + 0) \ var_120
 			if ( var_153(var_128, var_129) == 0 & var_153(var_126, var_127) >= 1 & var_152(var_126, var_127) / 8 \ 2 == 1 ) {
 				var_153(var_128, var_129) = var_153(var_126, var_127)
 				var_92 = 1
 				var_112 = 0
 			}
-			var_126 = (var_98 + 2) \ var_119
+			var_126 = (var_98 + 2) \ roomSizeX
 			var_127 = (var_97 + 1) \ var_120
 			if ( var_153(var_128, var_129) == 0 & var_153(var_126, var_127) >= 1 & var_152(var_126, var_127) / 1 \ 2 == 1 ) {
 				var_153(var_128, var_129) = var_153(var_126, var_127)
 				var_92 = 1
 				var_112 = 0
 			}
-			var_126 = (var_98 + 1) \ var_119
+			var_126 = (var_98 + 1) \ roomSizeX
 			var_127 = (var_97 + 2) \ var_120
 			if ( var_153(var_128, var_129) == 0 & var_153(var_126, var_127) >= 1 & var_152(var_126, var_127) / 2 \ 2 == 1 ) {
 				var_153(var_128, var_129) = var_153(var_126, var_127)
@@ -1610,7 +1610,7 @@
 	var_154 = 0
 	var_98 = 0
 *label_079
-	exgoto var_98, 1, var_119, *label_082
+	exgoto var_98, 1, roomSizeX, *label_082
 	var_97 = 0
 *label_080
 	exgoto var_97, 1, var_120, *label_081
@@ -1628,10 +1628,10 @@
 	goto *label_079
 *label_082
 	gosub *label_158
-	dim var_155, var_119, var_120
+	dim var_155, roomSizeX, var_120
 	var_98 = 0
 *label_083
-	exgoto var_98, 1, var_119, *label_088
+	exgoto var_98, 1, roomSizeX, *label_088
 	var_97 = 0
 *label_084
 	exgoto var_97, 1, var_120, *label_087
@@ -1639,17 +1639,17 @@
 	var_106 = 0
 *label_085
 	exgoto var_106, 1, 9, *label_086
-	if ( var_135((var_98 + var_106 \ 3) \ var_119, (var_97 + var_106 / 3) \ var_120) == 4 & var_106 != 4 ) {
+	if ( var_135((var_98 + var_106 \ 3) \ roomSizeX, (var_97 + var_106 / 3) \ var_120) == 4 & var_106 != 4 ) {
 		var_92 += 1
 	}
 	var_106 += 1
 	goto *label_085
 *label_086
-	if ( var_135((var_98 + 1) \ var_119, (var_97 + 1) \ var_120) != 4 ) {
-		var_155((var_98 + 1) \ var_119, (var_97 + 1) \ var_120) = var_92
+	if ( var_135((var_98 + 1) \ roomSizeX, (var_97 + 1) \ var_120) != 4 ) {
+		var_155((var_98 + 1) \ roomSizeX, (var_97 + 1) \ var_120) = var_92
 	}
 	else {
-		var_155((var_98 + 1) \ var_119, (var_97 + 1) \ var_120) = 8
+		var_155((var_98 + 1) \ roomSizeX, (var_97 + 1) \ var_120) = 8
 	}
 	var_97 += 1
 	goto *label_084
@@ -1659,7 +1659,7 @@
 *label_088
 	var_98 = 0
 *label_089
-	exgoto var_98, 1, var_119, *label_092
+	exgoto var_98, 1, roomSizeX, *label_092
 	var_97 = 0
 *label_090
 	exgoto var_97, 1, var_120, *label_091
@@ -1676,7 +1676,7 @@
 		var_128 = 0
 		var_98 = 0
 *label_093
-		exgoto var_98, 1, var_119, *label_096
+		exgoto var_98, 1, roomSizeX, *label_096
 		var_97 = 0
 *label_094
 		exgoto var_97, 1, var_120, *label_095
@@ -1705,10 +1705,10 @@
 		goto *label_093
 *label_096
 	loop
-	dim var_156, var_119, var_120
+	dim var_156, roomSizeX, var_120
 	var_98 = 0
 *label_097
-	exgoto var_98, 1, var_119 - 1, *label_100
+	exgoto var_98, 1, roomSizeX - 1, *label_100
 	var_97 = 0
 *label_098
 	exgoto var_97, 1, var_120, *label_099
@@ -1734,7 +1734,7 @@
 *label_100
 	var_98 = 0
 *label_101
-	exgoto var_98, 1, var_119, *label_110
+	exgoto var_98, 1, roomSizeX, *label_110
 	var_97 = 0
 *label_102
 	exgoto var_97, 1, var_120 - 1, *label_109
@@ -1754,7 +1754,7 @@
 	}
 	var_98 = 0
 *label_103
-	exgoto var_98, 1, var_119, *label_108
+	exgoto var_98, 1, roomSizeX, *label_108
 	var_97 = 0
 *label_104
 	exgoto var_97, 1, var_120, *label_107
@@ -1779,11 +1779,11 @@
 *label_110
 	var_98 = 0
 *label_111
-	exgoto var_98, 1, var_119, *label_114
+	exgoto var_98, 1, roomSizeX, *label_114
 	var_97 = 0
 *label_112
 	exgoto var_97, 1, var_120, *label_113
-	var_126 = (var_98 + 1) \ var_119
+	var_126 = (var_98 + 1) \ roomSizeX
 	var_127 = (var_97 + 1) \ var_120
 	if ( var_156(var_98, var_97) == 2 ) {
 		var_137(var_98, var_97, 1) = 1 + rnd(3)
@@ -1809,11 +1809,11 @@
 *label_114
 	var_98 = 0
 *label_115
-	exgoto var_98, 1, var_119, *label_118
+	exgoto var_98, 1, roomSizeX, *label_118
 	var_97 = 0
 *label_116
 	exgoto var_97, 1, var_120, *label_117
-	var_126 = (var_98 + 1) \ var_119
+	var_126 = (var_98 + 1) \ roomSizeX
 	var_127 = (var_97 + 1) \ var_120
 	if ( var_156(var_98, var_97) == 2 & var_156(var_98, var_127) == 4 ) {
 		var_137(var_98, var_127, 1) = 3
@@ -1833,10 +1833,10 @@
 	var_98 += 1
 	goto *label_115
 *label_118
-	dim var_157, var_119 * 7, var_120 * 7
+	dim var_157, roomSizeX * 7, var_120 * 7
 	var_98 = 0
 *label_119
-	exgoto var_98, 1, var_119, *label_154
+	exgoto var_98, 1, roomSizeX, *label_154
 	var_97 = 0
 *label_120
 	exgoto var_97, 1, var_120, *label_153
@@ -2161,7 +2161,7 @@
 		var_157(var_98 * 7 + var_137(var_98, var_97, 1), var_97 * 7 + 0) = 0
 	}
 	if ( var_152(var_98, var_97) / 4 \ 2 == 1 ) {
-		var_157(var_98 * 7 + 6, var_97 * 7 + var_137((var_98 + 1) \ var_119, var_97, 0)) = 0
+		var_157(var_98 * 7 + 6, var_97 * 7 + var_137((var_98 + 1) \ roomSizeX, var_97, 0)) = 0
 	}
 	if ( var_152(var_98, var_97) / 8 \ 2 == 1 ) {
 		var_157(var_98 * 7 + var_137(var_98, (var_97 + 1) \ var_120, 1), var_97 * 7 + 6) = 0
@@ -2203,9 +2203,9 @@
 	if ( var_147 == 1 ) {
 		dim var_161, 4
 		var_161(0) = 6 - var_137(var_98, var_97, 1)
-		var_161(1) = var_137((var_98 + 1) \ var_119, var_97, 0)
+		var_161(1) = var_137((var_98 + 1) \ roomSizeX, var_97, 0)
 		var_139 = 6
-		var_140 = var_137((var_98 + 1) \ var_119, var_97, 0)
+		var_140 = var_137((var_98 + 1) \ roomSizeX, var_97, 0)
 		gosub *label_156
 	}
 	if ( var_147 == 2 ) {
@@ -2219,14 +2219,14 @@
 	if ( var_147 == 3 ) {
 		dim var_161, 4
 		var_161(0) = 6 - var_137(var_98, (var_97 + 1) \ var_120, 1)
-		var_161(3) = 6 - var_137((var_98 + 1) \ var_119, var_97, 0)
+		var_161(3) = 6 - var_137((var_98 + 1) \ roomSizeX, var_97, 0)
 		var_139 = 6
-		var_140 = var_137((var_98 + 1) \ var_119, var_97, 0)
+		var_140 = var_137((var_98 + 1) \ roomSizeX, var_97, 0)
 		gosub *label_156
 	}
 	if ( var_147 == 4 ) {
 		dim var_161, 4
-		var_92 = var_137(var_98, var_97, 0) - var_137((var_98 + 1) \ var_119, var_97, 0)
+		var_92 = var_137(var_98, var_97, 0) - var_137((var_98 + 1) \ roomSizeX, var_97, 0)
 		if ( var_92 >= 1 ) {
 			var_161(1) = var_92
 		}
@@ -2260,28 +2260,28 @@
 *label_158
 	var_98 = 0
 *label_159
-	exgoto var_98, 1, var_119, *label_162
+	exgoto var_98, 1, roomSizeX, *label_162
 	var_97 = 0
 *label_160
 	exgoto var_97, 1, var_120, *label_161
-	var_128 = (var_98 + 1) \ var_119
+	var_128 = (var_98 + 1) \ roomSizeX
 	var_129 = (var_97 + 1) \ var_120
-	var_126 = (var_98 + 0) \ var_119
+	var_126 = (var_98 + 0) \ roomSizeX
 	var_127 = (var_97 + 1) \ var_120
 	if ( var_152(var_128, var_129) / 1 \ 2 == 0 & var_152(var_126, var_127) / 4 \ 2 == 1 ) {
 		var_152(var_128, var_129) += 1
 	}
-	var_126 = (var_98 + 1) \ var_119
+	var_126 = (var_98 + 1) \ roomSizeX
 	var_127 = (var_97 + 0) \ var_120
 	if ( var_152(var_128, var_129) / 2 \ 2 == 0 & var_152(var_126, var_127) / 8 \ 2 == 1 ) {
 		var_152(var_128, var_129) += 2
 	}
-	var_126 = (var_98 + 2) \ var_119
+	var_126 = (var_98 + 2) \ roomSizeX
 	var_127 = (var_97 + 1) \ var_120
 	if ( var_152(var_128, var_129) / 4 \ 2 == 0 & var_152(var_126, var_127) / 1 \ 2 == 1 ) {
 		var_152(var_128, var_129) += 4
 	}
-	var_126 = (var_98 + 1) \ var_119
+	var_126 = (var_98 + 1) \ roomSizeX
 	var_127 = (var_97 + 2) \ var_120
 	if ( var_152(var_128, var_129) / 8 \ 2 == 0 & var_152(var_126, var_127) / 2 \ 2 == 1 ) {
 		var_152(var_128, var_129) += 8
@@ -2298,8 +2298,8 @@
 	dim var_162, 20
 	var_163 = 3
 	var_164 = 3
-	dim var_165, var_119, var_120
-	dim var_166, var_119, var_120
+	dim var_165, roomSizeX, var_120
+	dim var_166, roomSizeX, var_120
 	var_167 = 3
 	var_168 = 2
 	var_169 = timeGetTime()
@@ -2329,7 +2329,7 @@
 			dim var_174, 4
 			repeat 4
 				if ( cnt == 0 ) {
-					var_128 = (var_163 + var_145 * 7 - 1 + var_119 * 7) \ (var_119 * 7)
+					var_128 = (var_163 + var_145 * 7 - 1 + roomSizeX * 7) \ (roomSizeX * 7)
 					var_129 = (var_164 + var_146 * 7 + 0 + var_120 * 7) \ (var_120 * 7)
 					if ( var_157(var_128, var_129) >= 5 ) {
 						var_174(cnt) = 1
@@ -2342,7 +2342,7 @@
 					}
 				}
 				if ( cnt == 1 ) {
-					var_128 = (var_163 + var_145 * 7 + 0 + var_119 * 7) \ (var_119 * 7)
+					var_128 = (var_163 + var_145 * 7 + 0 + roomSizeX * 7) \ (roomSizeX * 7)
 					var_129 = (var_164 + var_146 * 7 - 1 + var_120 * 7) \ (var_120 * 7)
 					if ( var_157(var_128, var_129) >= 5 ) {
 						var_174(cnt) = 1
@@ -2355,7 +2355,7 @@
 					}
 				}
 				if ( cnt == 2 ) {
-					var_128 = (var_163 + var_145 * 7 + 1 + var_119 * 7) \ (var_119 * 7)
+					var_128 = (var_163 + var_145 * 7 + 1 + roomSizeX * 7) \ (roomSizeX * 7)
 					var_129 = (var_164 + var_146 * 7 + 0 + var_120 * 7) \ (var_120 * 7)
 					if ( var_157(var_128, var_129) >= 5 ) {
 						var_174(cnt) = 1
@@ -2363,12 +2363,12 @@
 					if ( var_163 == 6 & var_156(var_145, var_146) != 2 ) {
 						var_174(cnt) = 1
 					}
-					if ( var_137((var_145 + 1) \ var_119, var_146, 0) == var_164 & var_163 == 6 & var_152(var_145, var_146) / 4 \ 2 == 1 ) {
+					if ( var_137((var_145 + 1) \ roomSizeX, var_146, 0) == var_164 & var_163 == 6 & var_152(var_145, var_146) / 4 \ 2 == 1 ) {
 						var_174(cnt) = 0
 					}
 				}
 				if ( cnt == 3 ) {
-					var_128 = (var_163 + var_145 * 7 + 0 + var_119 * 7) \ (var_119 * 7)
+					var_128 = (var_163 + var_145 * 7 + 0 + roomSizeX * 7) \ (roomSizeX * 7)
 					var_129 = (var_164 + var_146 * 7 + 1 + var_120 * 7) \ (var_120 * 7)
 					if ( var_157(var_128, var_129) >= 5 ) {
 						var_174(cnt) = 1
@@ -2465,7 +2465,7 @@
 				var_95(17 + rnd(3) + var_92) = 1
 			}
 			if ( var_178 \ 4 == 1 ) {
-				var_112 = (var_163 + var_145 * 7 + var_119 * 7) \ (var_119 * 7)
+				var_112 = (var_163 + var_145 * 7 + roomSizeX * 7) \ (roomSizeX * 7)
 				var_113 = (var_164 + var_146 * 7 + var_120 * 7) \ (var_120 * 7)
 				if ( var_157(var_112, var_113) >= 5 ) {
 					if ( var_155(var_145, var_146) != 8 ) {
@@ -2500,14 +2500,14 @@
 						var_163 += 7
 						var_180 = var_145
 						var_181 = var_146
-						var_145 = (var_145 - 1 + var_119) \ var_119
+						var_145 = (var_145 - 1 + roomSizeX) \ roomSizeX
 						var_175 = 8
 						var_95(8) = 1
 					}
 					else {
 						if ( var_156(var_145, var_146) == 4 ) {
 							var_163 += 7
-							var_145 = (var_145 - 1 + var_119) \ var_119
+							var_145 = (var_145 - 1 + roomSizeX) \ roomSizeX
 						}
 						else {
 							var_163 += 1
@@ -2536,18 +2536,18 @@
 					}
 				}
 				if ( var_163 >= 7 ) {
-					if ( var_152(var_145, var_146) / 4 \ 2 == 1 & var_137((var_145 + 1) \ var_119, var_146, 0) == var_164 & var_156(var_145, var_146) != 2 ) {
+					if ( var_152(var_145, var_146) / 4 \ 2 == 1 & var_137((var_145 + 1) \ roomSizeX, var_146, 0) == var_164 & var_156(var_145, var_146) != 2 ) {
 						var_163 -= 7
 						var_180 = var_145
 						var_181 = var_146
-						var_145 = (var_145 + 1) \ var_119
+						var_145 = (var_145 + 1) \ roomSizeX
 						var_175 = 8
 						var_95(10) = 1
 					}
 					else {
 						if ( var_156(var_145, var_146) == 2 ) {
 							var_163 -= 7
-							var_145 = (var_145 + 1) \ var_119
+							var_145 = (var_145 + 1) \ roomSizeX
 						}
 						else {
 							var_163 -= 1
@@ -2615,7 +2615,7 @@
 				}
 				if ( var_183 != var_184 | var_182 == 1 ) {
 					var_185 = 8
-					var_112 = (var_145 + var_183 \ 5 - 2 + var_119) \ var_119
+					var_112 = (var_145 + var_183 \ 5 - 2 + roomSizeX) \ roomSizeX
 					var_113 = (var_146 + var_183 / 5 - 2 + var_120) \ var_120
 					if ( var_165(var_112, var_113) == 1 ) {
 						var_186 = var_155(var_112, var_113)
@@ -2630,7 +2630,7 @@
 				var_187 -= 1
 			}
 			if ( var_116(6) == 0 & var_182 >= 1 ) {
-				var_112 = (var_145 + var_183 \ 5 - 2 + var_119) \ var_119
+				var_112 = (var_145 + var_183 \ 5 - 2 + roomSizeX) \ roomSizeX
 				var_113 = (var_146 + var_183 / 5 - 2 + var_120) \ var_120
 				if ( var_165(var_112, var_113) == 0 & var_166(var_112, var_113) <= 1 ) {
 					var_166(var_112, var_113) = 2
@@ -2723,14 +2723,14 @@
 				}
 			}
 			if ( var_175 == 5 | var_182 == (-1) | var_134 == 12 ) {
-				var_98 = var_145 - 6 + var_119
+				var_98 = var_145 - 6 + roomSizeX
 *label_165
-				exgoto var_98, 1, var_145 + 7 + var_119, *label_168
+				exgoto var_98, 1, var_145 + 7 + roomSizeX, *label_168
 				var_97 = var_146 - 6 + var_120
 *label_166
 				exgoto var_97, 1, var_146 + 7 + var_120, *label_167
-				if ( var_166(var_98 \ var_119, var_97 \ var_120) == 1 ) {
-					var_166(var_98 \ var_119, var_97 \ var_120) = 0
+				if ( var_166(var_98 \ roomSizeX, var_97 \ var_120) == 1 ) {
+					var_166(var_98 \ roomSizeX, var_97 \ var_120) = 0
 				}
 				var_97 += 1
 				goto *label_166
@@ -2738,15 +2738,15 @@
 				var_98 += 1
 				goto *label_165
 *label_168
-				var_98 = var_145 - 6 + var_119
+				var_98 = var_145 - 6 + roomSizeX
 *label_169
-				exgoto var_98, 1, var_145 + 7 + var_119, *label_172
+				exgoto var_98, 1, var_145 + 7 + roomSizeX, *label_172
 				var_97 = var_146 - 6 + var_120
 *label_170
 				exgoto var_97, 1, var_146 + 7 + var_120, *label_171
 				var_92 = 0
 				repeat 9
-					var_158 = (var_98 + cnt \ 3) \ var_119
+					var_158 = (var_98 + cnt \ 3) \ roomSizeX
 					var_159 = (var_97 + cnt / 3) \ var_120
 					if ( var_155(var_158, var_159) == 8 & var_165(var_158, var_159) == 1 ) {
 						var_92 += 1
@@ -2757,11 +2757,11 @@
 						}
 					}
 				loop
-				var_112 = (var_98 + 1) \ var_119
+				var_112 = (var_98 + 1) \ roomSizeX
 				var_113 = (var_97 + 1) \ var_120
 				if ( var_92 == var_155(var_112, var_113) & var_165(var_112, var_113) == 1 ) {
 					repeat 9
-						var_158 = (var_98 + cnt \ 3) \ var_119
+						var_158 = (var_98 + cnt \ 3) \ roomSizeX
 						var_159 = (var_97 + cnt / 3) \ var_120
 						if ( var_166(var_158, var_159) == 0 ) {
 							var_166(var_158, var_159) = 1
@@ -3257,7 +3257,7 @@
 				gcopy 3 + var_172, var_113 * 16, 28 * 12, 16, 24
 			}
 			if ( var_152(var_202, var_203) / 4 \ 2 == 1 & var_156(var_202, var_203) != 2 ) {
-				pos var_126 + 7 * 16, var_137((var_202 + 1) \ var_119, var_203, 0) * 12 - 24 + var_127
+				pos var_126 + 7 * 16, var_137((var_202 + 1) \ roomSizeX, var_203, 0) * 12 - 24 + var_127
 				gcopy 3 + var_172, var_113 * 16, 33 * 12, 16, 36
 			}
 			if ( var_156(var_202, var_203) == 1 ) {
@@ -3300,7 +3300,7 @@
 					gcopy 3 + var_172, var_113 * 16, 28 * 12, 16, 24
 				}
 				if ( var_152(var_206, var_207) / 4 \ 2 == 1 & var_156(var_206, var_207) != 2 ) {
-					pos var_126 + 7 * 16 + var_204, var_137((var_206 + 1) \ var_119, var_207, 0) * 12 - 24 + var_127 + var_205
+					pos var_126 + 7 * 16 + var_204, var_137((var_206 + 1) \ roomSizeX, var_207, 0) * 12 - 24 + var_127 + var_205
 					gcopy 3 + var_172, var_113 * 16, 33 * 12, 16, 36
 				}
 				if ( var_152(var_206, var_207) / 8 \ 2 == 1 & var_156(var_206, var_207) != 3 ) {
@@ -3702,7 +3702,7 @@
 		var_97 = 0
 *label_184
 		exgoto var_97, 1, 13, *label_185
-		var_128 = (var_145 + var_98 - 6 + var_119) \ var_119
+		var_128 = (var_145 + var_98 - 6 + roomSizeX) \ roomSizeX
 		var_129 = (var_146 + var_97 - 6 + var_120) \ var_120
 		gmode 4, , , 32
 		if ( var_98 >= 1 & var_97 >= 1 & var_98 <= 11 & var_97 <= 11 ) {
