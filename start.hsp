@@ -675,8 +675,8 @@
 		}
 		await 0
 	loop
-	var_150 = roomCoordX2
-	var_151 = roomCoordY2
+	roomCoordX5 = roomCoordX2
+	roomCoordY5 = roomCoordY2
 	repeat var_122
 		roomCoordX3 = 0
 *label_037
@@ -850,7 +850,7 @@
 	loop
 	dim roomList4, levelSizeX, levelSizeY
 	roomList4(roomCoordX4, roomCoordY4) = 1
-	roomList4(var_150, var_151) = 2
+	roomList4(roomCoordX5, roomCoordY5) = 2
 	repeat 800
 		var_92 = 0
 		roomCoordX3 = 0
@@ -963,7 +963,7 @@
 		}
 	loop
 	roomListType(roomCoordX4, roomCoordY4) = 6
-	roomListType(var_150, var_151) = 7
+	roomListType(roomCoordX5, roomCoordY5) = 7
 	roomCoordX3 = 0
 *label_057
 	exgoto roomCoordX3, 1, levelSizeX, *label_062
@@ -1041,7 +1041,7 @@
 *label_062
 	dim roomList4, levelSizeX, levelSizeY
 	roomList4(roomCoordX4, roomCoordY4) = 1
-	roomList4(var_150, var_151) = 2
+	roomList4(roomCoordX5, roomCoordY5) = 2
 	repeat 800
 		var_92 = 0
 		roomCoordX3 = 0
@@ -1180,7 +1180,7 @@
 	gosub *label_158
 	dim roomList4, levelSizeX, levelSizeY
 	roomList4(roomCoordX4, roomCoordY4) = 1
-	roomList4(var_150, var_151) = 2
+	roomList4(roomCoordX5, roomCoordY5) = 2
 	var_112 = 0
 	repeat 800
 		var_92 = 0
@@ -4290,8 +4290,8 @@
 	var_197 = 0
 	roomList2 = 0
 	playerDeathAnimFrame = 0
-	var_150 = 0
-	var_151 = 0
+	roomCoordX5 = 0
+	roomCoordY5 = 0
 	playerClearAnimFrame = 0
 	var_92 = 0
 	roomCoordX = 0
