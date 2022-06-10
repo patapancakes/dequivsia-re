@@ -1924,7 +1924,7 @@
 	dim var_162, 20
 	var_163 = 3
 	var_164 = 3
-	dim var_165, levelSizeX, levelSizeY
+	dim roomList7, levelSizeX, levelSizeY
 	dim var_166, levelSizeX, levelSizeY
 	var_167 = 3
 	playerLivesLeft = 2
@@ -2243,7 +2243,7 @@
 					var_185 = 8
 					var_112 = (playerRoomCoordX2 + var_183 \ 5 - 2 + levelSizeX) \ levelSizeX
 					var_113 = (playerRoomCoordY2 + var_183 / 5 - 2 + levelSizeY) \ levelSizeY
-					if ( var_165(var_112, var_113) == 1 ) {
+					if ( roomList7(var_112, var_113) == 1 ) {
 						var_186 = roomList5(var_112, var_113)
 					}
 					else {
@@ -2258,7 +2258,7 @@
 			if ( var_116(6) == 0 & var_182 >= 1 ) {
 				var_112 = (playerRoomCoordX2 + var_183 \ 5 - 2 + levelSizeX) \ levelSizeX
 				var_113 = (playerRoomCoordY2 + var_183 / 5 - 2 + levelSizeY) \ levelSizeY
-				if ( var_165(var_112, var_113) == 0 & var_166(var_112, var_113) <= 1 ) {
+				if ( roomList7(var_112, var_113) == 0 & var_166(var_112, var_113) <= 1 ) {
 					var_166(var_112, var_113) = 2
 					var_95(13) = 1
 				}
@@ -2374,18 +2374,18 @@
 				repeat 9
 					var_158 = (var_98 + cnt \ 3) \ levelSizeX
 					var_159 = (var_97 + cnt / 3) \ levelSizeY
-					if ( roomList5(var_158, var_159) == 8 & var_165(var_158, var_159) == 1 ) {
+					if ( roomList5(var_158, var_159) == 8 & roomList7(var_158, var_159) == 1 ) {
 						var_92 += 1
 					}
 					else {
-						if ( var_165(var_158, var_159) == 0 & var_166(var_158, var_159) == 2 ) {
+						if ( roomList7(var_158, var_159) == 0 & var_166(var_158, var_159) == 2 ) {
 							var_92 += 1
 						}
 					}
 				loop
 				var_112 = (var_98 + 1) \ levelSizeX
 				var_113 = (var_97 + 1) \ levelSizeY
-				if ( var_92 == roomList5(var_112, var_113) & var_165(var_112, var_113) == 1 ) {
+				if ( var_92 == roomList5(var_112, var_113) & roomList7(var_112, var_113) == 1 ) {
 					repeat 9
 						var_158 = (var_98 + cnt \ 3) \ levelSizeX
 						var_159 = (var_97 + cnt / 3) \ levelSizeY
@@ -2404,19 +2404,19 @@
 			if ( var_116(6) == 0 ) {
 				var_182 = 0
 			}
-			if ( var_165(playerRoomCoordX2, playerRoomCoordY2) == 0 ) {
-				var_165(playerRoomCoordX2, playerRoomCoordY2) = 1
+			if ( roomList7(playerRoomCoordX2, playerRoomCoordY2) == 0 ) {
+				roomList7(playerRoomCoordX2, playerRoomCoordY2) = 1
 				if ( roomList6(playerRoomCoordX2, playerRoomCoordY2) == 4 ) {
-					var_165(playerRoomCoordX2 - 1, playerRoomCoordY2) = 1
+					roomList7(playerRoomCoordX2 - 1, playerRoomCoordY2) = 1
 				}
 				if ( roomList6(playerRoomCoordX2, playerRoomCoordY2) == 1 ) {
-					var_165(playerRoomCoordX2, playerRoomCoordY2 - 1) = 1
+					roomList7(playerRoomCoordX2, playerRoomCoordY2 - 1) = 1
 				}
 				if ( roomList6(playerRoomCoordX2, playerRoomCoordY2) == 2 ) {
-					var_165(playerRoomCoordX2 + 1, playerRoomCoordY2) = 1
+					roomList7(playerRoomCoordX2 + 1, playerRoomCoordY2) = 1
 				}
 				if ( roomList6(playerRoomCoordX2, playerRoomCoordY2) == 3 ) {
-					var_165(playerRoomCoordX2, playerRoomCoordY2 + 1) = 1
+					roomList7(playerRoomCoordX2, playerRoomCoordY2 + 1) = 1
 				}
 			}
 			var_192 += 1
@@ -3374,7 +3374,7 @@
 			}
 		}
 		pos var_98 * 8 + roomCoordX, var_97 * 8 + roomCoordY
-		if ( var_165(playerRoomCoordX, playerRoomCoordY) >= 1 ) {
+		if ( roomList7(playerRoomCoordX, playerRoomCoordY) >= 1 ) {
 			gcopy 2, roomList3(playerRoomCoordX, playerRoomCoordY) * 8, roomList5(playerRoomCoordX, playerRoomCoordY) * 8 + 8, 8, 8
 			if ( var_98 == 6 & var_97 == 6 ) {
 				gcopy 2, roomList3(playerRoomCoordX, playerRoomCoordY) * 8, 0, 8, 8
