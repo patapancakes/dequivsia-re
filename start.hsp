@@ -484,7 +484,7 @@
 *label_024
 	color 0, 0, 0
 	boxf
-	gosub *gameInitVars
+	gosub *gameVarsInit
 	var_109 = 5
 	var_110 = 1
 	menuItemSelected = 0
@@ -948,7 +948,7 @@
 	var_109 = 0
 	var_110 = 1
 	gosub *label_195
-	gosub *gameInitVars
+	gosub *gameVarsInit
 	redraw 0
 	dim var_135, roomSizeX, roomSizeY
 	dim var_136, 4
@@ -4654,7 +4654,7 @@
 	}
 	await 0
 	goto *label_188
-*gameInitVars
+*gameVarsInit
 	var_176 = 0
 	var_178 = 0
 	var_155 = 0
