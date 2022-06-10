@@ -72,7 +72,7 @@
 	}
 	gameSeVolume = 50
 	gameMuVolume = 50
-	gosub *label_194
+	gosub *gameSetVolume
 	var_102 = 1
 	dim var_103, 10, 4
 	dim var_104, 14
@@ -179,14 +179,14 @@
 			if ( var_116(0) == 1 | var_116(0) >= 8 ) {
 				if ( gameSeVolume >= 5 ) {
 					gameSeVolume -= 5
-					gosub *label_194
+					gosub *gameSetVolume
 					gameSeToPlay(34) = 1
 				}
 			}
 			if ( var_116(2) == 1 | var_116(2) >= 8 ) {
 				if ( gameSeVolume <= 95 ) {
 					gameSeVolume += 5
-					gosub *label_194
+					gosub *gameSetVolume
 					gameSeToPlay(34) = 1
 				}
 			}
@@ -195,14 +195,14 @@
 			if ( var_116(0) == 1 | var_116(0) >= 8 ) {
 				if ( gameMuVolume >= 5 ) {
 					gameMuVolume -= 5
-					gosub *label_194
+					gosub *gameSetVolume
 					gameSeToPlay(34) = 1
 				}
 			}
 			if ( var_116(2) == 1 | var_116(2) >= 8 ) {
 				if ( gameMuVolume <= 95 ) {
 					gameMuVolume += 5
-					gosub *label_194
+					gosub *gameSetVolume
 					gameSeToPlay(34) = 1
 				}
 			}
@@ -2476,14 +2476,14 @@
 						if ( var_116(0) == 1 | var_116(0) >= 8 ) {
 							if ( gameSeVolume >= 5 ) {
 								gameSeVolume -= 5
-								gosub *label_194
+								gosub *gameSetVolume
 								gameSeToPlay(30) = 1
 							}
 						}
 						if ( var_116(2) == 1 | var_116(2) >= 8 ) {
 							if ( gameSeVolume <= 95 ) {
 								gameSeVolume += 5
-								gosub *label_194
+								gosub *gameSetVolume
 								gameSeToPlay(30) = 1
 							}
 						}
@@ -2492,14 +2492,14 @@
 						if ( var_116(0) == 1 | var_116(0) >= 8 ) {
 							if ( gameMuVolume >= 5 ) {
 								gameMuVolume -= 5
-								gosub *label_194
+								gosub *gameSetVolume
 								gameSeToPlay(30) = 1
 							}
 						}
 						if ( var_116(2) == 1 | var_116(2) >= 8 ) {
 							if ( gameMuVolume <= 95 ) {
 								gameMuVolume += 5
-								gosub *label_194
+								gosub *gameSetVolume
 								gameSeToPlay(30) = 1
 							}
 						}
@@ -4402,7 +4402,7 @@
 		dim gameSeToPlay, gameSeCount
 	}
 	return
-*label_194
+*gameSetVolume
 	repeat gameSeCount * var_94
 		ds_vol cnt, gameSeVolume
 	loop
