@@ -406,13 +406,13 @@
 	gcopy 5, 40 * var_92, 184, 40, 32
 	pos 0, 0
 	gzoom 256 * (1 + gameWindowSize), 144 * (1 + gameWindowSize), 0, 0, 0, 256, 144
-	var_93 = 75
+	gameSeCount = 75
 	var_94 = 3
 	ds_init 22050, 2
-	dim var_95, var_93
-	dim var_96, var_93
+	dim var_95, gameSeCount
+	dim var_96, gameSeCount
 	color 10, 10, 10
-	repeat var_93
+	repeat gameSeCount
 		pos cnt / 14 * 60
 		if ( cnt \ 14 == 0 ) {
 			pos , 0
@@ -423,11 +423,11 @@
 	loop
 	var_97 = 0
 *label_018
-	exgoto var_97, 1, var_93, *label_021
+	exgoto var_97, 1, gameSeCount, *label_021
 	var_98 = 0
 *label_019
 	exgoto var_98, 1, var_94 - 1, *label_020
-	ds_dup var_93 + var_97 + var_93 * var_98, var_97
+	ds_dup gameSeCount + var_97 + gameSeCount * var_98, var_97
 	var_98 += 1
 	goto *label_019
 *label_020
@@ -435,7 +435,7 @@
 	goto *label_018
 *label_021
 	pos 360, 0
-	var_99 = var_93 * var_94 + 1
+	var_99 = gameSeCount * var_94 + 1
 	exist "data\\savedata\\100"
 	if ( strsize == (-1) ) {
 		repeat 50
@@ -4761,9 +4761,9 @@
 	return
 *label_193
 	if ( var_100 >= 1 ) {
-		repeat var_93
+		repeat gameSeCount
 			if ( var_95(cnt) == 1 ) {
-				ds_play var_93 * var_96(cnt) + cnt
+				ds_play gameSeCount * var_96(cnt) + cnt
 				var_95(cnt) = 0
 				var_96(cnt) = (var_96(cnt) + 1) \ var_94
 			}
@@ -4773,11 +4773,11 @@
 	else {
 		var_215 = 0
 		var_215 = 1
-		dim var_95, var_93
+		dim var_95, gameSeCount
 	}
 	return
 *label_194
-	repeat var_93 * var_94
+	repeat gameSeCount * var_94
 		ds_vol cnt, var_100
 	loop
 	repeat 50 + 1
