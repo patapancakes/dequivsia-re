@@ -484,7 +484,7 @@
 *label_024
 	color 0, 0, 0
 	boxf
-	gosub *label_189
+	gosub *gameInitVars
 	var_109 = 5
 	var_110 = 1
 	var_111 = 0
@@ -948,7 +948,7 @@
 	var_109 = 0
 	var_110 = 1
 	gosub *label_195
-	gosub *label_189
+	gosub *gameInitVars
 	redraw 0
 	dim var_135, roomSizeX, roomSizeY
 	dim var_136, 4
@@ -4654,7 +4654,7 @@
 	}
 	await 0
 	goto *label_188
-*label_189
+*gameInitVars
 	var_176 = 0
 	var_178 = 0
 	var_155 = 0
