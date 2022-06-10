@@ -4367,7 +4367,7 @@
 		getkey gameKeyPressed(19), 27
 		var_106 = 0
 *gameInputsInterpret
-		exgoto var_106, 1, 20, *label_192
+		exgoto var_106, 1, 20, *gameInputsCheckQuit
 		if ( gameKeyPressed(var_106) == 1 ) {
 			gameKeyRead(var_106) += 1
 		}
@@ -4376,7 +4376,7 @@
 		}
 		var_106 += 1
 		goto *gameInputsInterpret
-*label_192
+*gameInputsCheckQuit
 		if ( gameKeyPressed(19) == 1 ) {
 			goto *gameQuit
 		}
